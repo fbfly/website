@@ -1,9 +1,8 @@
-const withSass = require('@zeit/next-sass')
+const withImages = require('next-images')
 
-module.exports = {
+module.exports = withImages({
   target: 'serverless',
-  ...withSass(),
   devIndicators: {
     autoPrerender: false,
   },
-}
+})

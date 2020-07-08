@@ -1,0 +1,31 @@
+{
+  "name": "website",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@aragon/ui": "^1.4.2",
+    "@hapi/iron": "6.0.0",
+    "@magic-sdk/admin": "1.0.0",
+    "@zeit/next-sass": "^1.0.1",
+    "bulma": "^0.9.0",
+    "cookie": "0.4.0",
+    "fortmatic": "^2.0.6",
+    "magic-sdk": "1.0.1",
+    "mongodb": "^3.5.9",
+    "next": "latest",
+    "next-connect": "^0.8.0",
+    "node-sass": "^4.14.1",
+    "react": "latest",
+    "react-dom": "latest",
+    "styled-components": "^5.1.1",
+    "swr": "0.1.16",
+    "web3": "^1.2.9"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "babel-plugin-styled-components": "^1.10.7"
+  }
+}

@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useUser } from '../lib/hooks'
-import '../styles/styles.sass'
+import Footer from '../components/Footer'
+import Navbar from '../components/Navbar'
 
 const Home = () => {
   const user = useUser()
@@ -13,9 +14,11 @@ const Home = () => {
       </Head>
       <section className="section">
         <div className="container">
-          <h1 className="title">Facebook Fly</h1>
+          <Navbar></Navbar>
         </div>
       </section>
+
+      <Footer />
     </div>
   )
 }

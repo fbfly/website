@@ -1,5 +1,6 @@
 import FbFlyText from '../public/images/fbfly-text.svg'
 import FbFlyLogo from '../public/images/fbfly-logo.svg'
+
 const Navbar = props => (
   <nav
     className="navbar is-fixed-top"
@@ -33,11 +34,12 @@ const Navbar = props => (
         <span aria-hidden="true"></span>
       </a>
     </div>
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-end" style={{ marginRight: '80px' }}>
-        <a class="navbar-item">Why</a>
-        <a class="navbar-item">Product</a>
-        <a class="navbar-item">About</a>
+    <div id="navbarBasicExample" className="navbar-menu">
+      <div className="navbar-end" style={{ marginRight: '80px' }}>
+        <a className="navbar-item">Why</a>
+        <a className="navbar-item">Product</a>
+        <a className="navbar-item">About</a>
+        <a className="navbar-item navbar-start-now">Start now</a>
       </div>
     </div>
   </nav>

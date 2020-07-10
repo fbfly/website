@@ -40,7 +40,7 @@ const Card = ({ className }) => {
         </a>
         <div className="card-content">
           <div className="card-content-about">
-            <div className="card-content-title">About Etical Brand</div>
+            <div className="card-content-title">About Ethical Brand</div>
             <div className="card-content-description">
               Fast fashion is easy for consumers because it’s just that: fast
               and inexpensive. Lasting for only a season or so, it’s easy for us

@@ -1,0 +1,91 @@
+.main
+  display: flex
+  flex-direction: column
+  align-items: center
+  width: 100%
+  position: relative
+
+.main-header
+  display: flex
+  flex-direction: column
+  align-items: center
+  padding-top: 6rem
+  height: 500px
+  width: 100%
+
+.main-header-title
+  text-align: center
+  font-size: 3.5rem
+  margin-bottom: 1rem
+
+.main-header-subtitle
+  text-align: center
+  font-size: 3.5rem
+  margin-bottom: 2rem
+  background: linear-gradient(266.52deg, #8B3CE6 -1.19%, #406EFB 96.86%)
+  -webkit-background-clip: text
+  -webkit-text-fill-color: transparent
+
+.main-examples
+  z-index: 1
+  position: absolute;
+  top: calc(500px)
+  height: 500px
+  width: 100%
+  transform: translateY(-8rem)
+  display: flex
+  justify-content: center
+  align-items: center
+
+  .background-card
+    max-width: 67.5rem
+    max-height: 500px
+
+  .foreground-card
+    z-index: 2
+    position: absolute
+    max-width: 55rem
+    height: calc(500px + 4rem)
+
+.main-sections
+  display: flex
+  flex-direction: column
+  align-items: center
+  width: 100%
+  background: linear-gradient(180deg, #EDEBF6 0%, #FFFFFF 100%)
+  padding-top: calc(500px)
+  padding-bottom: 8rem
+
+.main-sections-text
+  font-size: 3.5rem
+  color: black
+  margin: 3rem 0
+  
+.main-sections-grid
+  flex: 1
+  display: grid
+  grid-template-columns: 1fr 1fr 1fr
+  grid-gap: 1.5rem
+  width: 90%
+  max-width: 70rem
+
+.main-sections-item
+  display: flex
+  flex-direction: column
+  align-items: center
+  background: #FFFFFF
+  box-shadow: 0 0.5rem 1rem rgba(71, 51, 154, 0.16)
+  border-radius: 0.75rem
+  padding: 2rem
+
+  .section-img
+    margin: 1.5rem
+  .section-title
+    width: 100%
+    font-size: 1.5rem
+    margin-bottom: 0.5rem
+  .section-description
+    width: 100%
+    font-size: 1rem
+    font-weight: 400;
+    color: #8D7EC0

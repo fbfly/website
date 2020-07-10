@@ -1,1 +1,25 @@
-@import "../node_modules/bulma/bulma.sass"
+*, *::after, *::before
+  box-sizing: border-box
+
+@import url('https://rsms.me/inter/inter.css');
+
+html
+  font-family: 'Inter', sans-serif
+  font-weight: 500
+
+body
+  margin: 0
+  padding: 0
+
+.container
+  display: flex
+  justify-content: flex-start
+  align-items: center
+  flex-direction: column
+
+a 
+  text-decoration: none
+  cursor: pointer
+  color: black
+  &:hover
+    color: #3A72FD;

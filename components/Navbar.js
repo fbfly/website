@@ -1,5 +1,6 @@
 import FbFlyText from '../public/images/fbfly-text.svg'
 import FbFlyLogo from '../public/images/fbfly-logo.svg'
+import '../styles/navbar.sass'
 
 const Navbar = props => (
   <nav
@@ -8,19 +9,9 @@ const Navbar = props => (
     aria-label="main navigation"
   >
     <div className="navbar-brand">
-      <a className="navbar-item" href="https://fbfly.xyz">
-        <img
-          src={FbFlyLogo}
-          style={{ marginLeft: '100px', marginTop: '20px' }}
-          width="50"
-          height="50"
-        />
-        <img
-          src={FbFlyText}
-          style={{ marginTop: '25px' }}
-          width="120"
-          height="60"
-        />
+      <a className="navbar-logo" href="https://fbfly.xyz">
+        <img className="logo-img" src={FbFlyLogo} width="50" height="50" />
+        <img className="logo-txt" src={FbFlyText} width="120" height="60" />
       </a>
 
       <a
@@ -34,13 +25,11 @@ const Navbar = props => (
         <span aria-hidden="true"></span>
       </a>
     </div>
-    <div id="navbarBasicExample" className="navbar-menu">
-      <div className="navbar-end" style={{ marginRight: '80px' }}>
-        <a className="navbar-item">Why</a>
-        <a className="navbar-item">Product</a>
-        <a className="navbar-item">About</a>
-        <a className="navbar-item navbar-start-now">Start now</a>
-      </div>
+    <div className="navbar-menu">
+      <a className="navbar-item">Why</a>
+      <a className="navbar-item">Product</a>
+      <a className="navbar-item">About</a>
+      <a className="navbar-item navbar-start-now">Start now</a>
     </div>
   </nav>
 )

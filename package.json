@@ -10,6 +10,7 @@
     "@hapi/iron": "6.0.0",
     "@magic-sdk/admin": "1.0.0",
     "@svgr/webpack": "^5.4.0",
+    "@webdeb/next-styles": "^1.1.0",
     "@zeit/next-sass": "^1.0.1",
     "bulma": "^0.9.0",
     "cookie": "0.4.0",
@@ -28,6 +29,9 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.10.7"
+    "babel-plugin-styled-components": "^1.10.7",
+    "file-loader": "^6.0.0",
+    "next-compose": "0.0.2",
+    "url-loader": "^4.1.0"
   }
 }

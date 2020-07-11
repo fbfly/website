@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Card from '../components/Card'
+import '../styles/connect.sass'
 
 const Connect = () => {
 
@@ -9,7 +10,7 @@ const Connect = () => {
         <title>Connect with Facebook Fly</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className="container">
+      <div className="connect-container">
           <Card className="onboarding"/>
       </div>
     </>

@@ -7,8 +7,8 @@
   transform: translate(-50%, -50%)
   border-radius: 50%
   overflow: hidden
-  width: 4em
-  height: 4em
+  width: 4rem
+  height: 4rem
   display: flex
   justify-content: center
   align-items: center
@@ -19,8 +19,8 @@
 
 .dao-title
   text-align: center
-  font-size: 1.5em
-  margin-bottom: 0.5em
+  font-size: 1.5rem
+  margin-bottom: 0.5rem
 
 .dao-fb-link
   cursor: pointer
@@ -30,26 +30,30 @@
   align-items: center
   color: #3A72FD
   .fb-logo-img
-    width: 1.5em
-    height: 1.5em
-    margin-right: 0.5em
+    width: 1.5rem
+    height: 1.5rem
+    margin-right: 0.5rem
 
 .dao-content
   display: grid
-  max-height: 60%
-  grid-template-columns: 3fr 1fr 1fr 1fr
-  grid-gap: 1em
-  padding: 1em
+  grid-template-columns: 1fr 1fr
+  grid-gap: 1rem
+  padding: 1rem
   .dao-content-about
     display: flex
     flex-direction: column
     justify-content: center
-    padding: 1em
+    padding: 1rem
   .more-link
+    margin-left: 0.5rem
     color: #3A72FD
   .dao-content-title
     color: #A99BD8
-    margin-bottom: 1em
+    margin-bottom: 1rem
+  .dao-content-counts-container
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+    grid-gap: 1rem
   .dao-content-count
     display: flex
     justify-content: center
@@ -60,19 +64,27 @@
       text-align: center
     .count-value
       text-align: center
-      font-size: 1.5em
-      margin: 0.5em 0
+      font-size: 1.5rem
+      margin: 0.5rem 0
     .count-link
       text-align: center
       color: #3A72FD
 
 .dao-donate-button
-  height: 2.5em
+  height: 2.5rem
   display: flex
   justify-content: center
   align-items: center
-  border-radius: 0.5em
+  border-radius: 0.5rem
   background: linear-gradient(144.73deg, #3177FF 7.02%, #9634E2 96.8%)
-  box-shadow: 0 0.25em 0.5em rgba(35, 24, 81, 0.2)
+  box-shadow: 0 0.25rem 0.5rem rgba(35, 24, 81, 0.2)
   color: white
-  padding: 0 3em
+  padding: 0 3rem
+  position: absolute
+  bottom: 2rem
+  left: auto
+  right: auto
+
+@media (max-width: 40rem)
+  .dao-content
+    grid-template-columns: 1fr

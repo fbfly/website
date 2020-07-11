@@ -1,7 +1,7 @@
 import '../styles/login-view.sass'
 
 const LoginView = ({ login, setStep }) => (
-  <>
+  <div className="card-inner">
     <span className="login-title">You are not connected!</span>
     <a
       className="login-button"
@@ -12,7 +12,7 @@ const LoginView = ({ login, setStep }) => (
     >
       Login
     </a>
-  </>
+  </div>
 )
 
 export default LoginView

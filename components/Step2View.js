@@ -13,7 +13,7 @@ const Step2View = ({ setStep }) => {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   return (
-    <>
+    <div className="card-inner">
       <div className="step2-inner">
         <div className="text-section">
           <span className="name-label">DAO Name</span>
@@ -41,9 +41,7 @@ const Step2View = ({ setStep }) => {
             <div className="logo-container">
               <img className="logo-img" src={EthicalBrandLogo} />
             </div>
-              <a className="logo-upload-button">
-                Upload new
-              </a>
+            <a className="logo-upload-button">Upload new</a>
           </div>
         </div>
       </div>
@@ -54,7 +52,7 @@ const Step2View = ({ setStep }) => {
         <img className="back-img" src={Back} />
         Back
       </a>
-    </>
+    </div>
   )
 }
 

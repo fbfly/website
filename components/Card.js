@@ -9,11 +9,13 @@ import LoginView from './LoginView'
 import Step1View from './Step1View'
 import Step2View from './Step2View'
 import Step3View from './Step3View'
+import LoadingView from './LoadingView'
 
 const Card = ({ className }) => {
   const userName = 'Adrian G.'
   const userProfile = UserProfile
   const [connected, setConnected] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [flying, setFlying] = useState(false)
   const [step, setStep] = useState(undefined)
   const data = {
@@ -22,13 +24,13 @@ const Card = ({ className }) => {
     description:
       'Fast fashion is easy for consumers because it’s just that: fast and inexpensive. Lasting for only a season or so, it’s easy for us to end up with clothes that tatter and rip after just a few wear.',
     members: '28',
-    captial: '552$',
-    votes: '',
+    capital: '552$',
+    votes: '82',
   }
 
   return (
     <div className={className ? `card ${className}` : 'card'}>
-      {connected && (
+      {connected && !loading && (
         <div className="card-user">
           <div className="user-profile">
             <img className="user-profile-img" src={userProfile} />
@@ -36,13 +38,17 @@ const Card = ({ className }) => {
           <div className="user-name">{userName}</div>
         </div>
       )}
-      <div className="card-status">
-        <div className={connected ? 'status-icon true' : 'status-icon false'} />
-        <div className="status-text">
-          {connected ? 'Connected' : 'Not Connected'}
+      {!loading && (
+        <div className="card-status">
+          <div
+            className={connected ? 'status-icon true' : 'status-icon false'}
+          />
+          <div className="status-text">
+            {connected ? 'Connected' : 'Not Connected'}
+          </div>
         </div>
-      </div>
-      {!flying && (
+      )}
+      {!flying && !loading && (
         <div className="card-tabs">
           <div
             className={step === 1 ? 'tab selected' : 'tab'}
@@ -74,24 +80,21 @@ const Card = ({ className }) => {
           </div>
         </div>
       )}
-      <div className="card-inner">
-        {!connected ? (
-          <LoginView login={setConnected} setStep={setStep} />
-        ) : flying ? (
-          <DAOView data={data} />
-        ) : step === 1 ? (
-          <Step1View setStep={setStep}/>
-        ) : step === 2 ? (
-          <Step2View setStep={setStep}/>
-        ) : step === 3 ? (
-          <Step3View setStep={setStep}/>
-        ) : step === 4 ? (
-          <div> STEP 4 </div>
-        ) : null}
-      </div>
+      {!connected ? (
+        <LoginView login={setConnected} setStep={setStep} />
+      ) : flying ? (
+        <DAOView data={data} />
+      ) : step === 1 ? (
+        <Step1View setStep={setStep} />
+      ) : step === 2 ? (
+        <Step2View setStep={setStep} />
+      ) : step === 3 ? (
+        <Step3View setStep={setStep} setLoading={setLoading} />
+      ) : step === 4 || loading ? (
+        <LoadingView done={setFlying} setLoading={setLoading} />
+      ) : null}
     </div>
   )
 }
-
 
 export default Card

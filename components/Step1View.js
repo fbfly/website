@@ -7,7 +7,7 @@ const Step1View = ({ setStep }) => {
   }
   const [url, setUrl] = useState('')
   return (
-    <>
+    <div className="card-inner">
       <span className="step1-label">What is your Facebook Group URL?</span>
       <input
         className="step1-input"
@@ -20,7 +20,7 @@ const Step1View = ({ setStep }) => {
       <a className="step1-button" onClick={submit}>
         Next Step
       </a>
-    </>
+    </div>
   )
 }
 

@@ -1,0 +1,72 @@
+.step3-button
+  position: absolute
+  bottom: 2rem
+  right: 3rem
+  height: 2.5rem
+  display: flex
+  justify-content: center
+  align-items: center
+  border-radius: 0.5rem
+  background: linear-gradient(144.73deg, #3177FF 7.02%, #9634E2 96.8%)
+  box-shadow: 0 0.25rem 0.5rem rgba(35, 24, 82, 0.2)
+  color: white
+  padding: 0 3rem
+
+.step3-back-button
+  position: absolute
+  bottom: 2rem
+  left: 3rem
+  height: 2.5rem
+  display: flex
+  justify-content: center
+  align-items: center
+  color: black
+  background: #FFFFFF;
+  box-shadow: 0 0.25rem 0.5rem rgba(35, 24, 82, 0.2)
+  border-radius: 0.5rem;
+  padding: 0 3rem
+  .back-img
+    margin-right: 1rem
+
+.step3-label
+  color: #8F82B9
+  margin-bottom: 1rem
+  font-size: 1rem
+  width: 60%
+
+.step3-input
+  font-size: 1rem
+  padding: 1rem
+  width: 60%
+  background: #FFFFFF;
+  border: 2px solid #EAE7F4;
+  border-radius: 6px;
+  margin-bottom: 1rem
+  &:focus
+    border: 2px solid #8F82B9;
+    outline: none
+
+.step3-info
+  background: linear-gradient(265.04deg, rgba(139, 60, 230, 0.1) -1.19%, rgba(64, 110, 251, 0.1) 96.86%);
+  border-radius: 6px;
+  width: 60%
+  display: flex;
+  align-items: center
+  padding: 1rem
+
+.info-text
+  margin-left: 1rem
+  line-height: 1.5rem
+  color: #8F82B9
+  a
+    color: #3177FF
+
+@media (max-width: 40rem)
+  .step3-label, .step3-input, .step3-info
+    width: calc(100% - 4rem)
+  .step3-button
+    right: 2rem
+    padding: 0 2rem
+  .step3-back-button
+    left: 2rem
+    padding: 0 2rem

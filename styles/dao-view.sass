@@ -1,0 +1,90 @@
+.dao-logo
+  background: #FFFFFF
+  box-shadow: 0px 4px 4px rgba(58, 38, 119, 0.12)
+  position: absolute
+  top: 0
+  left: 50%
+  transform: translate(-50%, -50%)
+  border-radius: 50%
+  overflow: hidden
+  width: 4rem
+  height: 4rem
+  display: flex
+  justify-content: center
+  align-items: center
+  .dao-logo-img
+    width: 75%
+    height: 75%
+
+
+.dao-title
+  text-align: center
+  font-size: 1.5rem
+  margin-bottom: 0.5rem
+
+.dao-fb-link
+  cursor: pointer
+  text-align: center
+  display: flex
+  justify-content: center
+  align-items: center
+  color: #3A72FD
+  .fb-logo-img
+    width: 1.5rem
+    height: 1.5rem
+    margin-right: 0.5rem
+
+.dao-content
+  display: grid
+  grid-template-columns: 1fr 1fr
+  grid-gap: 1rem
+  padding: 1rem
+  .dao-content-about
+    display: flex
+    flex-direction: column
+    justify-content: center
+    padding: 1rem
+  .more-link
+    margin-left: 0.5rem
+    color: #3A72FD
+  .dao-content-title
+    color: #A99BD8
+    margin-bottom: 1rem
+  .dao-content-counts-container
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+    grid-gap: 1rem
+  .dao-content-count
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+    .count-title
+      color: #A99BD8
+      text-align: center
+    .count-value
+      text-align: center
+      font-size: 1.5rem
+      margin: 0.5rem 0
+    .count-link
+      text-align: center
+      color: #3A72FD
+
+.dao-donate-button
+  height: 2.5rem
+  display: flex
+  justify-content: center
+  align-items: center
+  border-radius: 0.5rem
+  background: linear-gradient(144.73deg, #3177FF 7.02%, #9634E2 96.8%)
+  box-shadow: 0 0.25rem 0.5rem rgba(35, 24, 81, 0.2)
+  color: white
+  padding: 0 3rem
+  position: absolute
+  bottom: 2rem
+  left: auto
+  right: auto
+
+@media (max-width: 40rem)
+  .dao-content
+    grid-template-columns: 1fr

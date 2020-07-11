@@ -1,0 +1,37 @@
+.step1-button
+  position: absolute
+  bottom: 2rem
+  right: 3rem
+  height: 2.5rem
+  display: flex
+  justify-content: center
+  align-items: center
+  border-radius: 0.5rem
+  background: linear-gradient(144.73deg, #3177FF 7.02%, #9634E2 96.8%)
+  box-shadow: 0 0.25rem 0.5rem rgba(35, 24, 82, 0.2)
+  color: white
+  padding: 0 3rem
+
+.step1-label
+  color: #8F82B9
+  margin-bottom: 1rem
+  width: 60%
+  font-size: 1rem
+
+.step1-input
+  padding: 1rem
+  font-size: 1rem
+  width: 60%
+  background: #FFFFFF;
+  border: 2px solid #EAE7F4;
+  border-radius: 6px;
+  &:focus
+    border: 2px solid #8F82B9;
+    outline: none
+
+@media (max-width: 40rem)
+  .step1-label, .step1-input
+    width: calc(100% - 4rem)
+  .step1-button
+    right: 2rem
+    padding: 0 2rem

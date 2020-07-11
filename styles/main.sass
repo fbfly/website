@@ -10,8 +10,8 @@
   flex-direction: column
   align-items: center
   padding: 0 2rem
-  padding-top: 5vw
-  height: clamp(200px, 40vw, 500px) 
+  padding-top: clamp(1rem, 5vw, 10rem)
+  height: clamp(14rem, 40vw, 30rem) 
   width: 100%
 
 .main-header-title
@@ -30,11 +30,11 @@
 .main-examples
   z-index: 1
   position: absolute
-  top: clamp(200px, 40vw, 500px) 
-  height: 40vw
-  font-size: 1.35vw
+  top: clamp(14rem, 40vw, 30rem) 
+  height: clamp(10rem, 40vw, 30rem) 
+  font-size: clamp(0.35rem, 1.35vw, 1rem)
   width: 100%
-  transform: translateY(-7em)
+  transform: translateY(-8em)
   display: flex
   justify-content: center
   align-items: center
@@ -42,24 +42,24 @@
   .background-card
     width: 90%
     max-width: 67.5rem
-    max-height: 40vw
+    max-height: clamp(10rem, 40vw, 30rem) 
 
   .foreground-card
     z-index: 2
     position: absolute
     max-width: 55rem
     width: 75%
-    height: calc(40vw + 3.5em)
+    height: clamp(calc(10rem + 4em), calc(40vw + 4em), calc(30rem + 4em)) 
 
 .main-sections
   overflow: hidden
-  padding-top: 35vw
+  padding-top: clamp(10rem, 35vw, 30rem)
+  padding-bottom: clamp(2rem, 10vw, 10rem)
   display: flex
   flex-direction: column
   align-items: center
   width: 100%
   background: linear-gradient(180deg, #EDEBF6 0%, #FFFFFF 100%)
-  padding-bottom: 10vw
 
 .main-sections-text
   font-size: clamp(1.5rem, 4vw, 3.5rem) 

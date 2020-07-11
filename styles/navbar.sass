@@ -4,7 +4,7 @@
   width: 100%
   max-width: 80rem
 
-.navbar-menu, .navbar-brand
+.navbar-brand
   display: flex
   align-items: center
   height: 100%
@@ -22,11 +22,29 @@
     padding: 0.25rem
 
 .navbar-menu
+  display: flex
+  align-items: center
+  height: 100%
   justify-content: flex-end
   flex: 1
 
 .navbar-burger
-  display: hidden
+  z-index: 10
+  position: absolute
+  top: 1.5rem
+  right: 2rem
+  display: none
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  width: 1.5rem;
+  &::after, &::before, div
+    background-color: black;
+    content: '';
+    display: block;
+    height: 2px;
+    margin: 5px 0;
+    transition: all 0.5s ease-in-out, background-color 0.25s;
 
 .navbar-item 
   display: flex
@@ -42,8 +60,52 @@
   color: white
   padding: 0 1rem
 
+.navbar.open
+  .navbar-burger
+    transition: all 0.5s ease-in-out;
+    &::before
+      background: white
+      transform: translateY(7px) rotate(135deg);
+    &::after
+      background: white
+      transform: translateY(-7px) rotate(-135deg);
+    div
+      background: white
+      transform: scale(0)
+
 @media (max-width: 40rem)
+  .navbar-item
+    color: white
+    font-size: 1.75rem
+    margin: 0
+    margin-bottom: 1.25rem
+  .navbar-start-now
+    background: none
+    box-shadow: none
+    border-radius: 0
+    padding: 0
   .navbar
     max-width: 100%
   .navbar-menu 
-    display: none
+    transition: all 0.25s ease-in-out
+    z-index: 5
+    opacity: 0
+    visibility: hidden
+    flex: unset
+    display: flex
+    flex-direction: column
+    justify-content: flex-start
+    padding-top: 7rem
+    align-items: center
+    position: fixed
+    height: 100vh
+    width: 100vw
+    top: 0
+    left: 0
+    background: linear-gradient(269.42deg, #8B3CE6 -1.19%, #406EFB 96.86%);
+  .navbar-burger
+    display: block
+  .navbar.open
+    .navbar-menu
+      opacity: 1
+      visibility: visible

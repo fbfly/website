@@ -9,18 +9,19 @@
   display: flex
   flex-direction: column
   align-items: center
-  padding-top: 6rem
-  height: 500px
+  padding: 0 2rem
+  padding-top: 5vw
+  height: clamp(250px, 40vw, 500px); 
   width: 100%
 
 .main-header-title
   text-align: center
-  font-size: 3.5rem
-  margin-bottom: 1rem
+  font-size: clamp(1.5rem, 4vw, 3.5rem); 
+  margin-bottom: 0.5em
 
 .main-header-subtitle
   text-align: center
-  font-size: 3.5rem
+  font-size: clamp(1.5rem, 4vw, 3.5rem); 
   margin-bottom: 2rem
   background: linear-gradient(266.52deg, #8B3CE6 -1.19%, #406EFB 96.86%)
   -webkit-background-clip: text
@@ -28,36 +29,39 @@
 
 .main-examples
   z-index: 1
-  position: absolute;
-  top: calc(500px)
-  height: 500px
+  position: absolute
+  top: clamp(250px, 40vw, 500px); 
+  height: 40vw
+  font-size: 1.35vw
   width: 100%
-  transform: translateY(-8rem)
+  transform: translateY(-7em)
   display: flex
   justify-content: center
   align-items: center
 
   .background-card
+    width: 90%
     max-width: 67.5rem
-    max-height: 500px
+    max-height: 40vw
 
   .foreground-card
     z-index: 2
     position: absolute
     max-width: 55rem
-    height: calc(500px + 4rem)
+    width: 75%
+    height: calc(40vw + 3.5em)
 
 .main-sections
+  padding-top: 40vw
   display: flex
   flex-direction: column
   align-items: center
   width: 100%
   background: linear-gradient(180deg, #EDEBF6 0%, #FFFFFF 100%)
-  padding-top: calc(500px)
   padding-bottom: 8rem
 
 .main-sections-text
-  font-size: 3.5rem
+  font-size: clamp(1.5rem, 4vw, 3.5rem); 
   color: black
   margin: 3rem 0
   
@@ -66,7 +70,7 @@
   display: grid
   grid-template-columns: 1fr 1fr 1fr
   grid-gap: 1.5rem
-  width: 90%
+  width: 75%
   max-width: 70rem
 
 .main-sections-item
@@ -76,16 +80,35 @@
   background: #FFFFFF
   box-shadow: 0 0.5rem 1rem rgba(71, 51, 154, 0.16)
   border-radius: 0.75rem
-  padding: 2rem
+  padding: 1.5rem
 
   .section-img
-    margin: 1.5rem
+    margin: 1rem
+    width: clamp(7rem, 10vw, 10rem); 
+    height: clamp(7rem, 10vw, 10rem); 
   .section-title
     width: 100%
-    font-size: 1.5rem
+    font-size: clamp(1rem, 1.5vw, 1.5rem); 
     margin-bottom: 0.5rem
   .section-description
     width: 100%
-    font-size: 1rem
+    font-size: clamp(0.8rem, 1.25vw, 1rem); 
     font-weight: 400;
     color: #8D7EC0
+
+@media (max-width: 70rem)
+  .main-sections-grid
+    grid-template-columns: 1fr 1fr
+
+  .main-sections-item:last-child
+    grid-column: 1/ span 2
+    margin: 0 25%
+
+@media (max-width: 40rem)
+  .main-sections-grid
+    grid-template-columns: 1fr
+
+  .main-sections-item:last-child
+    grid-column: unset
+    margin: 0
+

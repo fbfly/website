@@ -1,11 +1,13 @@
 .start-now
-  height: 500px
+  height: clamp(250px, 40vw, 500px); 
   width: 100%
   background: linear-gradient(266.52deg, #8B3CE6 -1.19%, #406EFB 96.86%);
   display: flex
   justify-content: center
   align-items: center
   position: relative
+  overflow: hidden
+  padding: 0 2rem
 
 .logo-watermark
   z-index: -1
@@ -25,7 +27,7 @@
 
 .start-now-text
   text-align: center
-  font-size: 3.5rem
+  font-size: clamp(1.5rem, 4vw, 3.5rem); 
   margin-bottom: 2rem
   color: white
 

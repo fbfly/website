@@ -1,13 +1,11 @@
 import nextConnect from 'next-connect'
 import middleware from '../../middleware/database'
-import { getSession } from '../../lib/iron'
 
 const handler = nextConnect()
 
 handler.use(middleware)
 
 handler.get(async (req, res) => {
-  const session = await getSession(req)
   // After getting the session you may want to fetch for the user instead
   // of sending the session's payload directly, this example doesn't have a DB
   // let doc = await req.db.collection('daily').findOne()

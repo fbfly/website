@@ -2,7 +2,7 @@ import '../styles/main.sass'
 import Section1 from '../public/images/section1.svg'
 import Section2 from '../public/images/section2.svg'
 import Section3 from '../public/images/section3.svg'
-import Card from './Card'
+import ExampleCard from './ExampleCard'
 
 const MainSection = props => (
   <main className="main">
@@ -11,8 +11,8 @@ const MainSection = props => (
       <span className="main-header-subtitle">directly from Facebook</span>
     </section>
     <section className="main-examples">
-        <Card className="background-card" />
-        <Card className="foreground-card" />
+        <ExampleCard className="background-card" />
+        <ExampleCard className="foreground-card" />
     </section>
     <section className="main-sections">
       <span className="main-sections-text">What Fbfly does</span>

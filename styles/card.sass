@@ -9,12 +9,111 @@
   align-items: center
   flex-direction: column
   position: relative
+  background: linear-gradient(266.52deg, #8B3CE6 -1.19%, #406EFB 96.86%)
+
+.card-user
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 1
+  display: flex
+  justify-content: space-around
+  align-items: center
+  padding: 1.25em
+  .user-profile
+    width: 1.5em
+    height: 1.5em
+    background: white
+    border-radius: 50%
+    margin-right: 0.5em
+    overflow: hidden
+    img 
+      width: 100%
+      height: 100%
+
+.card-status
+  position: absolute
+  top: 0
+  right: 0
+  z-index: 1
+  display: flex
+  justify-content: space-around
+  align-items: center
+  padding: 1.25em
+  .status-icon
+    width: 0.75em
+    height: 0.75em
+    border-radius: 50%
+    margin-right: 0.5em
+
+  .status-icon.true
+      background: #70F1DA
+
+  .status-icon.false
+        background: #F18F70
+
+.card-tabs
+  position: absolute
+  top: 8em
+  transform: translateY(-100%)
+  width: 100%
+  display: grid
+  grid-template-columns: 1fr 1fr 1fr 1fr
+  padding: 0 3em
+  .tab
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    padding: 0.5em 0
+    margin: 0.5em 0
+    opacity: 0.4
+    cursor: pointer
+    .tab-title
+      margin-bottom: 0.5em
+      color: rgba(255, 255, 255, 0.5)
+    .tab-description
+      color: white
+  .tab.selected
+    opacity: 1
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(4px);
+    border-radius: 6px;
+
+.login-title 
+  color: #8F82B9;
+  font-size: 1.5em
+  margin-bottom: 1em
+
+.login-button
+  height: 2.5em
+  display: flex
+  justify-content: center
+  align-items: center
+  border-radius: 0.5em
+  background: linear-gradient(144.73deg, #3177FF 7.02%, #9634E2 96.8%)
+  box-shadow: 0 0.25em 0.5em rgba(35, 24, 81, 0.2)
+  color: white
+  padding: 0 3em
+
+.card-inner
+  background: white
+  margin-top: 8em
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  height: calc(100% - 8em)
+  min-height: 500px
+  width: 100%
+  padding: 2em 0 
+  position: relative
 
 .card-logo
   background: #FFFFFF
   box-shadow: 0px 4px 4px rgba(58, 38, 119, 0.12)
   position: absolute
-  top: 8em
+  top: 0
   left: 50%
   transform: translate(-50%, -50%)
   border-radius: 50%
@@ -26,65 +125,7 @@
   .card-logo-img
     width: 75%
     height: 75%
-    
 
-.card-header-watermark
-  position: absolute
-  height: 8em
-  left: 50%
-  transform: translateX(-50%)
-
-.card-header
-  display: flex
-  justify-content: space-between
-  align-items: flex-start
-  color: white
-  height: 8em
-  width: 100%
-  background: linear-gradient(266.52deg, #8B3CE6 -1.19%, #406EFB 96.86%)
-  position: relative
-  .card-user
-    z-index: 1
-    display: flex
-    justify-content: space-around
-    align-items: center
-    padding: 1.25em
-    .user-profile
-      width: 1.5em
-      height: 1.5em
-      background: white
-      border-radius: 50%
-      margin-right: 0.5em
-      overflow: hidden
-      img 
-        width: 100%
-        height: 100%
-  
-  .card-status
-    z-index: 1
-    display: flex
-    justify-content: space-around
-    align-items: center
-    padding: 1.25em
-    .status-icon
-      width: 0.75em
-      height: 0.75em
-      border-radius: 50%
-      margin-right: 0.5em
-
-    .status-icon.true
-        background: #70F1DA
-
-    .status-icon.false
-        background: #F18F70
-
-
-.card-inner
-  display: flex
-  flex-direction: column
-  align-items: center
-  justify-content: center
-  height: calc(100% - 8em)
 
 .card-title
   text-align: center
@@ -135,7 +176,7 @@
       text-align: center
       color: #3A72FD
 
-.donate-button
+.card-donate-button
   height: 2.5em
   display: flex
   justify-content: center

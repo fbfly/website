@@ -8,7 +8,7 @@ const StartNow = props => (
       <span className="start-now-text">
         Start now, create your first community
       </span>
-      <a className="start-now-button">Start now</a>
+      <a href="/connect" className="start-now-button">Start now</a>
     </div>
   </section>
 )

@@ -1,11 +1,13 @@
 import '../styles/step1-view.sass'
-import { useState } from 'react'
+import { useContext } from 'react'
+import UserContext from '../lib/UserContext'
 
-const Step1View = ({ setStep }) => {
+const Step1View = () => {
+  const { setStep, url, setUrl } = useContext(UserContext)
   const submit = () => {
     setStep(2)
   }
-  const [url, setUrl] = useState('')
+
   return (
     <div className="card-inner">
       <span className="step1-label">What is your Facebook Group URL?</span>

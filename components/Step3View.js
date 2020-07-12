@@ -1,9 +1,11 @@
 import '../styles/step3-view.sass'
 import Back from '../public/images/back.svg'
 import Info from '../public/images/info.svg'
-import { useState } from 'react'
+import { useContext } from 'react'
+import UserContext from '../lib/UserContext'
 
-const Step3View = ({ setStep, setLoading }) => {
+const Step3View = () => {
+  const { setStep, setLoading, currency, setCurrency } = useContext(UserContext)
   const submit = () => {
     setStep(4)
     setLoading(true)
@@ -11,7 +13,7 @@ const Step3View = ({ setStep, setLoading }) => {
   const back = () => {
     setStep(2)
   }
-  const [currency, setCurrency] = useState('')
+
   return (
     <div className="card-inner">
       <span className="step3-label">

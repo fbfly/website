@@ -1,17 +1,20 @@
 import '../styles/step2-view.sass'
 import Back from '../public/images/back.svg'
 import EthicalBrandLogo from '../public/images/ethical-brand.svg'
-import { useState } from 'react'
+import { useContext } from 'react'
+import UserContext from '../lib/UserContext'
 
-const Step2View = ({ setStep }) => {
+const Step2View = () => {
+  const { setStep, name, setName, description, setDescription } = useContext(
+    UserContext,
+  )
   const submit = () => {
     setStep(3)
   }
   const back = () => {
     setStep(1)
   }
-  const [name, setName] = useState('')
-  const [description, setDescription] = useState('')
+
   return (
     <div className="card-inner">
       <div className="step2-inner">

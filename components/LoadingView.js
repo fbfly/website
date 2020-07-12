@@ -1,8 +1,10 @@
 import '../styles/loading-view.sass'
 import Loading from '../public/images/loading.svg'
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
+import UserContext from '../lib/UserContext'
 
-const LoadingView = ({ done, setLoading }) => {
+const LoadingView = () => {
+  const { done, setLoading } = useContext(UserContext)
   useEffect(() => {
     setTimeout(() => {
       setLoading(false)

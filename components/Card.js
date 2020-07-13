@@ -40,6 +40,9 @@ const Card = ({ className }) => {
   // Step2 hooks
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
+  const [logoHash, setLogoHash] = useState(
+    'bafybeidsm72bt7kspzyfh4bbtoxmqvsxgt3su25afb77h23t4uw4ys3dtm',
+  )
 
   // Step3 hooks
   const [currency, setCurrency] = useState('')
@@ -72,13 +75,11 @@ const Card = ({ className }) => {
     }
   }
 
-  async function userWallet() {
-    await web3Obj.web3.eth.getAccounts().then(async accounts => {
-      setAccount(accounts[0])
-      await web3Obj.web3.eth.getBalance(accounts[0]).then(balance => {
-        setBalance(balance)
-      })
-    })
+  async function updateUserWallet() {
+    const accounts = await web3Obj.web3.eth.getAccounts()
+    setAccount(accounts[0])
+    const balance = await web3Obj.web3.eth.getBalance(accounts[0])
+    setBalance(balance)
   }
 
   return (
@@ -97,12 +98,14 @@ const Card = ({ className }) => {
           setName,
           description,
           setDescription,
+          logoHash,
+          setLogoHash,
           // Step3
           currency,
           setCurrency,
           setLoading,
           balance,
-          userWallet,
+          updateUserWallet,
           // LoadingView
           done: setFlying,
         }}

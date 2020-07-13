@@ -28,7 +28,7 @@ const Card = ({ className }) => {
     votes: '82',
   }
   // Tor.us hooks
-  const [userInfo, setUserInfo] = useState({})
+  // const [userInfo, setUserInfo] = useState({})
   const [account, setAccount] = useState(null)
   const [balance, setBalance] = useState('')
   const [buildEnv, setBuildEnv] = useState('testing')
@@ -56,19 +56,13 @@ const Card = ({ className }) => {
     const isTorus = sessionStorage.getItem('pageUsingTorus')
     if (isTorus && web3Obj) {
       web3Obj.initialize(isTorus).then(async () => {
-        await getUserInfo()
-          .then(() => {
-            setConnected(true)
-            setStep(1)
-          })
-          .catch(e => console.log(e))
+        const userInfo = await web3Obj.torus.getUserInfo()
+        setUserName(userInfo.name)
+        setConnected(true)
+        setStep(1)
       })
     }
   }, [web3Obj])
-
-  useEffect(() => {
-    setUserName(userInfo.name)
-  }, [getUserInfo])
 
   async function enableTorus() {
     try {
@@ -86,14 +80,12 @@ const Card = ({ className }) => {
       })
     })
   }
-  async function getUserInfo() {
-    setUserInfo(await web3Obj.torus.getUserInfo())
-  }
 
   return (
     <div className={className ? `card ${className}` : 'card'}>
       <UserProvider
         value={{
+          web3Obj,
           enableTorus,
           setConnected,
           setStep,
@@ -109,6 +101,8 @@ const Card = ({ className }) => {
           currency,
           setCurrency,
           setLoading,
+          balance,
+          userWallet,
           // LoadingView
           done: setFlying,
         }}

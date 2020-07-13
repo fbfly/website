@@ -1,19 +1,35 @@
 import '../styles/step2-view.sass'
 import Back from '../public/images/back.svg'
 import EthicalBrandLogo from '../public/images/ethical-brand.svg'
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import UserContext from '../lib/UserContext'
+import fleekStorage from '@fleekhq/fleek-storage-js'
 
 const Step2View = () => {
-  const { setStep, name, setName, description, setDescription } = useContext(
-    UserContext,
-  )
+  const {
+    setStep,
+    name,
+    setName,
+    description,
+    setDescription,
+    logoHash,
+    setLogoHash,
+  } = useContext(UserContext)
   const submit = () => {
     setStep(3)
   }
   const back = () => {
     setStep(1)
   }
+
+  const [logoFile, setLogoFile] = useState('')
+  useEffect(() => {
+    fleekStorage
+      .getFileFromHash({
+        hash: logoHash,
+      })
+      .then(logoFile => setLogoFile(encodeURIComponent(logoFile)))
+  }, [logoHash])
 
   return (
     <div className="card-inner">
@@ -42,7 +58,10 @@ const Step2View = () => {
           <span className="logo-label label">DAO Logo</span>
           <div className="logo-input">
             <div className="logo-container">
-              <img className="logo-img" src={EthicalBrandLogo} />
+              <img
+                className="logo-img"
+                src={`data:image/svg+xml;utf8,${logoFile}`}
+              />
             </div>
             <a className="logo-upload-button">Upload new</a>
           </div>

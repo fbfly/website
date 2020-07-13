@@ -12,12 +12,12 @@ const Step3View = () => {
     currency,
     setCurrency,
     balance,
-    userWallet,
+    updateUserWallet,
   } = useContext(UserContext)
   const createDao = async () => {
-    await userWallet().then(async () => {
-      if (balance > 1) {
-        /* 
+    await updateUserWallet()
+    if (balance > 1) {
+      /* 
             Some way to save the following:
             1. DAO Logo on IPFS (https://github.com/ipfs/js-ipfs)
             2. Save the relation between the FB Group ID and the DAO address.
@@ -26,20 +26,19 @@ const Step3View = () => {
                (I think this one is easier)
             We may want to take the fee from creating the DAO in this moment.
         */
-        setStep(4)
-        setLoading(true)
-      } else {
-        await web3Obj.torus
-          .initiateTopup('rampnetwork', {
-            selectedCryptoCurrency: 'DAI',
-            fiatValue: 10,
-          })
-          .then()
-          .catch(e => {
-            alert('You need to load some cash to pay for the DAO fees!')
-          })
-      }
-    })
+      setStep(4)
+      setLoading(true)
+    } else {
+      await web3Obj.torus
+        .initiateTopup('rampnetwork', {
+          selectedCryptoCurrency: 'DAI',
+          fiatValue: 10,
+        })
+        .then()
+        .catch(e => {
+          alert('You need to load some cash to pay for the DAO fees!')
+        })
+    }
   }
   const back = () => {
     setStep(2)

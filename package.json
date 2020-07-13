@@ -8,6 +8,7 @@
   "dependencies": {
     "@aragon/connect-thegraph": "^0.4.2",
     "@aragon/ui": "^1.4.2",
+    "@fleekhq/fleek-storage-js": "^1.0.2",
     "@hapi/iron": "6.0.0",
     "@magic-sdk/admin": "1.0.0",
     "@svgr/webpack": "^5.4.0",

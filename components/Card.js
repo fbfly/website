@@ -85,6 +85,7 @@ const Card = ({ className }) => {
     <div className={className ? `card ${className}` : 'card'}>
       <UserProvider
         value={{
+          web3Obj,
           enableTorus,
           setConnected,
           setStep,
@@ -100,6 +101,8 @@ const Card = ({ className }) => {
           currency,
           setCurrency,
           setLoading,
+          balance,
+          userWallet,
           // LoadingView
           done: setFlying,
         }}

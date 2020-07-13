@@ -31,6 +31,18 @@ const Step2View = () => {
       .then(logoFile => setLogoFile(encodeURIComponent(logoFile)))
   }, [logoHash])
 
+  const uploadFile = async file => {
+    console.log("file uploading to ipfs")
+    const uploadedFile = await fleekStorage.upload({
+      apiKey: '9cILwykg8eJ7JifGfuS4zA==',
+      apiSecret: 'u1gcUczk4+o3B0XBP2A0DcWABEvDqUdxz06MgXc3FRA=',
+      key: file.name,
+      data: file,
+    })
+    console.log("file upload done")
+    setLogoHash(uploadedFile.hash)
+  }
+
   return (
     <div className="card-inner">
       <div className="step2-inner">
@@ -63,7 +75,18 @@ const Step2View = () => {
                 src={`data:image/svg+xml;utf8,${logoFile}`}
               />
             </div>
-            <a className="logo-upload-button">Upload new</a>
+            <label className="logo-upload-button">
+              Upload new
+              <input
+                style={{ display: 'none' }}
+                type="file"
+                onChange={e => {
+                  const file = e.target.files[0]
+                  uploadFile(file)
+                }}
+                accept="image/svg+xml"
+              />
+            </label>
           </div>
         </div>
       </div>

@@ -28,9 +28,9 @@ const Card = ({ className }) => {
     votes: '82',
   }
   // Tor.us hooks
-  // const [userInfo, setUserInfo] = useState({})
   const [account, setAccount] = useState(null)
-  const [balance, setBalance] = useState('')
+  // const [balance, setBalance] = useState('')
+  // const [daiBalance, setDaiBalance] = useState('')
   const [buildEnv, setBuildEnv] = useState('testing')
   const [web3Obj, setWeb3Obj] = useState(null)
 
@@ -55,40 +55,56 @@ const Card = ({ className }) => {
     loadTorus()
   }, [])
 
-  useEffect(() => {
-    const isTorus = sessionStorage.getItem('pageUsingTorus')
-    const networkTorus = sessionStorage.getItem('networkTorus')
-    if (isTorus && web3Obj) {
-      web3Obj.initialize(isTorus, networkTorus).then(async () => {
-        const userInfo = await web3Obj.torus.getUserInfo()
-        setUserName(userInfo.name)
-        setConnected(true)
-        setStep(1)
-      })
-    }
-  }, [web3Obj])
+  // useEffect(() => {
+  //   const isTorus = sessionStorage.getItem('pageUsingTorus')
+  //   const networkTorus = sessionStorage.getItem('networkTorus')
+  //   if (isTorus && web3Obj) {
+  //     web3Obj.initialize(isTorus, networkTorus).then(async () => {
+  //       const userInfo = await web3Obj.torus.getUserInfo()
+  //       setUserName(userInfo.name)
+  //       setConnected(true)
+  //       setStep(1)
+  //     })
+  //   }
+  // }, [web3Obj])
 
-  async function enableTorus() {
+  async function loginWithTorus() {
     try {
-      await web3Obj.initialize(buildEnv, 'mainnet')
+      await web3Obj.initialize(buildEnv, 'xdai')
+      let balance = await web3Obj.balance()
+      console.log({ xDaiBalance: balance })
+      if (balance < 1) {
+        await web3Obj.changeNetwork('mainnet')
+        balance = await web3Obj.balance()
+        console.log({ balance })
+        const daiBalance = await web3Obj.daiBalance()
+        console.log({ daiBalance })
+        await web3Obj.exchangeDaixDai(1)
+        await web3Obj.changeNetwork('xdai')
+      }
+      const userInfo = await web3Obj.torus.getUserInfo()
+      setUserName(userInfo.name)
+
+      setConnected(true)
+      setStep(1)
     } catch (error) {
       console.error(error)
     }
   }
 
-  async function updateUserWallet() {
-    const accounts = await web3Obj.web3.eth.getAccounts()
-    setAccount(accounts[0])
-    const balance = await web3Obj.web3.eth.getBalance(accounts[0])
-    setBalance(balance)
-  }
+  // async function updateUserWallet() {
+  //   const accounts = await web3Obj.web3.eth.getAccounts()
+  //   setAccount(accounts[0])
+  //   const balance = await web3Obj.web3.eth.getBalance(accounts[0])
+  //   setBalance(balance)
+  // }
 
   return (
     <div className={className ? `card ${className}` : 'card'}>
       <UserProvider
         value={{
           web3Obj,
-          enableTorus,
+          loginWithTorus,
           setConnected,
           setStep,
           // Step1
@@ -106,8 +122,8 @@ const Card = ({ className }) => {
           currency,
           setCurrency,
           setLoading,
-          balance,
-          updateUserWallet,
+          // balance,
+          // updateUserWallet,
           // LoadingView
           done: setFlying,
         }}

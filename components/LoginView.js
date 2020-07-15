@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import UserContext from '../lib/UserContext'
 
 const LoginView = () => {
-  const { enableTorus, setConnected, setStep } = useContext(UserContext)
+  const { loginWithTorus, setConnected, setStep } = useContext(UserContext)
   return (
     <div className="card-inner">
       <span className="login-title">You are not connected!</span>
@@ -11,7 +11,7 @@ const LoginView = () => {
       <a
         className="login-button"
         onClick={async () => {
-          await enableTorus()
+          await loginWithTorus()
             .then(async () => {
               setConnected(true)
               setStep(1)

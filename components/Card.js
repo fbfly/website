@@ -71,14 +71,17 @@ const Card = ({ className }) => {
   async function loginWithTorus() {
     try {
       await web3Obj.initialize(buildEnv, 'xdai')
-      let balance = await web3Obj.balance()
-      console.log({ xDaiBalance: balance })
+      const xDaiBalance = await web3Obj.balance()
+      console.log({ xDaiBalance })
       if (balance < 1) {
         await web3Obj.changeNetwork('mainnet')
-        balance = await web3Obj.balance()
+        const balance = await web3Obj.balance()
         console.log({ balance })
         const daiBalance = await web3Obj.daiBalance()
         console.log({ daiBalance })
+        if (daiBalance < 1) {
+            await web3Obj.buyDai()
+        }
         await web3Obj.exchangeDaixDai(1)
         await web3Obj.changeNetwork('xdai')
       }

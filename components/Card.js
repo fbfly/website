@@ -92,6 +92,7 @@ const Card = ({ className }) => {
           setConnected,
           setStep,
           // Step1
+          account,
           url,
           setUrl,
           // Step2

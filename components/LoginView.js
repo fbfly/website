@@ -3,9 +3,7 @@ import { useContext } from 'react'
 import UserContext from '../lib/UserContext'
 
 const LoginView = () => {
-  const { enableTorus, setConnected, setStep, balance } = useContext(
-    UserContext,
-  )
+  const { enableTorus, setConnected, setStep } = useContext(UserContext)
   return (
     <div className="card-inner">
       <span className="login-title">You are not connected!</span>
@@ -16,19 +14,7 @@ const LoginView = () => {
           await enableTorus()
             .then(async () => {
               setConnected(true)
-              if (balance > 5) {
-                setStep(1)
-              } else {
-                await web3Obj.torus
-                  .initiateTopup('rampnetwork', {
-                    selectedCryptoCurrency: 'DAI',
-                    fiatValue: 10,
-                  })
-                  .then()
-                  .catch(e => {
-                    alert('You need to load some cash to pay for the DAO fees!')
-                  })
-              }
+              setStep(1)
             })
             .catch(e => console.log(e))
         }}

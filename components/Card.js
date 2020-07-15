@@ -57,8 +57,9 @@ const Card = ({ className }) => {
 
   useEffect(() => {
     const isTorus = sessionStorage.getItem('pageUsingTorus')
+    const networkTorus = sessionStorage.getItem('networkTorus')
     if (isTorus && web3Obj) {
-      web3Obj.initialize(isTorus).then(async () => {
+      web3Obj.initialize(isTorus, networkTorus).then(async () => {
         const userInfo = await web3Obj.torus.getUserInfo()
         setUserName(userInfo.name)
         setConnected(true)
@@ -69,7 +70,7 @@ const Card = ({ className }) => {
 
   async function enableTorus() {
     try {
-      await web3Obj.initialize(buildEnv)
+      await web3Obj.initialize(buildEnv, 'mainnet')
     } catch (error) {
       console.error(error)
     }

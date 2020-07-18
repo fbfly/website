@@ -1,20 +1,14 @@
 import '../styles/loading-view.sass'
-import Loading from '../public/images/loading.svg'
 import { useEffect, useContext } from 'react'
+import Loading from '../public/images/loading.svg'
 import UserContext from '../lib/UserContext'
 
-const LoadingView = () => {
-  const { done, setLoading } = useContext(UserContext)
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-      done(true)
-    }, 3000)
-  }, [])
+const LoadingView = ({ img, title }) => {
+  const { setLoading } = useContext(UserContext)
   return (
     <div className="loading-view">
-      <img className="loading-img" src={Loading} />
-      <span className="loading-title">Your dao is being created</span>
+      <img className="loading-img" src={img} />
+      <span className="loading-title">{title}</span>
       <span className="loading-description">
         Please wait and do not close this window
       </span>

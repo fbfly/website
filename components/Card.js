@@ -2,22 +2,26 @@ import '../styles/card.sass'
 import HeaderWatermark from '../public/images/card-header-watermark.svg'
 import EthicalBrandLogo from '../public/images/ethical-brand.svg'
 import UserProfile from '../public/images/user-profile.svg'
+import Alert from '../public/images/alert.svg'
 import { useState, useEffect } from 'react'
 import { UserProvider } from '../lib/UserContext'
 import DAOView from './DAOView'
 import LoginView from './LoginView'
+import RampView from './RampView'
 import Step1View from './Step1View'
 import Step2View from './Step2View'
 import Step3View from './Step3View'
 import LoadingView from './LoadingView'
 
 const Card = ({ className }) => {
-  const userProfile = UserProfile
+  const [profileImage, setProfileImage] = useState(UserProfile)
   const [userName, setUserName] = useState('John Doe')
   const [connected, setConnected] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(undefined)
   const [flying, setFlying] = useState(false)
   const [step, setStep] = useState(undefined)
+  const [onRamp, setOnRamp] = useState(false)
+
   const data = {
     name: 'Ethical Brand',
     logo: EthicalBrandLogo,
@@ -29,10 +33,8 @@ const Card = ({ className }) => {
   }
   // Tor.us hooks
   const [account, setAccount] = useState(null)
-  // const [balance, setBalance] = useState('')
-  // const [daiBalance, setDaiBalance] = useState('')
-  const [buildEnv, setBuildEnv] = useState('testing')
   const [web3Obj, setWeb3Obj] = useState(null)
+  const [xDaiBalance, setxDaiBalance] = useState(0)
 
   // Step1 hooks
   const [url, setUrl] = useState('')
@@ -55,61 +57,26 @@ const Card = ({ className }) => {
     loadTorus()
   }, [])
 
-  // useEffect(() => {
-  //   const isTorus = sessionStorage.getItem('pageUsingTorus')
-  //   const networkTorus = sessionStorage.getItem('networkTorus')
-  //   if (isTorus && web3Obj) {
-  //     web3Obj.initialize(isTorus, networkTorus).then(async () => {
-  //       const userInfo = await web3Obj.torus.getUserInfo()
-  //       setUserName(userInfo.name)
-  //       setConnected(true)
-  //       setStep(1)
-  //     })
-  //   }
-  // }, [web3Obj])
-
-  async function loginWithTorus() {
-    try {
-      await web3Obj.initialize(buildEnv, 'xdai')
-      const xDaiBalance = await web3Obj.balance()
-      console.log({ xDaiBalance })
-      if (balance < 1) {
-        await web3Obj.changeNetwork('mainnet')
-        const balance = await web3Obj.balance()
-        console.log({ balance })
-        const daiBalance = await web3Obj.daiBalance()
-        console.log({ daiBalance })
-        if (daiBalance < 1) {
-            await web3Obj.buyDai()
-        }
-        await web3Obj.exchangeDaixDai(1)
-        await web3Obj.changeNetwork('xdai')
-      }
-      const userInfo = await web3Obj.torus.getUserInfo()
-      setUserName(userInfo.name)
-
-      setConnected(true)
-      setStep(1)
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  // async function updateUserWallet() {
-  //   const accounts = await web3Obj.web3.eth.getAccounts()
-  //   setAccount(accounts[0])
-  //   const balance = await web3Obj.web3.eth.getBalance(accounts[0])
-  //   setBalance(balance)
-  // }
-
+  const [onRampDone, setOnRampDone] = useState(false)
+  const [onRampSuccess, setOnRampSuccess] = useState(false)
   return (
     <div className={className ? `card ${className}` : 'card'}>
       <UserProvider
         value={{
           web3Obj,
-          loginWithTorus,
           setConnected,
           setStep,
+          //Login
+          xDaiBalance,
+          setxDaiBalance,
+          setOnRamp,
+          setUserName,
+          setProfileImage,
+          //onRamp
+          onRampDone,
+          setOnRampDone,
+          onRampSuccess,
+          setOnRampSuccess,
           // Step1
           account,
           url,
@@ -125,30 +92,36 @@ const Card = ({ className }) => {
           currency,
           setCurrency,
           setLoading,
-          // balance,
-          // updateUserWallet,
-          // LoadingView
           done: setFlying,
         }}
       >
         {connected && !loading && (
           <div className="card-user">
             <div className="user-profile">
-              <img className="user-profile-img" src={userProfile} />
+              <img className="user-profile-img" src={profileImage} />
             </div>
             <div className="user-name">{userName}</div>
           </div>
         )}
-        {!loading && (
-          <div className="card-status">
-            <div
-              className={connected ? 'status-icon true' : 'status-icon false'}
-            />
-            <div className="status-text">
-              {connected ? 'Connected' : 'Not Connected'}
+        {!loading &&
+          (connected ? (
+            <div className="card-status connected">
+              <div className="balance">
+                {`${(xDaiBalance / 10 ** 18).toFixed(2)} xDai (USD)`}
+              </div>
+              {onRamp && (
+                <div className="alert">
+                  <img className="alert-img" src={Alert} />
+                  {'Insufficient funds'}
+                </div>
+              )}
             </div>
-          </div>
-        )}
+          ) : (
+            <div className="card-status">
+              <div className="status-icon false" />
+              <div className="status-text">Not connected</div>
+            </div>
+          ))}
         {!flying && !loading && (
           <div className="card-tabs">
             <div
@@ -181,7 +154,11 @@ const Card = ({ className }) => {
             </div>
           </div>
         )}
-        {!connected ? (
+        {loading ? (
+          <LoadingView img={loading.img} title={loading.title} />
+        ) : onRamp ? (
+          <RampView />
+        ) : !connected ? (
           <LoginView />
         ) : flying ? (
           <DAOView data={data} />
@@ -191,8 +168,6 @@ const Card = ({ className }) => {
           <Step2View />
         ) : step === 3 ? (
           <Step3View />
-        ) : step === 4 || loading ? (
-          <LoadingView />
         ) : null}
       </UserProvider>
     </div>
@@ -200,20 +175,3 @@ const Card = ({ className }) => {
 }
 
 export default Card
-
-// function getPublicAddress() {
-//   web3Obj.torus
-//     .getPublicAddress({
-//       verifier: selectedVerifier,
-//       verifierId: verifierId,
-//       isExtended: true,
-//     })
-//     .then(console.log(''))
-// }
-// function sendEth() {
-//   web3Obj.web3.eth.sendTransaction({
-//     from: account,
-//     to: account,
-//     value: web3Obj.web3.utils.toWei('0.01'),
-//   })
-// }

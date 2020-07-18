@@ -79,8 +79,19 @@ const Card = ({ className }) => {
         console.log({ balance })
         const daiBalance = await web3Obj.daiBalance()
         console.log({ daiBalance })
+        // If you don't have DAI, then...
         if (daiBalance < 1) {
-            await web3Obj.buyDai()
+          // Check if you have some ether to buy DAI.
+          if (balance < 1) {
+            // If you don't have any ether, then buy some ether.
+            await web3Obj
+              .buyEth()
+              .then(() => console.log('You bought some ether'))
+          }
+          // If you had ether, then just buy DAI.
+          await web3Obj.exchangeEthToDAI().then(() => {
+            console.log('You got some DAI :)')
+          })
         }
         await web3Obj.exchangeDaixDai(1)
         await web3Obj.changeNetwork('xdai')

@@ -1,11 +1,19 @@
 import '../styles/dao-list-view.sass'
 import FbLogo from '../public/images/fb-logo.svg'
 
+const memberslogo = '';
+const capitallogo = '';
+const voteslogo = '';
+
 const DAOListView = ({
-  data: { logo, name, members, capital, votes },
-}) => (
+  list
+}) =>
   <div className="card">
-  <div className="card-inner">
+  <div className="header"></div>
+  {list.map(({ logo, name, members, capital, votes }, index) => {
+    console.log({ index })
+    return (
+  <div className={`card-inner ${index === 0 ? 'top' : ''}`}>
     {/* <div className="dao-logo">
       <img className="dao-logo-img" src={logo} />
     </div>
@@ -63,8 +71,7 @@ const DAOListView = ({
       {/* </div> */}
     </div>
     {/* <a className="dao-donate-button">Donate to {name}</a> */}
+  </div>)})}
   </div>
-  </div>
-)
 
 export default DAOListView

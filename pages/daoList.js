@@ -15,6 +15,7 @@ const Onboarding = () => {
     capital: '552$',
     votes: '82',
   }
+  const list = [data, data]
   return (
     <>
       {/* <Head>
@@ -24,7 +25,7 @@ const Onboarding = () => {
       <div className="container">
         <Navbar />
         <div className="connect-container"> */}
-          <DAOListView data={data}/>
+          <DAOListView list={list}/>
         {/* </div>
         <Footer />
       </div> */}

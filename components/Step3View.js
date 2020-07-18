@@ -1,8 +1,9 @@
 import '../styles/step3-view.sass'
 import Back from '../public/images/back.svg'
-import Info from '../public/images/info.svg'
 import { useContext } from 'react'
+import Loading from '../public/images/loading.svg'
 import UserContext from '../lib/UserContext'
+import InfoButton from './InfoButton'
 
 const Step3View = () => {
   const {
@@ -14,32 +15,14 @@ const Step3View = () => {
     balance,
     updateUserWallet,
   } = useContext(UserContext)
+
   const createDao = async () => {
-    await updateUserWallet()
-    if (balance > 1) {
-      /* 
-            Some way to save the following:
-            1. DAO Logo on IPFS (https://github.com/ipfs/js-ipfs)
-            2. Save the relation between the FB Group ID and the DAO address.
-               This can be achieved by using a smart contract that saves key value pairs.
-               Also, another option would be using https://github.com/orbitdb/orbit-db 
-               (I think this one is easier)
-            We may want to take the fee from creating the DAO in this moment.
-        */
-      setStep(4)
-      setLoading(true)
-    } else {
-      await web3Obj.torus
-        .initiateTopup('rampnetwork', {
-          selectedCryptoCurrency: 'DAI',
-          fiatValue: 10,
-        })
-        .then()
-        .catch(e => {
-          alert('You need to load some cash to pay for the DAO fees!')
-        })
-    }
+    setLoading({ img: Loading, title: 'Your dao is being created' })
+    setTimeout(() => {
+      setLoading(undefined)
+    }, 3000)
   }
+
   const back = () => {
     setStep(2)
   }
@@ -57,13 +40,11 @@ const Step3View = () => {
           setCurrency(e.target.value)
         }}
       />
-      <div className="step3-info">
-        <img className="info-img" src={Info} />
-        <span className="info-text">
-          All DAOs come with their own community currency. <a>Learn more</a>
-        </span>
-      </div>
 
+      <InfoButton
+        title={'All DAOs come with their own community tokens.'}
+        content={'Because you do!'}
+      />
       <a className="step3-button" onClick={createDao}>
         Create DAO
       </a>

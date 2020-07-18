@@ -1,9 +1,10 @@
 import '../styles/step1-view.sass'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import UserContext from '../lib/UserContext'
 
 const Step1View = () => {
-  const { setStep, url, setUrl } = useContext(UserContext)
+  const { setStep, url, setUrl, balance, web3Obj } = useContext(UserContext)
+
   const submit = () => {
     setStep(2)
   }

@@ -15,6 +15,7 @@ const Step2View = () => {
     logoHash,
     setLogoHash,
   } = useContext(UserContext)
+
   const submit = () => {
     setStep(3)
   }
@@ -23,6 +24,7 @@ const Step2View = () => {
   }
 
   const [logoFile, setLogoFile] = useState('')
+
   useEffect(() => {
     fleekStorage
       .getFileFromHash({
@@ -32,14 +34,14 @@ const Step2View = () => {
   }, [logoHash])
 
   const uploadFile = async file => {
-    console.log("file uploading to ipfs")
+    console.log('file uploading to ipfs')
     const uploadedFile = await fleekStorage.upload({
       apiKey: '9cILwykg8eJ7JifGfuS4zA==',
       apiSecret: 'u1gcUczk4+o3B0XBP2A0DcWABEvDqUdxz06MgXc3FRA=',
       key: file.name,
       data: file,
     })
-    console.log("file upload done")
+    console.log('file upload done')
     setLogoHash(uploadedFile.hash)
   }
 

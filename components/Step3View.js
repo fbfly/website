@@ -1,8 +1,9 @@
 import '../styles/step3-view.sass'
 import Back from '../public/images/back.svg'
-import Info from '../public/images/info.svg'
 import { useContext } from 'react'
+import Loading from '../public/images/loading.svg'
 import UserContext from '../lib/UserContext'
+import InfoButton from './InfoButton'
 
 const Step3View = () => {
   const {
@@ -14,11 +15,14 @@ const Step3View = () => {
     balance,
     updateUserWallet,
   } = useContext(UserContext)
+
   const createDao = async () => {
-    await updateUserWallet()
-    setStep(4)
-    setLoading(true)
+    setLoading({ img: Loading, title: 'Your dao is being created' })
+    setTimeout(() => {
+      setLoading(undefined)
+    }, 3000)
   }
+
   const back = () => {
     setStep(2)
   }
@@ -36,13 +40,11 @@ const Step3View = () => {
           setCurrency(e.target.value)
         }}
       />
-      <div className="step3-info">
-        <img className="info-img" src={Info} />
-        <span className="info-text">
-          All DAOs come with their own community currency. <a>Learn more</a>
-        </span>
-      </div>
 
+      <InfoButton
+        title={'All DAOs come with their own community tokens.'}
+        content={'Because you do!'}
+      />
       <a className="step3-button" onClick={createDao}>
         Create DAO
       </a>

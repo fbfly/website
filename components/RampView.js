@@ -140,7 +140,7 @@ const RampView = () => {
                 value={xDai.toFixed(3)}
                 onChange={e => {
                   setxDai(Number(e.target.value))
-                  setUSD(calcUsdFromxDai(e.target.value))
+                  setUsd(calcUsdFromxDai(e.target.value))
                 }}
               />
               <span class="ramp-unit">xDAI</span>

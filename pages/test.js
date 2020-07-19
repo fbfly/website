@@ -34,7 +34,7 @@ const Test = () => {
           <button
             onClick={async () => {
               await main(web3Obj.provider)
-                .then(() => process.exit(0))
+                .then()
                 .catch(err => {
                   console.log(`Error: `, err)
                   console.log(

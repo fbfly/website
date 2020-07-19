@@ -1,15 +1,22 @@
 .header
+  display: grid
+  grid-template-columns: 1fr 1fr 1fr
+  grid-gap: 1rem
+  padding: 2.3rem
+  padding-left: 6%
+  padding-right: 6%
   position: absolute
-  height: 20%
+  height: 9.8rem
   width: 100%
-  background: #FFFFFF
-  box-shadow: 0px 4px 24px rgba(81, 61, 164, 0.25)
+  // box-shadow: 0px 4px 24px rgba(81, 61, 164, 0.25)
   // overflow: hidden
-  display: flex
-  align-items: center
-  flex-direction: column
+  // display: flex
+  // align-items: center
+  // flex-direction: column
   // position: relative
-  background: linear-gradient(266.52deg, #8B3CE6 -1.19%, #406EFB 96.86%)
+  background: linear-gradient(260.48deg, #8B3CE6 -1.19%, #406EFB 96.86%);
+  .user-name
+    width: 6.75rem
 
 .card
   height: 100%
@@ -25,41 +32,81 @@
   // padding-top: 8rem
   // background: linear-gradient(266.52deg, #8B3CE6 -1.19%, #406EFB 96.86%)
 
+.card-user
+  height: 3.25rem
+  z-index: 1
+  display: flex
+  justify-self: end
+  // justify-content: space-around
+  align-items: center
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  /* Note: backdrop-filter has minimal browser support */
+  border-radius: 8px;
+  padding: 1.25rem
+  color: white
+  .user-profile
+    width: 1.5rem
+    height: 1.5rem
+    background: white
+    border-radius: 50%
+    margin-right: 0.5rem
+    overflow: hidden
+    img
+      width: 100%
+      height: 100%
+
 .card-inner
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   background: white
-  margin-top: 2rem
+  margin-top: 1.8rem
   display: flex
   flex-direction: column
   align-items: center
   justify-content: center
   // height: calc(100% - 8rem)
-  height: 20%
-  width: 70%
+  height: 12rem
+  width: 88%
   padding: 2rem 0
   position: relative
 
 .top
-  margin-top: 8rem
-  
-.dao-logo
-  background: #FFFFFF
-  box-shadow: 0px 4px 4px rgba(58, 38, 119, 0.12)
-  // position: absolute
-  // top: 0
-  // left: 50%
-  // transform: translate(-50%, -50%)
-  border-radius: 50%
-  overflow: hidden
-  width: 4rem
-  height: 4rem
+  margin-top: 7.8rem
+
+.dao-logo-img
+    margin: 0.5rem
+    width: 3rem
+    height: 3rem
+
+.dao-count-img
+  width: 3.75rem
+  height: 3.75rem
+
+.fbfly-text
+  margin-top: 0.5rem
   display: flex
-  justify-content: center
-  align-items: center
-  .dao-logo-img
-    width: 75%
-    height: 75%
+  align-items: start
+  justify-self: start
+
+.fbfly-logo
+  justify-self: center
+
+.fbfly-logo-img
+  width: 3.75rem
+  height: 3.75rem
+
+.c-header-watermark
+  position: absolute
+  height: 8em
+  left: 50%
+  transform: translateX(-59%)
+
+.d-header-watermark
+  position: absolute
+  height: 8em
+  left: 50%
+  transform: translateX(-41%)
 
 .connect-container
   // display: flex
@@ -77,6 +124,7 @@
   margin-bottom: 0.5rem
 
 .dao-fb-link
+  font-size: 1rem
   cursor: pointer
   text-align: center
   display: flex
@@ -84,18 +132,20 @@
   align-items: center
   color: #3A72FD
   .fb-logo-img
-    width: 1.5rem
-    height: 1.5rem
+    width: 1rem
+    height: 1rem
     margin-right: 0.5rem
 
 .dao-content
   width: 100%
   display: grid
-  justify-content: space-around
+  justify-items: center
   grid-template-columns: 1fr 1fr 1fr 1fr
   grid-gap: 1rem
   padding: 1rem
+  padding-right: 8.75rem
   .dao-content-logo
+    justify-self: center
     display: flex
     flex-direction: column
     justify-content: center
@@ -127,14 +177,24 @@
       flex-direction: column
     .count-title
       color: #A99BD8
+      font-size: 1rem
       text-align: center
     .count-value
       text-align: center
-      font-size: 1.5rem
+      font-size: 2rem
       margin: 0.5rem 0
     .count-link
       text-align: center
       color: #3A72FD
+
+.vl
+  border-left: 1px solid #EFEFEF
+  height: 12rem
+  position: absolute
+  left: 24.5%
+  // margin-left: -3px
+  top: 0
+
 
 .dao-donate-button
   height: 2.5rem

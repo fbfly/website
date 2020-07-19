@@ -12,7 +12,7 @@ const Onboarding = () => {
     description:
       'Fast fashion is easy for consumers because it’s just that: fast and inexpensive. Lasting for only a season or so, it’s easy for us to end up with clothes that tatter and rip after just a few wear.',
     members: '28',
-    capital: '552$',
+    capital: '$552',
     votes: '82',
   }
   const list = [data, data]
@@ -25,7 +25,7 @@ const Onboarding = () => {
       <div className="container">
         <Navbar />
         <div className="connect-container"> */}
-          <DAOListView list={list}/>
+          <DAOListView list={list} userName="John Doe"/>
         {/* </div>
         <Footer />
       </div> */}

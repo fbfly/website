@@ -1,77 +1,74 @@
 import '../styles/dao-list-view.sass'
+import caratDown from '../public/images/carat-down.svg'
+import cHeaderWatermark from '../public/images/c-header-watermark.svg'
+import dHeaderWatermark from '../public/images/d-header-watermark.svg'
+import FbFlyLogo from '../public/images/fbfly-logo-light.svg'
+import FbText from '../public/images/fb.svg'
+import FlyText from '../public/images/fly.svg'
+import UserProfile from '../public/images/user-profile.svg'
 import FbLogo from '../public/images/fb-logo.svg'
 
-const memberslogo = '';
-const capitallogo = '';
-const voteslogo = '';
+import membersLogo from '../public/images/profile.svg';
+import capitalLogo from '../public/images/coins.svg';
+import votesLogo from '../public/images/thumbs.svg';
 
 const DAOListView = ({
-  list
+  list, userName
 }) =>
   <div className="card">
-  <div className="header"></div>
-  {list.map(({ logo, name, members, capital, votes }, index) => {
-    console.log({ index })
-    return (
-  <div className={`card-inner ${index === 0 ? 'top' : ''}`}>
-    {/* <div className="dao-logo">
-      <img className="dao-logo-img" src={logo} />
+  <div className="header">
+    <img className="c-header-watermark" src={cHeaderWatermark} />
+    <img className="d-header-watermark" src={dHeaderWatermark} />
+    <div className="fbfly-text">
+      <img className="fbfly-text-img" src={FbText} />
+      <img className="fbfly-text-img" src={FlyText} />
     </div>
-    <div className="dao-title">{name}</div>
-    <a className="dao-fb-link">
-      <img className="fb-logo-img" src={FbLogo} />
-      Go to our Facebook Group
-    </a> */}
+    <div className="fbfly-logo">
+      <img className="fbfly-logo-img" src={FbFlyLogo} />
+    </div>
+    <div className="card-user">
+      <div className="user-profile">
+        <img className="user-profile-img" src={UserProfile} />
+      </div>
+      <div className="user-name">{userName}</div>
+      <img src={caratDown} />
+    </div>
+  </div>
+  {list.map(({ logo, name, members, capital, votes }, index) => (
+  <div className={`card-inner ${index === 0 ? 'top' : ''}`}>
     <div className="dao-content">
-      {/* <div className="dao-content-about">
-        <div className="dao-content-title">About {name}</div>
-        <div className="dao-content-description">
-          {description}
-          <a className="more-link">Read more</a>
-        </div>
-      </div> */}
+      <div class="vl"></div>
       <div className="dao-content-logo">
-        <div className="dao-logo">
-          <img className="dao-logo-img" src={logo} />
-        </div>
+        <img className="dao-logo-img" src={logo} />
         <div className="dao-title">{name}</div>
         <a className="dao-fb-link">
           <img className="fb-logo-img" src={FbLogo} />
           Go to our Facebook Group
         </a>
       </div>
-      {/* <div className="dao-content-counts-container"> */}
         <div className="dao-content-count">
-          <div className="dao-logo dao-count-left">
-            <img className="dao-logo-img" src={logo} />
-          </div>
+          <img className="dao-count-img dao-count-left" src={membersLogo} />
           <div className="dao-count-right">
             <span className="count-value">{members}</span>
             <span className="count-title">Members</span>
           </div>
         </div>
         <div className="dao-content-count">
-          <div className="dao-logo dao-count-left">
-            <img className="dao-logo-img" src={logo} />
-          </div>
-          <div className="dao-count-right">
-            <span className="count-value">{capital}</span>
-            <span className="count-title">Capital</span>
-          </div>
-        </div>
-        <div className="dao-content-count">
-          <div className="dao-logo dao-count-left">
-            <img className="dao-logo-img" src={logo} />
-          </div>
+            <img className="dao-count-img dao-count-left" src={votesLogo} />
           <div className="dao-count-right">
             <span className="count-value">{votes}</span>
             <span className="count-title">Votes</span>
           </div>
         </div>
-      {/* </div> */}
+        <div className="dao-content-count">
+            <img className="dao-count-img dao-count-left" src={capitalLogo} />
+          <div className="dao-count-right">
+            <span className="count-value">{capital}</span>
+            <span className="count-title">Capital</span>
+          </div>
+        </div>
     </div>
-    {/* <a className="dao-donate-button">Donate to {name}</a> */}
-  </div>)})}
+  </div>))}
   </div>
 
 export default DAOListView

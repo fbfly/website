@@ -19,7 +19,7 @@ const DaoList = () => {
       votes: '82',
       fbLink: '',
       daoLink: '',
-    }, 
+    },
     {
       name: 'Moral Brand',
       logo: MoralBrandLogo,
@@ -30,15 +30,13 @@ const DaoList = () => {
       votes: '533',
       fbLink: '',
       daoLink: '',
-    }
+    },
   ]
   const user = {
-    userName: "John Doe",
-    userProfile
+    userName: 'John Doe',
+    userProfile,
   }
-  return (
-    <DAOListView list={list} user={user} />
-  )
+  return <DAOListView list={list} user={user} />
 }
 
 export default DaoList

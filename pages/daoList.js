@@ -7,7 +7,7 @@ import EthicalBrandLogo from '../public/images/ethical-brand.svg'
 import MoralBrandLogo from '../public/images/section2.svg'
 import userProfile from '../public/images/user-profile.svg'
 
-const Onboarding = () => {
+const DaoList = () => {
   const list = [
     {
       name: 'Ethical Brand',
@@ -41,4 +41,4 @@ const Onboarding = () => {
   )
 }
 
-export default Onboarding
+export default DaoList

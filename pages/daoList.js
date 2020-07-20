@@ -18,6 +18,7 @@ const Onboarding = () => {
       capital: '$552',
       votes: '82',
       fbLink: '',
+      daoLink: '',
     }, 
     {
       name: 'Moral Brand',
@@ -28,6 +29,7 @@ const Onboarding = () => {
       capital: '$1,285',
       votes: '533',
       fbLink: '',
+      daoLink: '',
     }
   ]
   const user = {

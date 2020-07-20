@@ -34,16 +34,16 @@ const DAOListView = ({
       <img src={caratDown} />
     </div>
   </div>
-  {list.map(({ logo, name, members, capital, votes, fbLink }, index) => (
+  {list.map(({ logo, name, members, capital, votes, fbLink, daoLink }, index) => (
   <div className={`dao-item ${index === 0 ? 'top' : ''}`}>
     <div className="dao-content">
       <div class="vl"></div>
       <div className="dao-content-logo">
-        <a className="dao-link">
+        <a className="dao-link" href={daoLink}>
           <img className="dao-logo-img" src={logo} />
           <div className="dao-title">{name}</div>
         </a>
-        <a className="dao-fb-link" to={fbLink}>
+        <a className="dao-fb-link" href={fbLink}>
           <img className="fb-logo-img" src={FbLogo} />
           Go to our Facebook Group
         </a>

@@ -23,20 +23,21 @@ const Step3View = () => {
 
   const createNewDao = async () => {
     setLoading({ img: Loading, title: 'Your dao is being created' })
-    const userInfo = web3Obj.getUserInfo();
+    const userInfo = web3Obj.getUserInfo()
+
     const metadata = {
-        fbUser: userInfo.name,
-        creatorName: userInfo.name,
-        groupID: url.replace(/^.*[\\\/]/, ""),
-        groupURL: url,
+      creatorName: userInfo.name,
+      groupID: url.replace(/^.*[\\\/]/, ''),
+      groupURL: url,
       name,
       currency,
       description,
       logoImageHash,
     }
 
-    const metadataHash = ipldService.uploadMetadata(metadata);
-    const error = createDAO(web3Obj.torus, metadata)
+    const metadataHash = ipldService.uploadMetadata(metadata)
+    // also call fbFly to store group data and metadata
+    // const error = createDAO(web3Obj.torus, metadata)
 
     setTimeout(() => {
       setLoading(undefined)

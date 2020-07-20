@@ -1,11 +1,9 @@
 import '../styles/dao-list-view.sass'
 import caratDown from '../public/images/carat-down.svg'
-import cHeaderWatermark from '../public/images/c-header-watermark.svg'
-import dHeaderWatermark from '../public/images/d-header-watermark.svg'
+import headerWatermark from '../public/images/card-header-watermark.svg'
 import FbFlyLogo from '../public/images/fbfly-logo-light.svg'
 import FbText from '../public/images/fb.svg'
 import FlyText from '../public/images/fly.svg'
-import UserProfile from '../public/images/user-profile.svg'
 import FbLogo from '../public/images/fb-logo.svg'
 
 import membersLogo from '../public/images/profile.svg';
@@ -13,12 +11,14 @@ import capitalLogo from '../public/images/coins.svg';
 import votesLogo from '../public/images/thumbs.svg';
 
 const DAOListView = ({
-  list, userName
+  list, user: {
+    userName,
+    userProfile,
+  }
 }) =>
-  <div className="card">
+  <div className="background">
   <div className="header">
-    <img className="c-header-watermark" src={cHeaderWatermark} />
-    <img className="d-header-watermark" src={dHeaderWatermark} />
+    <img className="header-watermark" src={headerWatermark} />
     <div className="fbfly-text">
       <img className="fbfly-text-img" src={FbText} />
       <img className="fbfly-text-img" src={FlyText} />
@@ -26,22 +26,24 @@ const DAOListView = ({
     <div className="fbfly-logo">
       <img className="fbfly-logo-img" src={FbFlyLogo} />
     </div>
-    <div className="card-user">
+    <div className="user">
       <div className="user-profile">
-        <img className="user-profile-img" src={UserProfile} />
+        <img className="user-profile-img" src={userProfile} />
       </div>
       <div className="user-name">{userName}</div>
       <img src={caratDown} />
     </div>
   </div>
-  {list.map(({ logo, name, members, capital, votes }, index) => (
-  <div className={`card-inner ${index === 0 ? 'top' : ''}`}>
+  {list.map(({ logo, name, members, capital, votes, fbLink }, index) => (
+  <div className={`dao-item ${index === 0 ? 'top' : ''}`}>
     <div className="dao-content">
       <div class="vl"></div>
       <div className="dao-content-logo">
-        <img className="dao-logo-img" src={logo} />
-        <div className="dao-title">{name}</div>
-        <a className="dao-fb-link">
+        <a className="dao-link">
+          <img className="dao-logo-img" src={logo} />
+          <div className="dao-title">{name}</div>
+        </a>
+        <a className="dao-fb-link" to={fbLink}>
           <img className="fb-logo-img" src={FbLogo} />
           Go to our Facebook Group
         </a>

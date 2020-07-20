@@ -1,4 +1,5 @@
 .header
+  z-index: 0
   display: grid
   grid-template-columns: 1fr 1fr 1fr
   grid-gap: 1rem
@@ -8,36 +9,26 @@
   position: absolute
   height: 9.8rem
   width: 100%
-  // box-shadow: 0px 4px 24px rgba(81, 61, 164, 0.25)
-  // overflow: hidden
-  // display: flex
-  // align-items: center
-  // flex-direction: column
-  // position: relative
   background: linear-gradient(260.48deg, #8B3CE6 -1.19%, #406EFB 96.86%);
   .user-name
     width: 6.75rem
 
-.card
+.background
+  z-index: 2
   height: 100%
   width: 100%
-  // background: #FFFFFF
   box-shadow: 0px 4px 24px rgba(81, 61, 164, 0.25)
-  // overflow: hidden
   display: flex
   align-items: center
   flex-direction: column
   position: absolute
   background: #F9F9F8
-  // padding-top: 8rem
-  // background: linear-gradient(266.52deg, #8B3CE6 -1.19%, #406EFB 96.86%)
 
-.card-user
+.user
   height: 3.25rem
   z-index: 1
   display: flex
   justify-self: end
-  // justify-content: space-around
   align-items: center
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(10px);
@@ -56,7 +47,8 @@
       width: 100%
       height: 100%
 
-.card-inner
+.dao-item
+  z-index: 2
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   background: white
@@ -65,7 +57,6 @@
   flex-direction: column
   align-items: center
   justify-content: center
-  // height: calc(100% - 8rem)
   height: 12rem
   width: 88%
   padding: 2rem 0
@@ -96,27 +87,12 @@
   width: 3.75rem
   height: 3.75rem
 
-.c-header-watermark
+.header-watermark
   position: absolute
-  height: 8em
+  width: 65.6rem
   left: 50%
-  transform: translateX(-59%)
-
-.d-header-watermark
-  position: absolute
-  height: 8em
-  left: 50%
-  transform: translateX(-41%)
-
-.connect-container
-  // display: flex
-  justify-content: center
-  align-items: center
-  // flex-direction: column
-  width: 100%
-  height: 100%
-  // width: 100vw
-  // height: calc(100vh - 10rem)
+  top: -8rem
+  transform: translateX(-50%)
 
 .dao-title
   text-align: center
@@ -151,17 +127,12 @@
     justify-content: center
     align-items: center
     padding: 1rem
-  .dao-content-about
-    display: flex
-    flex-direction: column
-    justify-content: center
-    padding: 1rem
-  .more-link
-    margin-left: 0.5rem
-    color: #3A72FD
-  .dao-content-title
-    color: #A99BD8
-    margin-bottom: 1rem
+    .dao-link
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: center
+
   .dao-content-count
     display: grid
     grid-template-columns: 1fr 1fr
@@ -192,24 +163,7 @@
   height: 12rem
   position: absolute
   left: 24.5%
-  // margin-left: -3px
   top: 0
-
-
-.dao-donate-button
-  height: 2.5rem
-  display: flex
-  justify-content: center
-  align-items: center
-  border-radius: 0.5rem
-  background: linear-gradient(144.73deg, #3177FF 7.02%, #9634E2 96.8%)
-  box-shadow: 0 0.25rem 0.5rem rgba(35, 24, 81, 0.2)
-  color: white
-  padding: 0 3rem
-  position: absolute
-  bottom: 2rem
-  left: auto
-  right: auto
 
 @media (max-width: 40rem)
   .dao-content

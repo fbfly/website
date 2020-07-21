@@ -1,10 +1,20 @@
 import '../styles/connect.sass'
 import Head from 'next/head'
+import { useState, useEffect } from 'react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import { main } from '../lib/createDao'
 
 const Test = () => {
+  const [web3Obj, setWeb3Obj] = useState(null)
+  useEffect(() => {
+    async function loadTorus() {
+      const { default: web3Obj } = await import('../lib/torus')
+      setWeb3Obj(web3Obj)
+    }
+    loadTorus()
+  }, [])
+
   return (
     <>
       <Head>
@@ -16,8 +26,15 @@ const Test = () => {
         <div className="connect-container">
           <button
             onClick={async () => {
-              await main()
-                .then(() => process.exit(0))
+              await web3Obj.initialize('rinkeby')
+            }}
+          >
+            Login
+          </button>
+          <button
+            onClick={async () => {
+              await main(web3Obj.provider)
+                .then()
                 .catch(err => {
                   console.log(`Error: `, err)
                   console.log(

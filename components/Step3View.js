@@ -4,6 +4,8 @@ import { useContext } from 'react'
 import Loading from '../public/images/loading.svg'
 import UserContext from '../lib/UserContext'
 import InfoButton from './InfoButton'
+import ipldService from '../lib/ipld'
+import createDAO from '../lib/createDao'
 
 const Step3View = () => {
   const {
@@ -13,11 +15,30 @@ const Step3View = () => {
     currency,
     setCurrency,
     balance,
-    updateUserWallet,
+    name,
+    url,
+    description,
+    logoHash,
   } = useContext(UserContext)
 
-  const createDao = async () => {
+  const createNewDao = async () => {
     setLoading({ img: Loading, title: 'Your dao is being created' })
+    const userInfo = web3Obj.getUserInfo()
+
+    const metadata = {
+      creatorName: userInfo.name,
+      groupID: url.replace(/^.*[\\\/]/, ''),
+      groupURL: url,
+      name,
+      currency,
+      description,
+      logoImageHash,
+    }
+
+    const metadataHash = ipldService.uploadMetadata(metadata)
+    // also call fbFly to store group data and metadata
+    // const error = createDAO(web3Obj.torus, metadata)
+
     setTimeout(() => {
       setLoading(undefined)
     }, 3000)
@@ -43,9 +64,9 @@ const Step3View = () => {
 
       <InfoButton
         title={'All DAOs come with their own community tokens.'}
-        content={'Because you do!'}
+        content={'Because they just do!'}
       />
-      <a className="step3-button" onClick={createDao}>
+      <a className="step3-button" onClick={createNewDao}>
         Create DAO
       </a>
       <a className="step3-back-button" onClick={back}>

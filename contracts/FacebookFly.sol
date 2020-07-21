@@ -1,58 +1,46 @@
 pragma solidity ^0.6.0;
 pragma experimental ABIEncoderV2;
 
-/*
-
-metadata json of DAO
- {
-     "name": "Ethical brand",
-     "description:" "Something about the brand",
-     "currency": "Ethical",
-     "logo": "asdasdsad" //this is a ipfs hash of the logo
-}
-
-this metadata will be uploaded to IPFS for each dao we create 
-and we shall store the IPFS hash in the smart contract
-can use IPLD for this as well: 
-https://github.com/ipld/js-ipld-dag-cbor
-
-*/
-
 contract FacebookFly {
     
-    struct fbFlyDao {
+    struct FbFly {
         address creator;
-        string fbGroupId;  
-        string metadataHash; 
-        address daoAddress;    
+        string groupId;
+        string metadataHash; // stored on IPFS in IPLD format
+        address daoAddress;
+        // uint8 memberCount;
+        // mapping (uint8 => address) members; // verified using facebook api
     }
     
-    mapping (uint => fbFlyDao) daos;
+    mapping (uint => FbFly) public daos;
     uint daosCount = 0;
-    
-    mapping (string => uint) fbGroupToDao;
+    mapping(address => string) public fbUsers;
+    mapping (string => uint) public fbGroupToDao;
     
     constructor() public {
-        daos[0] = fbDao(msg.sender, "fbFly", "ipfsHashContainingMetadataJson", 0xDAd714F1fF59F427f203ac1d056d80616E7b807B);
+        daos[0] = FbFly(msg.sender, "FbFly", "ipfsHashContainingMetadataJson", 0xDAd714F1fF59F427f203ac1d056d80616E7b807B);
         daosCount = 1;
     }
     
-    mapping(address => string) public fbUserNames;
     
-    function create(string memory _fbGroup, string memory _metadata, address _dao) public {
-        require(fbGroupToDao[_fbGroup] == 0, "DAO already exists for this fbGroup");
-        daos[daosCount] = fbDao(msg.sender, _fbGroup, _metadata, _dao);
-        fbGroupToDao[_fbGroup] = daosCount;
+    function create(string memory _groupId, string memory _metadata, address _dao) public {
+        require(fbGroupToDao[_groupId] == 0, "DAO already exists for this groupId");
+        daos[daosCount] = FbFly(msg.sender, _groupId, _metadata, _dao);
+        fbGroupToDao[_groupId] = daosCount;
         daosCount ++;
     }
 
+    // function approveDaoMembership
+
+    // function joinDao
     
-    function getDaoFromfbGroup(string memory _fbGroupId) public view returns (fbDao memory dao) {
-        return daos[fbGroupToDao[_fbGroup]];
+    function getDaoFromfbGroup(string memory _groupId) public view returns (FbFly memory dao) {
+        return daos[fbGroupToDao[_groupId]];
     }
     
-    function updatefbUserName(string memory _userName) public {
-        fbUsers[msg.sender] = _userName;
+    function updateFbUser(string memory _userId) public {
+        fbUsers[msg.sender] = _userId;
     }
+
     
 }

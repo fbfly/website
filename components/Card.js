@@ -22,15 +22,6 @@ const Card = ({ className }) => {
   const [step, setStep] = useState(undefined)
   const [onRamp, setOnRamp] = useState(false)
 
-  const data = {
-    name: 'Ethical Brand',
-    logo: EthicalBrandLogo,
-    description:
-      'Fast fashion is easy for consumers because it’s just that: fast and inexpensive. Lasting for only a season or so, it’s easy for us to end up with clothes that tatter and rip after just a few wear.',
-    members: '28',
-    capital: '552$',
-    votes: '82',
-  }
   // Tor.us hooks
   const [account, setAccount] = useState(null)
   const [web3Obj, setWeb3Obj] = useState(null)
@@ -161,7 +152,7 @@ const Card = ({ className }) => {
         ) : !connected ? (
           <LoginView />
         ) : flying ? (
-          <DAOView data={data} />
+          <DAOView />
         ) : step === 1 ? (
           <Step1View />
         ) : step === 2 ? (

@@ -37,7 +37,9 @@ const Navbar = props => {
       >
         <a className="navbar-item">Why</a>
         <a className="navbar-item">Product</a>
-        <a className="navbar-item">About</a>
+        <a className="navbar-item" href="https://docs.fbfly.xyz/">
+          About
+        </a>
         <a href="/onboarding" className="navbar-item navbar-start-now">
           Start now
         </a>

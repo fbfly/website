@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-import { main } from '../lib/createDao'
+import main from '../lib/createDao'
 
 const Test = () => {
   const [web3Obj, setWeb3Obj] = useState(null)

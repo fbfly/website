@@ -5,7 +5,7 @@ import Loading from '../public/images/loading.svg'
 import UserContext from '../lib/UserContext'
 import InfoButton from './InfoButton'
 import ipldService from '../lib/ipld'
-import createDAO from '../lib/createDao'
+import createDao from '../lib/createDao'
 
 const Step3View = () => {
   const {
@@ -23,9 +23,10 @@ const Step3View = () => {
 
   const createNewDao = async () => {
     setLoading({ img: Loading, title: 'Your dao is being created' })
+    const torusProvider = web3Obj.provider
     const userInfo = web3Obj.getUserInfo()
 
-    const metadata = {
+    const daoMetadata = {
       creatorName: userInfo.name,
       groupID: url.replace(/^.*[\\\/]/, ''),
       groupURL: url,
@@ -35,9 +36,11 @@ const Step3View = () => {
       logoImageHash,
     }
 
-    const metadataHash = ipldService.uploadMetadata(metadata)
+    const metadataHash = ipldService.uploadMetadata(daoMetadata)
     // also call fbFly to store group data and metadata
     // const error = createDAO(web3Obj.torus, metadata)
+
+    await createDao(torusProvider)
 
     setTimeout(() => {
       setLoading(undefined)

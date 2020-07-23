@@ -9,7 +9,9 @@ const Footer = props => (
     <div className="footer-menu">
       <a className="footer-item">Why</a>
       <a className="footer-item">Product</a>
-      <a className="footer-item">About</a>
+      <a className="footer-item" href="https://docs.fbfly.xyz/">
+        About
+      </a>
     </div>
   </footer>
 )

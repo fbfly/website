@@ -1,8 +1,4 @@
 import DAOListView from '../components/DAOListView'
-import '../styles/connect.sass'
-import Head from 'next/head'
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
 import EthicalBrandLogo from '../public/images/ethical-brand.svg'
 import MoralBrandLogo from '../public/images/section2.svg'
 import userProfile from '../public/images/user-profile.svg'

@@ -1,0 +1,264 @@
+.header
+  z-index: 0
+  display: grid
+  grid-template-columns: 1fr 1fr 1fr
+  grid-gap: 1rem
+  padding: 2.5rem 5rem
+  position: absolute
+  height: 10rem
+  width: 100%
+  background: linear-gradient(260.48deg, #8B3CE6 -1.19%, #406EFB 96.86%)
+  .user-name
+    width: 6.75rem
+
+.background
+  z-index: 2
+  height: 100%
+  width: 100%
+  box-shadow: 0px 4px 24px rgba(81, 61, 164, 0.25)
+  display: flex
+  align-items: center
+  flex-direction: column
+  position: absolute
+  background: #F9F9F8
+
+.user
+  height: 3rem
+  z-index: 1
+  display: flex
+  justify-self: end
+  align-items: center
+  background: rgba(255, 255, 255, 0.12)
+  backdrop-filter: blur(10px)
+  /* Note: backdrop-filter has minimal browser support */
+  border-radius: 8px
+  padding: 1.25rem
+  color: white
+  .user-profile
+    width: 1.5rem
+    height: 1.5rem
+    background: white
+    border-radius: 50%
+    margin-right: 0.5rem
+    overflow: hidden
+    img
+      width: 100%
+      height: 100%
+
+.dao-main
+  z-index: 1
+  height: 100%
+  margin-top: 8rem
+  width: 100%
+  display: grid
+  grid-template-columns: 1fr 2fr 1fr
+  grid-gap: 1rem
+  padding: 0 5rem
+
+.tile
+  background: #FFFFFF;
+  border: 1px solid #EFEFEF;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 0 1rem
+
+.left-column, .right-column
+  display: flex
+  flex-direction: column
+
+.dao-view-title
+  padding-top: 2rem
+  padding-bottom: 2rem
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-direction: column
+  margin: 0
+  .dao-fb-link
+    margin-top: 0.5rem
+    font-weight: normal
+    font-size: 0.8rem
+  
+.dao-count
+  margin-top: 1rem
+  padding-top: 2rem
+  padding-bottom: 2rem
+  padding-left: 2rem
+  display: flex
+  justify-content: flex-start
+  align-items: center
+
+.dao-count-right
+  padding-left: 1rem
+  display: flex
+  flex-direction: column
+  .count-value
+    font-size: 2rem
+  .count-title
+    font-size: 1rem
+    font-weight: 300
+    line-height: 1.5rem
+
+.dao-info
+  padding: 0
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  margin-bottom: 1rem
+  .dao-info-title
+    padding: 1rem 1rem
+    font-size: 0.8rem;
+    color: #637381;
+    display: flex
+    justify-content: flex-start
+    align-items: center
+    text-transform: uppercase
+    border-width: 1px
+    border-style: none none solid none
+    border-color: #DDE4E9
+    .question-img
+      margin-left: 0.5rem
+      height: 1rem
+      width: 1rem
+  .dao-info-content
+    padding: 0.25rem 1rem
+    display: flex
+    flex-direction: column
+    justify-content: flex-start
+    padding-bottom: 1rem
+    .token-item
+      display: flex
+      justify-content: space-between
+      align-items: center;
+      margin-top: 1rem
+      .item-label
+        color: #637381
+        font-weight: 300
+      .item-value
+        text-transform: uppercase
+      .item-symbol
+        background: #E5F5FA;
+        border-radius: 0.5rem;
+        justify-content: center
+        align-items: center
+        display: flex
+        padding: 0.25rem 1rem
+    .shares-header
+      padding: 0.5rem 0
+    .shares-title
+      font-weight: normal
+      margin-top: 0.5rem
+    .shares-display
+      margin: 1rem 0
+      border-radius: 0.25rem
+      height: 0.5rem
+      background: #F08658
+      
+    .shares-item
+      margin-top: 0.5rem
+      display: flex
+      justify-content: space-between
+      align-items: center
+      .shares-item-left
+        display: flex
+        justify-content: center
+        align-items: center
+
+      .item-color
+        border-radius: 50%
+        width: 0.75rem
+        height: 0.75rem
+        margin-right: 0.5rem
+        background: #F08658
+      .item-user
+        background: #E5F5FA;
+        border-radius: 0.5rem;
+        overflow: hidden
+        display: flex
+        align-items: center
+        .item-user-name
+          padding: 0 0.5rem
+        .item-user-img-container
+          overflow: hidden
+          position: relative
+          width: 2rem
+          height: 2rem
+        .item-user-img
+          position: absolute
+          top: 50%
+          left: 50%
+          transform: translate(-50%,-50%)
+          width: 3rem
+          height: 3rem
+  
+  
+.dao-tokens-header
+  padding: 1rem
+  display: flex
+  align-items: center
+  font-weight: normal
+  font-size: 1.25rem
+  .dao-tokens-symbol
+    color: white
+    margin-left: 0.5rem
+    display: flex
+    align-items: center
+    background: #4C5CF6;
+    border-radius: 0.5rem;
+    height: 1rem
+    padding: 0 0.5rem
+    font-size: 0.7rem
+
+.dao-tokens-content
+  display: grid
+  .dao-tokens-title
+    display: flex
+    justify-content: space-between
+    align-items: center
+    height: 3rem
+    padding-left: 2rem
+    padding-right: 6rem
+    
+    span
+      text-transform: uppercase
+      font-size: 12px;
+      color: #818181;
+  .dao-tokens-members
+    .member-item
+      padding: 1rem
+      border-style: solid none none none
+      border-width: 1px
+      border-color: #EFEFEF
+      display: flex
+      justify-content: space-between
+      align-items: center
+    .member-item-right
+      display: flex
+      align-items: center
+      .member-more
+        margin-left: 2rem
+      
+    .item-user
+      background: #E5F5FA;
+      border-radius: 0.5rem;
+      overflow: hidden
+      display: flex
+      align-items: center
+      .item-user-name
+        padding: 0 0.5rem
+      .item-user-img-container
+        overflow: hidden
+        position: relative
+        width: 2rem
+        height: 2rem
+      .item-user-img
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%,-50%)
+        width: 3rem
+        height: 3rem
+
+@media (max-width: 40rem)
+  .dao-list-content
+    grid-template-columns: 1fr

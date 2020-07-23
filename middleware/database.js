@@ -1,20 +1,20 @@
-import { MongoClient } from 'mongodb';
-import nextConnect from 'next-connect';
+import { MongoClient } from 'mongodb'
+import nextConnect from 'next-connect'
 
-const client = new MongoClient('{YOUR-MONGODB-CONNECTION-STRING}', {
+const client = new MongoClient(process.env.DB_CONNECTION_STRING, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+})
 
 async function database(req, res, next) {
-  if (!client.isConnected()) await client.connect();
-  req.dbClient = client;
-  req.db = client.db('MCT');
-  return next();
+  if (!client.isConnected()) await client.connect()
+  req.dbClient = client
+  req.db = client.db('fbfly')
+  return next()
 }
 
-const middleware = nextConnect();
+const middleware = nextConnect()
 
-middleware.use(database);
+middleware.use(database)
 
-export default middleware;
+export default middleware

@@ -22,10 +22,11 @@ const LoginView = () => {
       setLoading({ img: Wallet, title: 'Your wallet is being created' })
       await web3Obj.initialize('xdai')
       const userInfo = await web3Obj.torus.getUserInfo()
+      console.log(userInfo)
       const xDaiBalance = await web3Obj.balance()
       setxDaiBalance(xDaiBalance)
       // if (xDaiBalance < 1) {
-        setOnRamp(true)
+      setOnRamp(true)
       // } else {
       //   setStep(1)
       // }

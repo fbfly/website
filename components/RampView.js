@@ -1,5 +1,5 @@
 import '../styles/ramp-view.sass'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import UserContext from '../lib/UserContext'
 import Wallet from '../public/images/wallet.svg'
 import Arrow from '../public/images/arrow.svg'
@@ -20,6 +20,20 @@ const RampView = () => {
     onRampSuccess,
     setOnRampSuccess,
   } = useContext(UserContext)
+
+  useEffect(() => {
+    async function checkxDai() {
+      const xDaiBalance = await web3Obj.balance()
+
+      if (xDaiBalance > 0.1) {
+        setxDaiBalance(xDaiBalance)
+        setOnRampDone(true)
+        setOnRampSuccess(true)
+        setLoading(undefined)
+      }
+    }
+    checkxDai()
+  }, [xDaiBalance])
 
   async function onRamp() {
     setLoading({ img: Wallet, title: 'Your wallet is being funded' })
@@ -47,8 +61,6 @@ const RampView = () => {
       await web3Obj.changeNetwork('xdai')
       const xDaiBalance = await web3Obj.balance()
       setxDaiBalance(xDaiBalance)
-      setOnRampDone(true)
-      setOnRampSuccess(true)
     } catch (error) {
       console.log({ onRampError: error })
       setOnRampDone(true)

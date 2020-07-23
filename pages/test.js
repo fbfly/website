@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-import main from '../lib/createDao'
+import createDao from '../lib/createDao'
 
 const Test = () => {
   const [web3Obj, setWeb3Obj] = useState(null)
@@ -33,7 +33,7 @@ const Test = () => {
           </button>
           <button
             onClick={async () => {
-              await main(web3Obj.provider)
+              await createDao(web3Obj.provider)
                 .then()
                 .catch(err => {
                   console.log(`Error: `, err)

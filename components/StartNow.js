@@ -6,7 +6,7 @@ const StartNow = props => (
     <div className="start-now-inner">
       <img className="logo-watermark" src={LogoWatermark} />
       <span className="start-now-text">
-        Start now, create your first community
+          Bring DeFi to your Facebook Group
       </span>
       <a href="/onboarding" className="start-now-button">
         Start now

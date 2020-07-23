@@ -32,8 +32,8 @@ const MainSection = props => (
           <img className="section-img" src={Section2} />
           <div className="section-title">Manage funds</div>
           <div className="section-description">
-            Group members decide what funds should be spent on what, to whom and
-            when collectively & transparently
+            Group members decide collectively & transparently what funds should be spent on what, to whom and
+            when 
           </div>
         </div>
         <div className="main-sections-item">

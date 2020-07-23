@@ -35,8 +35,15 @@ const Navbar = props => {
           toggleOpen(open => false)
         }}
       >
-        <a className="navbar-item">Why</a>
-        <a className="navbar-item">Product</a>
+        <a
+          className="navbar-item"
+          href="https://aragon.1hive.org/#/0x9a955626885d5286fd7f041a2cdba2acc4c09516"
+        >
+          The FBFly DAO
+        </a>
+        <a className="navbar-item" href="https://fbfly.xyz/daoList">
+          Explore FB DAOs
+        </a>
         <a className="navbar-item" href="https://docs.fbfly.xyz/">
           About
         </a>

@@ -8,8 +8,8 @@ import fleekStorage from '@fleekhq/fleek-storage-js'
 const Step2View = () => {
   const {
     setStep,
-    name,
-    setName,
+    daoName,
+    setDaoName,
     description,
     setDescription,
     logoHash,
@@ -53,9 +53,9 @@ const Step2View = () => {
           <input
             className="name-input"
             placeholder="Ethical Brand"
-            value={name}
+            value={daoName}
             onChange={e => {
-              setName(e.target.value)
+              setDaoName(e.target.value)
             }}
           />
           <span className="description-label">DAO Description</span>

@@ -31,14 +31,15 @@ const Card = ({ className }) => {
   const [url, setUrl] = useState('')
 
   // Step2 hooks
-  const [name, setName] = useState('')
+  const [daoName, setDaoName] = useState('')
   const [description, setDescription] = useState('')
   const [logoHash, setLogoHash] = useState(
     'bafybeidsm72bt7kspzyfh4bbtoxmqvsxgt3su25afb77h23t4uw4ys3dtm',
   )
 
   // Step3 hooks
-  const [currency, setCurrency] = useState('')
+  const [tokenName, setTokenName] = useState('')
+  const [tokenSymbol, setTokenSymbol] = useState('')
 
   useEffect(() => {
     async function loadTorus() {
@@ -73,15 +74,17 @@ const Card = ({ className }) => {
           url,
           setUrl,
           // Step2
-          name,
-          setName,
+          daoName,
+          setDaoName,
           description,
           setDescription,
           logoHash,
           setLogoHash,
           // Step3
-          currency,
-          setCurrency,
+          tokenName,
+          setTokenName,
+          tokenSymbol,
+          setTokenSymbol,
           setLoading,
           done: setFlying,
         }}

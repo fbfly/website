@@ -1,5 +1,6 @@
 import '../styles/step1-view.sass'
 import { useContext, useEffect } from 'react'
+import InfoButton from './InfoButton'
 import UserContext from '../lib/UserContext'
 
 const Step1View = () => {
@@ -19,6 +20,11 @@ const Step1View = () => {
         onChange={e => {
           setUrl(e.target.value)
         }}
+        style={{ marginBottom: '2rem' }}
+      />
+      <InfoButton
+        title={'Why do we need your FB Group?'}
+        content={'All DAOs have a FB Group linked!'}
       />
       <a className="step1-button" onClick={submit}>
         Next Step

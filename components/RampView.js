@@ -139,7 +139,7 @@ const RampView = () => {
                   setxDai(calcxDaiFromUsd(e.target.value))
                 }}
               />
-              <span class="ramp-unit">USD</span>
+              <span className="ramp-unit">USD</span>
             </div>
             <div className="ramp-arrow">
               <img className="arrow-img" src={Arrow} />
@@ -155,7 +155,7 @@ const RampView = () => {
                   setUsd(calcUsdFromxDai(e.target.value))
                 }}
               />
-              <span class="ramp-unit">xDAI</span>
+              <span className="ramp-unit">xDAI</span>
             </div>
           </div>
           <span className="ramp-details">

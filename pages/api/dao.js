@@ -19,20 +19,31 @@ handler.get(async (req, res) => {
     })
 })
 handler.post(async (req, res) => {
-  const { daoName, tokenName, tokenSymbol, fbGroupId, imageHash } = req.body
+  const {
+    daoName,
+    description,
+    tokenName,
+    tokenSymbol,
+    fbGroupId,
+    fbGroulURL,
+    imageHash,
+  } = req.body
   await createDao(tokenName, tokenSymbol)
-    .then(
-      async orgAddress =>
-        await req.db.collection('daos').insert({
+    .then(orgAddress => {
+      if (orgAddress) {
+        req.db.collection('daos').insertOne({
           daoName: daoName,
           daoAddress: orgAddress,
+          description: description,
           tokenName: tokenName,
           tokenSymbol: tokenSymbol,
+          fbGroulURL: fbGroulURL,
           fbGroupId: fbGroupId,
           imageHash: imageHash,
-        }),
-      await res.status(200).json('DAO has been created successfully'),
-    )
+        })
+        res.status(200).json('DAO has been created successfully')
+      }
+    })
     .catch(() => res.status(401).json('There was an error creating your DAO.'))
 })
 

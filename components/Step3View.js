@@ -4,18 +4,19 @@ import { useContext } from 'react'
 import Loading from '../public/images/loading.svg'
 import UserContext from '../lib/UserContext'
 import InfoButton from './InfoButton'
-import ipldService from '../lib/ipld'
-import createDao from '../lib/createDao'
+const axios = require('axios')
 
 const Step3View = () => {
   const {
     web3Obj,
     setStep,
     setLoading,
-    currency,
-    setCurrency,
+    tokenName,
+    setTokenName,
+    tokenSymbol,
+    setTokenSymbol,
     balance,
-    name,
+    daoName,
     url,
     description,
     logoHash,
@@ -23,28 +24,24 @@ const Step3View = () => {
 
   const createNewDao = async () => {
     setLoading({ img: Loading, title: 'Your dao is being created' })
-    const torusProvider = web3Obj.provider
-    const userInfo = web3Obj.getUserInfo()
+    const userInfo = web3Obj.torus.getUserInfo()
 
-    const daoMetadata = {
-      creatorName: userInfo.name,
-      groupID: url.replace(/^.*[\\\/]/, ''),
-      groupURL: url,
-      name,
-      currency,
-      description,
-      logoImageHash,
-    }
-
-    const metadataHash = ipldService.uploadMetadata(daoMetadata)
-    // also call fbFly to store group data and metadata
-    // const error = createDAO(web3Obj.torus, metadata)
-
-    await createDao(torusProvider)
-
-    setTimeout(() => {
-      setLoading(undefined)
-    }, 3000)
+    await axios
+      .post('/api/dao', {
+        daoName: daoName,
+        creatorName: userInfo.name,
+        creatorAddress: userInfo.address,
+        description: description,
+        tokenName: tokenName,
+        tokenSymbol: tokenSymbol,
+        imageHash: logoHash,
+        fbGroupId: url.replace(/^.*[\\\/]/, ''),
+        fbGroulURL: url,
+      })
+      .then(response => {
+        console.log('Response:', response)
+        setLoading(undefined)
+      })
   }
 
   const back = () => {
@@ -54,14 +51,25 @@ const Step3View = () => {
   return (
     <div className="card-inner">
       <span className="step3-label">
-        What would you like your community currency?
+        What would you like your community token?
       </span>
       <input
         className="step3-input"
         placeholder="Ethical"
-        value={currency}
+        value={tokenName}
         onChange={e => {
-          setCurrency(e.target.value)
+          setTokenName(e.target.value)
+        }}
+      />
+      <span className="step3-label">
+        Write three letter symbol for your token
+      </span>
+      <input
+        className="step3-input"
+        placeholder="ETC"
+        value={tokenSymbol}
+        onChange={e => {
+          setTokenSymbol(e.target.value)
         }}
       />
 

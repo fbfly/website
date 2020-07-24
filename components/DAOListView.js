@@ -29,44 +29,46 @@ const DAOListView = ({ list, user: { userName, userProfile } }) => (
         <img src={caratDown} />
       </div>
     </div>
-    {list.map(({ logo, name, members, capital, votes, fbLink, daoLink }, index) => (
-      <div className={`dao-item ${index === 0 ? 'top' : ''}`}>
-        <div className="dao-list-content">
-          <div class="vl" />
-          <div className="dao-list-content-logo">
-            <a className="dao-link" href={daoLink}>
-              <img className="dao-logo-img" src={logo} />
-              <div className="dao-title">{name}</div>
-            </a>
-            <a className="dao-fb-link" href={fbLink}>
-              <img className="fb-logo-img" src={FbLogo} />
-              Go to Facebook Group
-            </a>
-          </div>
-          <div className="dao-list-content-count">
-            <img className="dao-count-img dao-count-left" src={membersLogo} />
-            <div className="dao-count-right">
-              <span className="count-value">{members}</span>
-              <span className="count-title">Members</span>
+    {list.map(
+      ({ logo, name, members, capital, votes, fbLink, daoLink }, index) => (
+        <div className={`dao-item ${index === 0 ? 'top' : ''}`}>
+          <div className="dao-list-content">
+            <div className="vl" />
+            <div className="dao-list-content-logo">
+              <a className="dao-link" href={daoLink}>
+                <img className="dao-logo-img" src={logo} />
+                <div className="dao-title">{name}</div>
+              </a>
+              <a className="dao-fb-link" href={fbLink}>
+                <img className="fb-logo-img" src={FbLogo} />
+                Go to Facebook Group
+              </a>
             </div>
-          </div>
-          <div className="dao-list-content-count">
-            <img className="dao-count-img dao-count-left" src={votesLogo} />
-            <div className="dao-count-right">
-              <span className="count-value">{votes}</span>
-              <span className="count-title">Votes</span>
+            <div className="dao-list-content-count">
+              <img className="dao-count-img dao-count-left" src={membersLogo} />
+              <div className="dao-count-right">
+                <span className="count-value">{members}</span>
+                <span className="count-title">Members</span>
+              </div>
             </div>
-          </div>
-          <div className="dao-list-content-count">
-            <img className="dao-count-img dao-count-left" src={capitalLogo} />
-            <div className="dao-count-right">
-              <span className="count-value">{capital}</span>
-              <span className="count-title">Capital</span>
+            <div className="dao-list-content-count">
+              <img className="dao-count-img dao-count-left" src={votesLogo} />
+              <div className="dao-count-right">
+                <span className="count-value">{votes}</span>
+                <span className="count-title">Votes</span>
+              </div>
+            </div>
+            <div className="dao-list-content-count">
+              <img className="dao-count-img dao-count-left" src={capitalLogo} />
+              <div className="dao-count-right">
+                <span className="count-value">{capital}</span>
+                <span className="count-title">Capital</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    ))}
+      ),
+    )}
   </div>
 )
 

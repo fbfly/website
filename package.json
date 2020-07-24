@@ -6,7 +6,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@aragon/connect": "^0.4.2",
     "@aragon/connect-thegraph": "^0.4.2",
+    "@aragon/connect-thegraph-voting": "^0.4.2",
     "@aragon/ui": "^1.4.2",
     "@fleekhq/fleek-storage-js": "^1.0.2",
     "@hapi/iron": "6.0.0",

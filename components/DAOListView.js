@@ -40,7 +40,7 @@ const DAOListView = ({ list, user: { userName, userProfile } }) => (
             </a>
             <a className="dao-fb-link" href={fbLink}>
               <img className="fb-logo-img" src={FbLogo} />
-              Go to our Facebook Group
+              Go to Facebook Group
             </a>
           </div>
           <div className="dao-list-content-count">

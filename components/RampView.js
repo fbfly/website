@@ -127,6 +127,7 @@ const RampView = () => {
           <InfoButton
             title={'Why do I need funds to create and manage a DAO?'}
             content={'Because you do!'}
+            link={'https://docs.fbfly.xyz/about-daos/why-do-i-need-funds-to-create-and-manage-a-dao'}
           />
           <div className="ramp-input-container">
             <div className="usd-input">

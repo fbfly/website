@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@aragon/connect": "^0.4.2",
+    "@aragon/connect-react": "^0.4.2",
     "@aragon/connect-thegraph": "^0.4.2",
     "@aragon/connect-thegraph-voting": "^0.4.2",
     "@aragon/ui": "^1.4.2",

@@ -139,6 +139,7 @@ const DAOPageView = ({
                 <img className="fb-logo-img" src={FbLogo} />
                 Go to Facebook Group
               </a>
+              <a className="dao-donate-button">Donate now</a>
             </div>
             <div className="dao-count tile" onClick={() => setSelected(0)}>
               <img className="dao-count-img dao-count-left" src={membersLogo} />

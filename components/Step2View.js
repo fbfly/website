@@ -2,7 +2,7 @@ import '../styles/step2-view.sass'
 import Back from '../public/images/back.svg'
 import EthicalBrandLogo from '../public/images/ethical-brand.svg'
 import { useContext, useState, useEffect } from 'react'
-import UserContext from '../lib/UserContext'
+import CardContext from '../lib/CardContext'
 import fleekStorage from '@fleekhq/fleek-storage-js'
 
 const Step2View = () => {
@@ -14,7 +14,7 @@ const Step2View = () => {
     setDescription,
     logoHash,
     setLogoHash,
-  } = useContext(UserContext)
+  } = useContext(CardContext)
 
   const submit = () => {
     setStep(3)

@@ -15,7 +15,7 @@ const VotingView = () => {
   const [votes, setVotes] = useState(undefined)
   useEffect(() => {
     async function getVotes() {
-      const orgVotes = await voting.votes({first: 10})
+      const orgVotes = await voting.votes()
       setVotes(orgVotes)
       orgVotes.map(vote => {
         if (vote.metadata) {
@@ -25,7 +25,7 @@ const VotingView = () => {
         }
       })
     }
-    getVotes()
+    // getVotes()
   })
 
   return (

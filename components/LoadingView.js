@@ -1,10 +1,10 @@
 import '../styles/loading-view.sass'
 import { useEffect, useContext } from 'react'
 import Loading from '../public/images/loading.svg'
-import UserContext from '../lib/UserContext'
+import CardContext from '../lib/CardContext'
 
 const LoadingView = ({ img, title }) => {
-  const { setLoading } = useContext(UserContext)
+  const { setLoading } = useContext(CardContext)
   return (
     <div className="loading-view">
       <img className="loading-img" src={img} />

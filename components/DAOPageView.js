@@ -5,6 +5,7 @@ import FbFlyLogo from '../public/images/fbfly-logo-light.svg'
 import FbText from '../public/images/fb.svg'
 import FlyText from '../public/images/fly.svg'
 import FbLogo from '../public/images/fb-logo.svg'
+import Link from 'next/link'
 
 import membersLogo from '../public/images/profile.svg'
 import capitalLogo from '../public/images/coins.svg'
@@ -13,20 +14,30 @@ import votesLogo from '../public/images/thumbs.svg'
 import TokensView from './TokensView'
 import VotingView from './VotingView'
 import FinanceView from './FinanceView'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import TorusContext from '../lib/TorusContext'
 
 import { Connect } from '@aragon/connect-react'
 
 const DAOPageView = ({
-  dao: { logo, name, members, capital, votes, fbLink, daoLink },
-  user: { userName, userProfile },
+  dao: { logo, name, members, capital, votes, fbLink, daoLink, daoAddress },
 }) => {
+  const {
+    web3Obj,
+    connected,
+    setConnected,
+    userName,
+    setUserName,
+    profileImage,
+    setProfileImage,
+  } = useContext(TorusContext)
+
   const transfers = [
     {
       date: new Date(),
       user: {
         name: userName,
-        profile: userProfile,
+        profile: profileImage,
       },
       reference: 'Test1',
       amount: '30 xDai',
@@ -35,7 +46,7 @@ const DAOPageView = ({
       date: new Date(),
       user: {
         name: userName,
-        profile: userProfile,
+        profile: profileImage,
       },
       reference: 'Test2',
       amount: '50 xDai',
@@ -44,7 +55,7 @@ const DAOPageView = ({
       date: new Date(),
       user: {
         name: userName,
-        profile: userProfile,
+        profile: profileImage,
       },
       reference: 'Test3',
       amount: '33 xDai',
@@ -60,31 +71,31 @@ const DAOPageView = ({
   const memberList = [
     {
       name: userName,
-      profile: userProfile,
+      profile: profileImage,
       balance: 200,
       percentShare: 20,
     },
     {
       name: userName,
-      profile: userProfile,
+      profile: profileImage,
       balance: 200,
       percentShare: 20,
     },
     {
       name: userName,
-      profile: userProfile,
+      profile: profileImage,
       balance: 200,
       percentShare: 20,
     },
     {
       name: userName,
-      profile: userProfile,
+      profile: profileImage,
       balance: 200,
       percentShare: 20,
     },
     {
       name: userName,
-      profile: userProfile,
+      profile: profileImage,
       balance: 200,
       percentShare: 20,
     },
@@ -96,16 +107,20 @@ const DAOPageView = ({
       <div className="background">
         <div className="header">
           <img className="header-watermark" src={headerWatermark} />
-          <div className="fbfly-text">
-            <img className="fbfly-text-img" src={FbText} />
-            <img className="fbfly-text-img" src={FlyText} />
-          </div>
-          <div className="fbfly-logo">
-            <img className="fbfly-logo-img" src={FbFlyLogo} />
-          </div>
+          <Link href="/">
+            <a className="fbfly-text">
+              <img className="fbfly-text-img" src={FbText} />
+              <img className="fbfly-text-img" src={FlyText} />
+            </a>
+          </Link>
+          <Link href="/">
+            <a className="fbfly-logo">
+              <img className="fbfly-logo-img" src={FbFlyLogo} />
+            </a>
+          </Link>
           <div className="user">
             <div className="user-profile">
-              <img className="user-profile-img" src={userProfile} />
+              <img className="user-profile-img" src={profileImage} />
             </div>
             <div className="user-name">{userName}</div>
             <img src={caratDown} />
@@ -150,7 +165,7 @@ const DAOPageView = ({
           {selected === 0 ? (
             <TokensView memberList={memberList} token={token} />
           ) : selected === 1 ? (
-            <VotingView  />
+            <VotingView />
           ) : (
             <FinanceView capital={capital} transfers={transfers} />
           )}

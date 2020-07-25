@@ -1,38 +1,35 @@
 import '../styles/login-view.sass'
 import { useContext } from 'react'
-import UserContext from '../lib/UserContext'
+import CardContext from '../lib/CardContext'
+import TorusContext from '../lib/TorusContext'
 import FbLogin from '../public/images/fb-login.svg'
 import Login from '../public/images/login.svg'
 import Wallet from '../public/images/wallet.svg'
 
 const LoginView = () => {
+  const { web3Obj, setConnected } = useContext(TorusContext)
   const {
-    web3Obj,
     setLoading,
-    setConnected,
     setStep,
-    setxDaiBalance,
+    setBalance,
     setOnRamp,
-    setUserName,
-    setProfileImage,
-  } = useContext(UserContext)
+    updateUserInfo,
+  } = useContext(CardContext)
 
   async function loginWithTorus() {
     try {
       setLoading({ img: Wallet, title: 'Your wallet is being created' })
-      await web3Obj.initialize('xdai')
+      await web3Obj.initialize('rinkeby')
       const userInfo = await web3Obj.torus.getUserInfo()
-      console.log(userInfo)
       const xDaiBalance = await web3Obj.balance()
-      setxDaiBalance(xDaiBalance)
-      // if (xDaiBalance < 1) {
-      setOnRamp(true)
-      // } else {
-      //   setStep(1)
-      // }
+      setBalance(xDaiBalance)
+      if (xDaiBalance < 1) {
+        setOnRamp(true)
+      } else {
+        setStep(1)
+      }
+      await updateUserInfo()
       setLoading(undefined)
-      setUserName(userInfo.name)
-      setProfileImage(userInfo.profileImage)
       setConnected(true)
     } catch (error) {
       console.error(error)

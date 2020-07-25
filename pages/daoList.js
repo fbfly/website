@@ -1,8 +1,10 @@
 import DAOListView from '../components/DAOListView'
 import EthicalBrandLogo from '../public/images/ethical-brand.svg'
 import MoralBrandLogo from '../public/images/section2.svg'
-import userProfile from '../public/images/user-profile.svg'
 import useSWR from 'swr'
+import Head from 'next/head'
+import Footer from '../components/Footer'
+import Navbar from '../components/Navbar'
 
 const DaoList = () => {
   let list = []
@@ -11,7 +13,7 @@ const DaoList = () => {
   if (!data) {
     console.log('Loading...')
   } else {
-    data.forEach(({ daoAddress, daoName }) =>
+    data.forEach(({ daoAddress, daoName, fbGroupId }) =>
       list.push({
         name: daoName,
         logo: EthicalBrandLogo,
@@ -21,15 +23,25 @@ const DaoList = () => {
         votes: '82',
         fbLink: '',
         daoLink: '',
+        fbGroupId,
+        daoAddress,
       }),
     )
   }
 
-  const user = {
-    userName: 'John Doe',
-    userProfile,
-  }
-  return <DAOListView list={list} user={user} />
+  return (
+    <>
+      <Head>
+        <title>Facebook Fly</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <div className="container">
+        {/* <Navbar /> */}
+        <DAOListView list={list}/>
+        {/* <Footer /> */}
+      </div>
+    </>
+  )
 }
 
 export default DaoList

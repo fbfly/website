@@ -1,6 +1,7 @@
 import '../styles/dao-view.sass'
 import FbLogo from '../public/images/fb-logo.svg'
 import { useContext, useState, useEffect } from 'react'
+import CardContext from '../lib/CardContext'
 
 const tempData = {
   name: 'Ethical Brand',
@@ -10,7 +11,7 @@ const tempData = {
 }
 
 const DAOView = () => {
-  const { name, logoHash, description } = useContext(UserContext)
+  const { name, logoHash, description } = useContext(CardContext)
   const members = '28'
   const capital = '552$'
   const votes = '82'

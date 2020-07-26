@@ -6,16 +6,14 @@ const handler = nextConnect()
 handler.use(middleware)
 
 handler.get(async (req, res) => {
-  await req.db
+  const user = await req.db
     .collection('users')
-    .findOne({ address: req.query.address })
-    .toArray(function (err, items) {
-      if (err) {
-        res.status(401).json(items)
-        throw err
-      }
-      res.status(200).json(items)
-    })
+    .findOne({ address: req.query.address.toLowerCase() })
+  if (!user) {
+    console.log('user not found')
+    return res.status(404).json({ error: 'Not Found' })
+  }
+  res.status(200).json(user)
 })
 
 export default handler

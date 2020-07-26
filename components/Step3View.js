@@ -7,6 +7,8 @@ import TorusContext from '../lib/TorusContext'
 import InfoButton from './InfoButton'
 const axios = require('axios')
 
+const SERVER_ADDRESS = '0xC9F2D9adfa6C24ce0D5a999F2BA3c6b06E36F75E'
+
 const Step3View = () => {
   const { web3Obj } = useContext(TorusContext)
 
@@ -19,7 +21,7 @@ const Step3View = () => {
       })
     }
     getAddress()
-  })
+  }, [])
 
   const {
     setStep,
@@ -36,12 +38,6 @@ const Step3View = () => {
 
   const createNewDao = async () => {
     setLoading({ img: Loading, title: 'Your dao is being created' })
-    const userInfo = await web3Obj.torus.getUserInfo()
-    await axios.post('/api/user', {
-      name: userInfo.name,
-      profileImage: userInfo.profileImage,
-      address: ethAddress,
-    })
     if (!ethAddress) {
       // Let the user know that they are not properly authenticated
     }
@@ -50,10 +46,10 @@ const Step3View = () => {
     await web3Obj.web3.eth
       .sendTransaction({
         from: ethAddress,
-        to: '0x419a443899Fa8401Bd10dF6D18863d66b36ec320',
+        to: SERVER_ADDRESS,
         value: web3Obj.web3.utils.toWei('0.01'),
       })
-      .on('confirmation', async function (confirmationNumber, receipt) {
+      .on('confirmation', async function(confirmationNumber, receipt) {
         if (confirmationNumber == 1) {
           await axios
             .post('/api/dao', {

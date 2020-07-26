@@ -74,6 +74,7 @@ const Step2View = () => {
             <div className="logo-container">
               <img
                 className="logo-img"
+                // NEED TO SUPPORT MORE IMAGE TYPES ( THIS WON't WORK ON DAO PAGE )
                 src={`data:image/svg+xml;utf8,${logoFile}`}
               />
             </div>

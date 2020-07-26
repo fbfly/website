@@ -9,7 +9,7 @@ handler.get(async (req, res) => {
   await req.db
     .collection('users')
     .find({})
-    .toArray(function (err, items) {
+    .toArray(function(err, items) {
       if (err) {
         res.status(401).json(items)
         throw err
@@ -24,9 +24,13 @@ handler.post(async (req, res) => {
   await req.db
     .collection('users')
     .updateOne(
-      { address: address },
+      { address: address.toLowerCase() },
       {
-        $set: { name: name, profileImage: profileImage, address: address },
+        $set: {
+          name: name,
+          profileImage: profileImage,
+          address: address.toLowerCase(),
+        },
       },
       {
         upsert: true,

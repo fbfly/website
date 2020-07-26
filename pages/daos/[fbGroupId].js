@@ -4,46 +4,13 @@ import Head from 'next/head'
 import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
 import { useRouter } from 'next/router'
-const axios = require('axios')
+import { useState, useEffect } from 'react'
 
-async function getDao(fbGroupId) {
-  await axios
-    .get(`/api/dao/${fbGroupId}`, {
-      daoName: daoName,
-      description: description,
-      tokenName: tokenName,
-      tokenSymbol: tokenSymbol,
-      imageHash: logoHash,
-      fbGroupId: url.replace(/^.*[\\\/]/, ''),
-      fbGroulURL: url,
-    })
-    .then(response => {
-      return response.items
-    })
-    .catch(error => {
-      console.log(error)
-    })
-}
+// OLD PICA POLLO ADDRESS IN MONGODB : 0xA4D0745Dc93555B3b2Fa93Ea0a665E1c3D945249
 
 const DaoPage = () => {
   const router = useRouter()
   const { fbGroupId } = router.query
-
-  // This will grab DAO metadata from database with a fbGroupId
-  const daoData = getDao(fbGroupId)
-
-  // A few things are not saved on the database, that's why this object exists.
-  const dao = {
-    name: daoData.daoName,
-    logo: EthicalBrandLogo,
-    description: daoData.description,
-    members: '28', // grab with connect
-    capital: '$552', // grab with connect
-    votes: '82', // grab with connect
-    fbLink: `facebook.com/groups/${fbGroupId}`,
-    daoLink: `fbfly.xyz/daos/${fbGroupId}`,
-    fbGroupId,
-  }
 
   return (
     <>
@@ -53,7 +20,7 @@ const DaoPage = () => {
       </Head>
       <div className="container">
         {/* <Navbar /> */}
-        <DAOPageView dao={dao} />
+        {fbGroupId && <DAOPageView fbGroupId={fbGroupId} />}
         {/* <Footer /> */}
       </div>
     </>

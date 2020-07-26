@@ -1,19 +1,18 @@
 import '../styles/dao-list-view.sass'
+import FbLogin from '../public/images/fb-login.svg'
 import caratDown from '../public/images/carat-down.svg'
 import headerWatermark from '../public/images/card-header-watermark.svg'
 import FbFlyLogo from '../public/images/fbfly-logo-light.svg'
 import FbText from '../public/images/fb.svg'
 import FlyText from '../public/images/fly.svg'
-import FbLogo from '../public/images/fb-logo.svg'
 import Link from 'next/link'
 import { useState, useEffect, useContext } from 'react'
 import TorusContext from '../lib/TorusContext'
 
-import membersLogo from '../public/images/profile.svg'
-import capitalLogo from '../public/images/coins.svg'
-import votesLogo from '../public/images/thumbs.svg'
+import axios from 'axios'
+import DAOListItem from './DAOListItem'
 
-const DAOListView = ({ list }) => {
+const DAOListView = () => {
   const {
     web3Obj,
     connected,
@@ -23,6 +22,38 @@ const DAOListView = ({ list }) => {
     profileImage,
     setProfileImage,
   } = useContext(TorusContext)
+
+  async function loginWithTorus() {
+    try {
+      await web3Obj.initialize('rinkeby')
+      const userInfo = await web3Obj.torus.getUserInfo()
+      setUserName(userInfo.name)
+      setProfileImage(userInfo.profileImage)
+      await axios.post('/api/user', {
+        name: userInfo.name,
+        profileImage: userInfo.profileImage,
+        address: await web3Obj.account(),
+      })
+      setConnected(true)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const [daoList, setDaoList] = useState()
+
+  useEffect(() => {
+    async function getDaoList() {
+      let response
+      try {
+        response = await axios.get('/api/dao')
+      } catch (error) {
+        console.log(error)
+      }
+      setDaoList(response.data)
+    }
+    getDaoList()
+  }, [])
 
   return (
     <div className="background">
@@ -39,75 +70,34 @@ const DAOListView = ({ list }) => {
             <img className="fbfly-logo-img" src={FbFlyLogo} />
           </a>
         </Link>
-        <div className="user">
-          <div className="user-profile">
-            <img className="user-profile-img" src={profileImage} />
-          </div>
-          <div className="user-name">{userName}</div>
-          <img src={caratDown} />
-        </div>
-      </div>
-      {list.map(
-        (
-          {
-            logo,
-            name,
-            members,
-            capital,
-            votes,
-            fbLink,
-            daoLink,
-            daoAddress,
-            fbGroupId,
-          },
-          index,
-        ) => (
-          <div className={`dao-item ${index === 0 ? 'top' : ''}`} key={index}>
-            <div className="dao-list-content">
-              <div className="vl" />
-              <div className="dao-list-content-logo">
-                <Link href="/daos/[fbGroupId]" as={`/daos/${fbGroupId}`}>
-                  <a className="dao-link">
-                    <img className="dao-logo-img" src={logo} />
-                    <div className="dao-title">{name}</div>
-                  </a>
-                </Link>
-                <a className="dao-fb-link" href={fbLink}>
-                  <img className="fb-logo-img" src={FbLogo} />
-                  Go to Facebook Group
-                </a>
-              </div>
-              <div className="dao-list-content-count">
-                <img
-                  className="dao-count-img dao-count-left"
-                  src={membersLogo}
-                />
-                <div className="dao-count-right">
-                  <span className="count-value">{members}</span>
-                  <span className="count-title">Members</span>
-                </div>
-              </div>
-              <div className="dao-list-content-count">
-                <img className="dao-count-img dao-count-left" src={votesLogo} />
-                <div className="dao-count-right">
-                  <span className="count-value">{votes}</span>
-                  <span className="count-title">Votes</span>
-                </div>
-              </div>
-              <div className="dao-list-content-count">
-                <img
-                  className="dao-count-img dao-count-left"
-                  src={capitalLogo}
-                />
-                <div className="dao-count-right">
-                  <span className="count-value">{capital}</span>
-                  <span className="count-title">Capital</span>
-                </div>
-              </div>
+        {connected ? (
+          <div className="user">
+            <div className="user-profile">
+              <img className="user-profile-img" src={profileImage} />
             </div>
+            <div className="user-name">{userName}</div>
+            {/* <img src={caratDown} /> */}
           </div>
-        ),
-      )}
+        ) : (
+          <a
+            className="login-button"
+            onClick={() => {
+              loginWithTorus()
+            }}
+          >
+            <img className="fb-login-img" src={FbLogin} />
+            Login with Facebook
+          </a>
+        )}
+      </div>
+      {daoList &&
+        daoList.map((dao, index) => (
+          <DAOListItem
+            dao={dao}
+            className={`dao-item ${index === 0 ? 'top' : ''}`}
+            key={index}
+          />
+        ))}
     </div>
   )
 }

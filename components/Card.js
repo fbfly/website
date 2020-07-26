@@ -12,6 +12,7 @@ import Step1View from './Step1View'
 import Step2View from './Step2View'
 import Step3View from './Step3View'
 import LoadingView from './LoadingView'
+import axios from 'axios'
 
 const Card = ({ className }) => {
   const [loading, setLoading] = useState(undefined)
@@ -54,6 +55,11 @@ const Card = ({ className }) => {
     setProfileImage(userInfo.profileImage)
     const xDaiBalance = await web3Obj.balance()
     setBalance(xDaiBalance)
+    await axios.post('/api/user', {
+      name: userInfo.name,
+      profileImage: userInfo.profileImage,
+      address: await web3Obj.account(),
+    })
   }
 
   useEffect(() => {

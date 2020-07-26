@@ -4,21 +4,45 @@ import Head from 'next/head'
 import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
 import { useRouter } from 'next/router'
+const axios = require('axios')
+
+async function getDao(fbGroupId) {
+  await axios
+    .get(`/api/dao/${fbGroupId}`, {
+      daoName: daoName,
+      description: description,
+      tokenName: tokenName,
+      tokenSymbol: tokenSymbol,
+      imageHash: logoHash,
+      fbGroupId: url.replace(/^.*[\\\/]/, ''),
+      fbGroulURL: url,
+    })
+    .then(response => {
+      return response.items
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
 
 const DaoPage = () => {
   const router = useRouter()
   const { fbGroupId } = router.query
+
+  // This will grab DAO metadata from database with a fbGroupId
+  const daoData = getDao(fbGroupId)
+
+  // A few things are not saved on the database, that's why this object exists.
   const dao = {
-    name: 'Ethical Brand',
+    name: daoData.daoName,
     logo: EthicalBrandLogo,
-    description:
-      'Fast fashion is easy for consumers because it’s just that: fast and inexpensive. Lasting for only a season or so, it’s easy for us to end up with clothes that tatter and rip after just a few wear.',
-    members: '28',
-    capital: '$552',
-    votes: '82',
-    fbLink: '',
-    daoLink: '',
-    fbGroupId
+    description: daoData.description,
+    members: '28', // grab with connect
+    capital: '$552', // grab with connect
+    votes: '82', // grab with connect
+    fbLink: `facebook.com/groups/${fbGroupId}`,
+    daoLink: `fbfly.xyz/daos/${fbGroupId}`,
+    fbGroupId,
   }
 
   return (

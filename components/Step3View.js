@@ -1,6 +1,6 @@
 import '../styles/step3-view.sass'
 import Back from '../public/images/back.svg'
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import Loading from '../public/images/loading.svg'
 import CardContext from '../lib/CardContext'
 import TorusContext from '../lib/TorusContext'
@@ -9,6 +9,18 @@ const axios = require('axios')
 
 const Step3View = () => {
   const { web3Obj } = useContext(TorusContext)
+
+  const [ethAddress, setEthAddress] = useState(null)
+
+  useEffect(() => {
+    async function getAddress() {
+      web3Obj.web3.eth.getAccounts().then(accounts => {
+        setEthAddress(accounts[0])
+      })
+    }
+    getAddress()
+  })
+
   const {
     setStep,
     setLoading,
@@ -24,23 +36,43 @@ const Step3View = () => {
 
   const createNewDao = async () => {
     setLoading({ img: Loading, title: 'Your dao is being created' })
-    const userInfo = web3Obj.torus.getUserInfo()
+    const userInfo = await web3Obj.torus.getUserInfo()
+    await axios.post('/api/user', {
+      name: userInfo.name,
+      profileImage: userInfo.profileImage,
+      address: ethAddress,
+    })
+    if (!ethAddress) {
+      // Let the user know that they are not properly authenticated
+    }
 
-    await axios
-      .post('/api/dao', {
-        daoName: daoName,
-        creatorName: userInfo.name,
-        creatorAddress: userInfo.address,
-        description: description,
-        tokenName: tokenName,
-        tokenSymbol: tokenSymbol,
-        imageHash: logoHash,
-        fbGroupId: url.replace(/^.*[\\\/]/, ''),
-        fbGroulURL: url,
+    // Make a transaction to pay for the fees.
+    await web3Obj.web3.eth
+      .sendTransaction({
+        from: ethAddress,
+        to: '0x419a443899Fa8401Bd10dF6D18863d66b36ec320',
+        value: web3Obj.web3.utils.toWei('0.01'),
       })
-      .then(response => {
-        console.log('Response:', response)
-        setLoading(undefined)
+      .on('confirmation', async function (confirmationNumber, receipt) {
+        if (confirmationNumber == 1) {
+          await axios
+            .post('/api/dao', {
+              daoName: daoName,
+              description: description,
+              tokenName: tokenName,
+              tokenSymbol: tokenSymbol,
+              imageHash: logoHash,
+              fbGroupId: url.replace(/^.*[\\\/]/, ''),
+              fbGroulURL: url,
+            })
+            .then(response => {
+              console.log('Response:', response)
+              setLoading(undefined)
+            })
+            .catch(error => {
+              console.log(error)
+            })
+        }
       })
   }
 

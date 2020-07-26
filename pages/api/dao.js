@@ -10,7 +10,7 @@ handler.get(async (req, res) => {
   await req.db
     .collection('daos')
     .find({})
-    .toArray(function(err, items) {
+    .toArray(function (err, items) {
       if (err) {
         res.status(401).json(items)
         throw err

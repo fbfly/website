@@ -10,7 +10,7 @@ handler.get(async (req, res) => {
   await req.db
     .collection('daos')
     .find({})
-    .toArray(function (err, items) {
+    .toArray(function(err, items) {
       if (err) {
         res.status(401).json(items)
         throw err
@@ -18,6 +18,7 @@ handler.get(async (req, res) => {
       res.status(200).json(items)
     })
 })
+
 handler.post(async (req, res) => {
   const {
     daoName,
@@ -41,10 +42,16 @@ handler.post(async (req, res) => {
           fbGroupId: fbGroupId,
           imageHash: imageHash,
         })
-        res.status(200).json('DAO has been created successfully')
+        res.status(200).json({
+          orgAddress: orgAddress,
+          message: 'DAO has been created successfully',
+        })
       }
     })
-    .catch(() => res.status(401).json('There was an error creating your DAO.'))
+    .catch(error => {
+      console.log(error)
+      res.status(500).json('There was an error creating your DAO.')
+    })
 })
 
 export default handler

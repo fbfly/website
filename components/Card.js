@@ -1,10 +1,10 @@
 import '../styles/card.sass'
 import HeaderWatermark from '../public/images/card-header-watermark.svg'
 import EthicalBrandLogo from '../public/images/ethical-brand.svg'
-import UserProfile from '../public/images/user-profile.svg'
 import Alert from '../public/images/alert.svg'
-import { useState, useEffect } from 'react'
-import { UserProvider } from '../lib/UserContext'
+import { useState, useEffect, useContext } from 'react'
+import { CardProvider } from '../lib/CardContext'
+import TorusContext from '../lib/TorusContext'
 import DAOView from './DAOView'
 import LoginView from './LoginView'
 import RampView from './RampView'
@@ -14,18 +14,22 @@ import Step3View from './Step3View'
 import LoadingView from './LoadingView'
 
 const Card = ({ className }) => {
-  const [profileImage, setProfileImage] = useState(UserProfile)
-  const [userName, setUserName] = useState('John Doe')
-  const [connected, setConnected] = useState(false)
   const [loading, setLoading] = useState(undefined)
   const [flying, setFlying] = useState(false)
   const [step, setStep] = useState(undefined)
   const [onRamp, setOnRamp] = useState(false)
 
-  // Tor.us hooks
-  const [account, setAccount] = useState(null)
-  const [web3Obj, setWeb3Obj] = useState(null)
-  const [xDaiBalance, setxDaiBalance] = useState(0)
+  const {
+    web3Obj,
+    connected,
+    setConnected,
+    userName,
+    setUserName,
+    profileImage,
+    setProfileImage,
+  } = useContext(TorusContext)
+  const [balance, setBalance] = useState(0)
+  const balanceUnit = process.env.network === 'xdai' ? 'xDai (USD)' : 'ETH'
 
   // Step1 hooks
   const [url, setUrl] = useState('')
@@ -41,36 +45,40 @@ const Card = ({ className }) => {
   const [tokenName, setTokenName] = useState('')
   const [tokenSymbol, setTokenSymbol] = useState('')
 
-  useEffect(() => {
-    async function loadTorus() {
-      const { default: web3Obj } = await import('../lib/torus')
-      setWeb3Obj(web3Obj)
-    }
-    loadTorus()
-  }, [])
-
   const [onRampDone, setOnRampDone] = useState(false)
   const [onRampSuccess, setOnRampSuccess] = useState(false)
+
+  async function updateUserInfo() {
+    const userInfo = await web3Obj.torus.getUserInfo()
+    setUserName(userInfo.name)
+    setProfileImage(userInfo.profileImage)
+    const xDaiBalance = await web3Obj.balance()
+    setBalance(xDaiBalance)
+  }
+
+  useEffect(() => {
+    if (connected) {
+      updateUserInfo()
+      setStep(1)
+    }
+  }, [connected])
+
   return (
     <div className={className ? `card ${className}` : 'card'}>
-      <UserProvider
+      <CardProvider
         value={{
-          web3Obj,
-          setConnected,
           setStep,
           //Login
-          xDaiBalance,
-          setxDaiBalance,
+          balance,
+          setBalance,
           setOnRamp,
-          setUserName,
-          setProfileImage,
+          updateUserInfo,
           //onRamp
           onRampDone,
           setOnRampDone,
           onRampSuccess,
           setOnRampSuccess,
           // Step1
-          account,
           url,
           setUrl,
           // Step2
@@ -101,7 +109,7 @@ const Card = ({ className }) => {
           (connected ? (
             <div className="card-status connected">
               <div className="balance">
-                {`${(xDaiBalance / 10 ** 18).toFixed(2)} xDai (USD)`}
+                {`${(balance / 10 ** 18).toFixed(2)} ${balanceUnit}`}
               </div>
               {onRamp && (
                 <div className="alert">
@@ -163,7 +171,7 @@ const Card = ({ className }) => {
         ) : step === 3 ? (
           <Step3View />
         ) : null}
-      </UserProvider>
+      </CardProvider>
     </div>
   )
 }

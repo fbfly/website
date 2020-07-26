@@ -1,19 +1,12 @@
-import '../styles/connect.sass'
 import Head from 'next/head'
-import { useState, useEffect } from 'react'
+import '../styles/connect.sass'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-import createDao from '../lib/createDao'
+import { useState } from 'react'
+const axios = require('axios')
 
 const Test = () => {
-  const [web3Obj, setWeb3Obj] = useState(null)
-  useEffect(() => {
-    async function loadTorus() {
-      const { default: web3Obj } = await import('../lib/torus')
-      setWeb3Obj(web3Obj)
-    }
-    loadTorus()
-  }, [])
+  const [orgAddress, setOrgAddress] = useState('')
 
   return (
     <>
@@ -26,25 +19,22 @@ const Test = () => {
         <div className="connect-container">
           <button
             onClick={async () => {
-              await web3Obj.initialize('rinkeby')
-            }}
-          >
-            Login
-          </button>
-          <button
-            onClick={async () => {
-              await createDao(web3Obj.provider)
-                .then()
-                .catch(err => {
-                  console.log(`Error: `, err)
-                  console.log(
-                    '\nPlease report any problem to https://github.com/aragon/connect/issues',
-                  )
+              await axios
+                .post('/api/dao', {
+                  daoName: 'Pica Pollo',
+                  description: 'Best DAO',
+                  tokenName: 'Flintstone',
+                  tokenSymbol: 'FST',
+                  fbGroupId: 'MyGroupId',
+                  fbGroulURL: 'MyGroupURL',
+                  imageHash: 'IPFSHash',
                 })
+                .then(orgAddress => setOrgAddress(orgAddress))
             }}
           >
             Create DAO
           </button>
+          <h1>Org Address {orgAddress}</h1>
         </div>
         <Footer />
       </div>

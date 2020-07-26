@@ -1,6 +1,7 @@
 import '../styles/ramp-view.sass'
 import { useContext, useState, useEffect } from 'react'
-import UserContext from '../lib/UserContext'
+import CardContext from '../lib/CardContext'
+import TorusContext from '../lib/TorusContext'
 import Wallet from '../public/images/wallet.svg'
 import Arrow from '../public/images/arrow.svg'
 import Success from '../public/images/success.svg'
@@ -8,44 +9,44 @@ import Failure from '../public/images/failure.svg'
 import InfoButton from './InfoButton'
 
 const RampView = () => {
+  const { web3Obj } = useContext(TorusContext)
   const {
-    web3Obj,
     setStep,
     setOnRamp,
     setLoading,
-    xDaiBalance,
-    setxDaiBalance,
+    balance,
+    setBalance,
     onRampDone,
     setOnRampDone,
     onRampSuccess,
     setOnRampSuccess,
-  } = useContext(UserContext)
+  } = useContext(CardContext)
 
   useEffect(() => {
-    async function checkxDai() {
-      const xDaiBalance = await web3Obj.balance()
+    async function checkBalance() {
+      const balance = await web3Obj.balance()
 
-      if (xDaiBalance > 0.1) {
-        setxDaiBalance(xDaiBalance)
+      if (balance > 0.1) {
+        setBalance(balance)
         setOnRampDone(true)
         setOnRampSuccess(true)
         setLoading(undefined)
       }
     }
-    checkxDai()
-  }, [xDaiBalance])
+    checkBalance()
+  }, [balance])
 
   async function onRamp() {
     setLoading({ img: Wallet, title: 'Your wallet is being funded' })
     try {
       await web3Obj.changeNetwork('mainnet')
-      const balance = await web3Obj.balance()
+      const mainBalance = await web3Obj.balance()
       const daiBalance = await web3Obj.daiBalance()
 
       // If you don't have DAI, then...
       if (daiBalance < 1) {
         // Check if you have some ether to buy DAI.
-        if (balance < 1) {
+        if (mainBalance < 1) {
           // If you don't have any ether, then buy some ether.
           await web3Obj
             .buyEth()
@@ -60,7 +61,7 @@ const RampView = () => {
       await web3Obj.exchangeDaixDai(1)
       await web3Obj.changeNetwork('xdai')
       const xDaiBalance = await web3Obj.balance()
-      setxDaiBalance(xDaiBalance)
+      setBalance(xDaiBalance)
     } catch (error) {
       console.log({ onRampError: error })
       setOnRampDone(true)
@@ -126,6 +127,7 @@ const RampView = () => {
           <InfoButton
             title={'Why do I need funds to create and manage a DAO?'}
             content={'Because you do!'}
+            link={'https://docs.fbfly.xyz/about-daos/why-do-i-need-funds-to-create-and-manage-a-dao'}
           />
           <div className="ramp-input-container">
             <div className="usd-input">
@@ -139,7 +141,7 @@ const RampView = () => {
                   setxDai(calcxDaiFromUsd(e.target.value))
                 }}
               />
-              <span class="ramp-unit">USD</span>
+              <span className="ramp-unit">USD</span>
             </div>
             <div className="ramp-arrow">
               <img className="arrow-img" src={Arrow} />
@@ -155,7 +157,7 @@ const RampView = () => {
                   setUsd(calcUsdFromxDai(e.target.value))
                 }}
               />
-              <span class="ramp-unit">xDAI</span>
+              <span className="ramp-unit">xDAI</span>
             </div>
           </div>
           <span className="ramp-details">

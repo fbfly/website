@@ -1,10 +1,10 @@
 import '../styles/step1-view.sass'
 import { useContext, useEffect } from 'react'
 import InfoButton from './InfoButton'
-import UserContext from '../lib/UserContext'
+import CardContext from '../lib/CardContext'
 
 const Step1View = () => {
-  const { setStep, url, setUrl, balance, web3Obj } = useContext(UserContext)
+  const { setStep, url, setUrl } = useContext(CardContext)
 
   const submit = () => {
     setStep(2)

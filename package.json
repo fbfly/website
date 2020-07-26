@@ -6,7 +6,10 @@
     "start": "next start"
   },
   "dependencies": {
+    "@aragon/connect": "^0.4.2",
+    "@aragon/connect-react": "^0.4.2",
     "@aragon/connect-thegraph": "^0.4.2",
+    "@aragon/connect-thegraph-voting": "^0.4.2",
     "@aragon/ui": "^1.4.2",
     "@fleekhq/fleek-storage-js": "^1.0.2",
     "@hapi/iron": "6.0.0",
@@ -37,7 +40,7 @@
     "react": "latest",
     "react-dom": "latest",
     "styled-components": "^5.1.1",
-    "swr": "^0.1.16",
+    "swr": "^0.1.18",
     "use-wallet": "^0.7.1",
     "web3": "^1.2.9"
   },

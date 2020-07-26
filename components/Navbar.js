@@ -2,6 +2,7 @@ import FbFlyText from '../public/images/fbfly-text.svg'
 import FbFlyLogo from '../public/images/fbfly-logo.svg'
 import '../styles/navbar.sass'
 import { useState } from 'react'
+import Link from 'next/link'
 
 const Navbar = props => {
   const [open, toggleOpen] = useState(false)
@@ -12,10 +13,12 @@ const Navbar = props => {
       aria-label="main navigation"
     >
       <div className="navbar-brand">
-        <a className="navbar-logo" href="https://fbfly.xyz">
-          <img className="logo-img" src={FbFlyLogo} width="50" height="50" />
-          <img className="logo-txt" src={FbFlyText} width="120" height="60" />
-        </a>
+        <Link href="/">
+          <a className="navbar-logo">
+            <img className="logo-img" src={FbFlyLogo} width="50" height="50" />
+            <img className="logo-txt" src={FbFlyText} width="120" height="60" />
+          </a>
+        </Link>
 
         <a
           role="button"
@@ -41,15 +44,15 @@ const Navbar = props => {
         >
           The FBFly DAO
         </a>
-        <a className="navbar-item" href="https://fbfly.xyz/daoList">
-          Explore FB DAOs
-        </a>
+        <Link href="/daoList">
+          <a className="navbar-item">Explore FB DAOs</a>
+        </Link>
         <a className="navbar-item" href="https://docs.fbfly.xyz/">
           About
         </a>
-        <a href="/onboarding" className="navbar-item navbar-start-now">
-          Start now
-        </a>
+        <Link href="/onboarding">
+          <a className="navbar-item navbar-start-now">Start now</a>
+        </Link>
       </div>
     </nav>
   )

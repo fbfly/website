@@ -2,25 +2,25 @@ import '../styles/step3-view.sass'
 import Back from '../public/images/back.svg'
 import { useContext } from 'react'
 import Loading from '../public/images/loading.svg'
-import UserContext from '../lib/UserContext'
+import CardContext from '../lib/CardContext'
+import TorusContext from '../lib/TorusContext'
 import InfoButton from './InfoButton'
 const axios = require('axios')
 
 const Step3View = () => {
+  const { web3Obj } = useContext(TorusContext)
   const {
-    web3Obj,
     setStep,
     setLoading,
     tokenName,
     setTokenName,
     tokenSymbol,
     setTokenSymbol,
-    balance,
     daoName,
     url,
     description,
     logoHash,
-  } = useContext(UserContext)
+  } = useContext(CardContext)
 
   const createNewDao = async () => {
     setLoading({ img: Loading, title: 'Your dao is being created' })

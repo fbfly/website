@@ -56,6 +56,9 @@
       
     .item-user
       background: #E5F5FA;
+      margin-right: 0.5rem
+      width: 8rem
+      height: 2rem
       border-radius: 0.5rem;
       overflow: hidden
       display: flex
@@ -129,14 +132,42 @@
 .shares-display
   margin: 1rem 0
   border-radius: 0.25rem
+  overflow: hidden
   height: 0.5rem
-  background: #F08658
+  display: grid;
+  grid-auto-columns: 1fr
+  grid-auto-flow: column
+  .shares-display-item
+    &:nth-child(1)
+      background: #3E7BF6
+    &:nth-child(2)
+      background: #F08658
+    &:nth-child(3)
+      background: #58F095;
+    &:nth-child(4)
+      background: #9258F0;
+    &:nth-child(5)
+      background: #FC68FF
+    &:nth-child(6)
+      background: #F05858;
   
 .shares-item
   margin-top: 0.5rem
   display: flex
   justify-content: space-between
   align-items: center
+  &:nth-child(1) .item-color
+    background: #3E7BF6
+  &:nth-child(2) .item-color
+    background: #F08658
+  &:nth-child(3) .item-color
+    background: #58F095;
+  &:nth-child(4) .item-color
+    background: #9258F0;
+  &:nth-child(5) .item-color
+    background: #FC68FF
+  &:nth-child(6) .item-color
+    background: #F05858;
   .shares-item-left
     display: flex
     justify-content: center
@@ -147,8 +178,10 @@
     width: 0.75rem
     height: 0.75rem
     margin-right: 0.5rem
-    background: #F08658
   .item-user
+    margin-right: 0.5rem
+    width: 8rem
+    height: 2rem
     background: #E5F5FA;
     border-radius: 0.5rem;
     overflow: hidden

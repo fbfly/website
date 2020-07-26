@@ -5,59 +5,38 @@ import '../styles/voting-view.sass'
 
 import { Voting } from '@aragon/connect-thegraph-voting'
 import { useEffect, useState } from 'react'
+import { getUser } from '../lib/helpers'
 
-const VotingView = () => {
-  const tempVotes = [
-    {
-      creator: '',
-      metadata: 'Send money to XYZ',
-      executed: true,
-      yea: 50,
-      nay: 0,
-    },
-    {
-      creator: '',
-      metadata: 'Add ABC as a member',
-      executed: true,
-      yea: 40,
-      nay: 0,
-    },
-    {
-      creator: '',
-      metadata: 'This is a vote',
-      executed: false,
-      yea: 70,
-      nay: 0,
-    },
-    {
-      creator: '',
-      metadata: 'This is another vote',
-      executed: true,
-      yea: 70,
-      nay: 0,
-    },
-  ]
-  const [votes, setVotes] = useState(tempVotes)
+const VotingView = ({ org }) => {
+  const [votes, setVotes] = useState()
 
-  // const VOTING_APP_ADDRESS = '0x709e31ba29fb84000f20045590ec664bfc3cdc1d'
-  // const VOTING_APP_SUBGRAPH_URL =
-  //   'https://api.thegraph.com/subgraphs/name/aragon/aragon-voting-mainnet'
+  useEffect(() => {
+    async function getVotes() {
+      const votingApp = new Voting(
+        (await org.app('voting')).address,
+        'https://api.thegraph.com/subgraphs/name/aragon/aragon-voting-rinkeby',
+      )
+      let orgVotes = await votingApp.votes()
+      orgVotes = await Promise.all(
+        orgVotes.map(async vote => {
+          if (!vote.metadata) {
+            return {
+              ...vote,
+              metadata: 'Mint Token',
+            }
+          }
+          return vote
+        }),
+      )
+      setVotes(orgVotes)
+      //orgVotes.map(console.log)
+    }
+    getVotes()
+  }, [])
 
-  // const voting = new Voting(VOTING_APP_ADDRESS, VOTING_APP_SUBGRAPH_URL)
-  // useEffect(() => {
-  //   async function getVotes() {
-  //     const orgVotes = await voting.votes()
-  //     setVotes(orgVotes)
-  //     orgVotes.map(vote => {
-  //       if (vote.metadata) {
-  //         console.log(
-  //           vote.creator + ' + ' + vote.metadata + ' + ' + vote.voteNum,
-  //         )
-  //       }
-  //     })
-  //   }
-  //   getVotes()
-  // })
+  if (!votes) {
+    return null
+  }
 
   return (
     <div className="voting-view">
@@ -73,13 +52,22 @@ const VotingView = () => {
           {votes &&
             votes.map(
               (
-                { creator, metadata, executed, startDate, yea, nay, voteNum },
+                {
+                  user,
+                  creator,
+                  metadata,
+                  executed,
+                  startDate,
+                  yea,
+                  nay,
+                  voteNum,
+                },
                 index,
               ) => (
                 <div className="vote-item" key={index}>
                   <div className="vote-metadata"> {metadata} </div>
-                  <div className="vote-count">{yea} %</div>
-                  <div className="vote-count">{nay} %</div>
+                  <div className="vote-count">{yea}</div>
+                  <div className="vote-count">{nay}</div>
                   {executed ? (
                     <div className="vote-status pass">Passed</div>
                   ) : (

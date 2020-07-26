@@ -1,4 +1,5 @@
 import '../styles/dao-page-view.sass'
+import FbLogin from '../public/images/fb-login.svg'
 import caratDown from '../public/images/carat-down.svg'
 import headerWatermark from '../public/images/card-header-watermark.svg'
 import FbFlyLogo from '../public/images/fbfly-logo-light.svg'
@@ -17,11 +18,15 @@ import FinanceView from './FinanceView'
 import { useState, useEffect, useContext } from 'react'
 import TorusContext from '../lib/TorusContext'
 
-import { Connect } from '@aragon/connect-react'
+import { connect } from '@aragon/connect'
+import { Voting } from '@aragon/connect-thegraph-voting'
+import { TokenManager } from '@aragon/connect-thegraph-tokens'
+import { Finance } from '@aragon/connect-finance'
+import axios from 'axios'
 
-const DAOPageView = ({
-  dao: { logo, name, members, capital, votes, fbLink, daoLink, daoAddress },
-}) => {
+// A few things are not saved on the database, that's why this object exists.
+
+const DAOPageView = ({ fbGroupId }) => {
   const {
     web3Obj,
     connected,
@@ -31,79 +36,85 @@ const DAOPageView = ({
     profileImage,
     setProfileImage,
   } = useContext(TorusContext)
+  const balanceUnit = process.env.network === 'xdai' ? 'xDai (USD)' : 'ETH'
+  const [dao, setDAO] = useState({})
 
-  const transfers = [
-    {
-      date: new Date(),
-      user: {
-        name: userName,
-        profile: profileImage,
-      },
-      reference: 'Test1',
-      amount: '30 xDai',
-    },
-    {
-      date: new Date(),
-      user: {
-        name: userName,
-        profile: profileImage,
-      },
-      reference: 'Test2',
-      amount: '50 xDai',
-    },
-    {
-      date: new Date(),
-      user: {
-        name: userName,
-        profile: profileImage,
-      },
-      reference: 'Test3',
-      amount: '33 xDai',
-    },
-  ]
+  // This will grab DAO metadata from database with a fbGroupId
+  useEffect(() => {
+    async function getDao(fbGroupId) {
+      const response = await axios.get(`/api/dao/${fbGroupId}`)
+      setDAO(response.data)
+    }
+    getDao(fbGroupId)
+  }, [fbGroupId])
 
-  const token = {
-    symbol: 'FBC',
-    supply: 1000,
-    transferable: true,
+  const { imageHash, daoName, daoAddress, daoENS, tokenName, tokenSymbol } = dao
+
+  async function loginWithTorus() {
+    try {
+      await web3Obj.initialize('rinkeby')
+      const userInfo = await web3Obj.torus.getUserInfo()
+      setUserName(userInfo.name)
+      setProfileImage(userInfo.profileImage)
+      await axios.post('/api/user', {
+        name: userInfo.name,
+        profileImage: userInfo.profileImage,
+        address: await web3Obj.account(),
+      })
+      setConnected(true)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
-  const memberList = [
-    {
-      name: userName,
-      profile: profileImage,
-      balance: 200,
-      percentShare: 20,
-    },
-    {
-      name: userName,
-      profile: profileImage,
-      balance: 200,
-      percentShare: 20,
-    },
-    {
-      name: userName,
-      profile: profileImage,
-      balance: 200,
-      percentShare: 20,
-    },
-    {
-      name: userName,
-      profile: profileImage,
-      balance: 200,
-      percentShare: 20,
-    },
-    {
-      name: userName,
-      profile: profileImage,
-      balance: 200,
-      percentShare: 20,
-    },
-  ]
 
   const [selected, setSelected] = useState(0)
+  const [org, setOrg] = useState()
+  const [members, setMembers] = useState()
+  const [balance, setBalance] = useState()
+  const [exchange, setExchange] = useState()
+  const [votes, setVotes] = useState()
+
+  useEffect(() => {
+    async function aragonConnect() {
+      const org = await connect(daoAddress, 'thegraph', { chainId: 4 })
+      console.log('org found')
+      setOrg(org)
+      const votingApp = new Voting(
+        (await org.app('voting')).address,
+        'https://api.thegraph.com/subgraphs/name/aragon/aragon-voting-rinkeby',
+      )
+      setVotes((await votingApp.votes()).length)
+      const tokensApp = new TokenManager(
+        (await org.app('token-manager')).address,
+        'https://api.thegraph.com/subgraphs/name/aragon/aragon-tokens-rinkeby',
+      )
+      setMembers((await (await tokensApp.token()).holders()).length)
+      const vaultAppAddress = (await org.app('vault')).address
+      setBalance(
+        Number(
+          web3Obj.web3.utils.fromWei(
+            await web3Obj.web3.eth.getBalance(vaultAppAddress),
+          ),
+        ),
+      )
+
+      setExchange(
+        Number(
+          (
+            await axios.get(
+              'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD',
+            )
+          ).data['USD'],
+        ),
+      )
+    }
+    if (dao.daoAddress) {
+      aragonConnect()
+    }
+  }, [dao])
   return (
-    <Connect location="beehive.aragonid.eth" connector="thegraph">
+    <>
       <div className="background">
         <div className="header">
           <img className="header-watermark" src={headerWatermark} />
@@ -118,24 +129,45 @@ const DAOPageView = ({
               <img className="fbfly-logo-img" src={FbFlyLogo} />
             </a>
           </Link>
-          <div className="user">
-            <div className="user-profile">
-              <img className="user-profile-img" src={profileImage} />
+          {connected ? (
+            <div className="user">
+              <div className="user-profile">
+                <img className="user-profile-img" src={profileImage} />
+              </div>
+              <div className="user-name">{userName}</div>
+              {/* <img src={caratDown} /> */}
             </div>
-            <div className="user-name">{userName}</div>
-            <img src={caratDown} />
-          </div>
+          ) : (
+            <a
+              className="login-button"
+              onClick={() => {
+                loginWithTorus()
+              }}
+            >
+              <img className="fb-login-img" src={FbLogin} />
+              Login with Facebook
+            </a>
+          )}
         </div>
         <main className="dao-main">
           <div className="left-column">
             <div className="dao-view-title tile">
-              <img
-                className="dao-logo-img"
-                //src={`data:image/svg+xml;utf8,${logoFile}`}
-                src={logo}
-              />
-              <div className="dao-name">{name}</div>
-              <a className="dao-fb-link">
+              {imageHash && (
+                <img
+                  className="dao-logo-img"
+                  src={`https://ipfs.infura.io/ipfs/${imageHash}`}
+                />
+              )}
+              <a
+                href={`https://rinkeby.aragon.org/#/${daoAddress}`}
+                className="dao-name"
+              >
+                {daoName}
+              </a>
+              <a
+                className="dao-fb-link"
+                href={`https://www.facebook.com/groups/${fbGroupId}`}
+              >
                 <img className="fb-logo-img" src={FbLogo} />
                 Go to Facebook Group
               </a>
@@ -158,21 +190,24 @@ const DAOPageView = ({
             <div className="dao-count tile" onClick={() => setSelected(2)}>
               <img className="dao-count-img dao-count-left" src={capitalLogo} />
               <div className="dao-count-right">
-                <span className="count-value">{capital}</span>
+                <span className="count-value">
+                  {exchange && `$${(balance * exchange).toFixed(0)}`}
+                </span>
                 <span className="count-title">Capital</span>
               </div>
             </div>
           </div>
-          {selected === 0 ? (
-            <TokensView memberList={memberList} token={token} />
-          ) : selected === 1 ? (
-            <VotingView />
-          ) : (
-            <FinanceView capital={capital} transfers={transfers} />
-          )}
+          {org &&
+            (selected === 0 ? (
+              <TokensView org={org} />
+            ) : selected === 1 ? (
+              <VotingView org={org} />
+            ) : (
+              <FinanceView balance={balance} exchange={exchange} org={org} />
+            ))}
         </main>
       </div>
-    </Connect>
+    </>
   )
 }
 

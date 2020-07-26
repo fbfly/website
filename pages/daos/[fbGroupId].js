@@ -4,22 +4,13 @@ import Head from 'next/head'
 import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
 import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
+
+// OLD PICA POLLO ADDRESS IN MONGODB : 0xA4D0745Dc93555B3b2Fa93Ea0a665E1c3D945249
 
 const DaoPage = () => {
   const router = useRouter()
   const { fbGroupId } = router.query
-  const dao = {
-    name: 'Ethical Brand',
-    logo: EthicalBrandLogo,
-    description:
-      'Fast fashion is easy for consumers because it’s just that: fast and inexpensive. Lasting for only a season or so, it’s easy for us to end up with clothes that tatter and rip after just a few wear.',
-    members: '28',
-    capital: '$552',
-    votes: '82',
-    fbLink: '',
-    daoLink: '',
-    fbGroupId
-  }
 
   return (
     <>
@@ -29,7 +20,7 @@ const DaoPage = () => {
       </Head>
       <div className="container">
         {/* <Navbar /> */}
-        <DAOPageView dao={dao} />
+        {fbGroupId && <DAOPageView fbGroupId={fbGroupId} />}
         {/* <Footer /> */}
       </div>
     </>

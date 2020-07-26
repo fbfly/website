@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Footer from '../../components/Footer'
 import Navbar from '../../components/Navbar'
 import { useRouter } from 'next/router'
+const axios = require('axios')
 
 async function getDao(fbGroupId) {
   await axios
@@ -28,16 +29,19 @@ const DaoPage = () => {
   const router = useRouter()
   const { fbGroupId } = router.query
 
+  // This will grab DAO metadata from database with a fbGroupId
   const daoData = getDao(fbGroupId)
+
+  // A few things are not saved on the database, that's why this object exists.
   const dao = {
     name: daoData.daoName,
     logo: EthicalBrandLogo,
     description: daoData.description,
-    members: '28',
-    capital: '$552',
-    votes: '82',
-    fbLink: '',
-    daoLink: '',
+    members: '28', // grab with connect
+    capital: '$552', // grab with connect
+    votes: '82', // grab with connect
+    fbLink: `facebook.com/groups/${fbGroupId}`,
+    daoLink: `fbfly.xyz/daos/${fbGroupId}`,
     fbGroupId,
   }
 

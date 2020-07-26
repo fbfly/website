@@ -5,11 +5,10 @@ const handler = nextConnect()
 
 handler.use(middleware)
 
-// A GET request with fbGroupId as query param returns the DAO metadata.
 handler.get(async (req, res) => {
   await req.db
-    .collection('daos')
-    .findOne({ fbGroupId: req.query.fbGroupId })
+    .collection('users')
+    .findOne({ address: req.query.address })
     .toArray(function (err, items) {
       if (err) {
         res.status(401).json(items)

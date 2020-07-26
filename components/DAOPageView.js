@@ -32,6 +32,7 @@ const DAOPageView = ({
     setProfileImage,
   } = useContext(TorusContext)
 
+  // Fetch with connect from any rinkeby DAO
   const transfers = [
     {
       date: new Date(),
@@ -61,13 +62,14 @@ const DAOPageView = ({
       amount: '33 xDai',
     },
   ]
-
+  // Fetch with connect from any rinkeby DAO
   const token = {
     symbol: 'FBC',
     supply: 1000,
     transferable: true,
   }
 
+  // Fetch with connect from any rinkeby DAO
   const memberList = [
     {
       name: userName,

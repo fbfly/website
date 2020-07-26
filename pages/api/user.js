@@ -19,6 +19,7 @@ handler.get(async (req, res) => {
 })
 
 handler.post(async (req, res) => {
+  // This grabs user data to render it on our UI given an eth address.
   const { name, profileImage, address } = req.body
   await req.db
     .collection('users')

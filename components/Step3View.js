@@ -51,8 +51,8 @@ const Step3View = () => {
       value: web3Obj.web3.utils.toWei('0.01'),
     })
 
-    await axios
-      .post(
+    try {
+      const response = await axios.post(
         '/api/dao',
         {
           daoName: daoName,
@@ -66,14 +66,15 @@ const Step3View = () => {
         },
         { timeout: 1000000 },
       )
-      .then(({ orgAddress }) => {
-        console.log('Organization Address', orgAddress)
-        setLoading(undefined)
-        Router.push('/daos/[fbGroupId]', `/daos/${fbGroupId}`)
-      })
-      .catch(error => {
-        console.log('Could not create DAO Error:', error)
-      })
+
+      const { orgAddress } = response.data
+      console.log('Organization Address', orgAddress)
+      setLoading(undefined)
+      Router.push('/daos/[fbGroupId]', `/daos/${fbGroupId}`)
+    } catch (error) {
+      console.log('Could not create DAO Error:', error)
+      setStep(2)
+    }
   }
 
   const back = () => {

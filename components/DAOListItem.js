@@ -36,13 +36,15 @@ const DAOListItem = ({
         'https://api.thegraph.com/subgraphs/name/aragon/aragon-voting-rinkeby',
       )
       setVotes((await votingApp.votes()).length)
+      const tokenManagerAddress = (await org.app('token-manager')).address
       const tokensApp = new TokenManager(
-        (await org.app('token-manager')).address,
+        tokenManagerAddress,
         'https://api.thegraph.com/subgraphs/name/aragon/aragon-tokens-rinkeby',
       )
-      console.log({tokensApp})
+      console.log({ tokenManagerAddress })
+      console.log({ tokensApp })
       const token = await tokensApp.token()
-      console.log({token})
+      console.log({ token })
       setMembers((await token.holders()).length)
       console.log(await org.app('finance'))
       const vaultAppAddress = (await org.app('vault')).address
@@ -73,7 +75,7 @@ const DAOListItem = ({
                 className={styles.daoLogoImg}
                 src={`https://ipfs.infura.io/ipfs/${imageHash}`}
               />
-              <div className={styles.daoTitle}>{name}</div>
+              <div className={styles.daoTitle}>{daoName}</div>
             </a>
           </Link>
           <a

@@ -46,7 +46,7 @@ handler.post(async (req, res) => {
     torusAccount,
   } = req.body
   try {
-    const { orgAddress } = await createDao(tokenName, tokenSymbol, torusAccount)
+    const orgAddress = await createDao(tokenName, tokenSymbol, torusAccount)
     if (orgAddress) {
       await req.db.collection('daos').insertOne({
         daoName: daoName,
@@ -62,9 +62,7 @@ handler.post(async (req, res) => {
         orgAddress: orgAddress,
         message: 'DAO has been created successfully',
       })
-      res.end('OK')
     }
-    res.status(401).send('401 ERROR')
   } catch (error) {
     console.log(error)
     res.status(500).send('500 ERROR')

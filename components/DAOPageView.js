@@ -67,13 +67,33 @@ const DAOPageView = ({ fbGroupId }) => {
     }
   }
 
-
   const [selected, setSelected] = useState(0)
   const [org, setOrg] = useState()
   const [members, setMembers] = useState()
   const [balance, setBalance] = useState()
   const [exchange, setExchange] = useState()
   const [votes, setVotes] = useState()
+
+  async function donateNow() {
+    const vaultAppAddress = (await org.app('vault')).address
+    if (balance > 1) {
+      await web3Obj.web3.eth
+        .sendTransaction({
+          from: await web3Obj.account(),
+          to: vaultAppAddress,
+          value: web3Obj.web3.utils.toWei('0.01'),
+        })
+        .on('confirmation', async function (confirmationNumber, receipt) {
+          if (confirmationNumber == 1) {
+            /**
+             * Message notification, successfully donated.
+             */
+          }
+        })
+    } else {
+      await web3Obj.buyEth()
+    }
+  }
 
   useEffect(() => {
     async function aragonConnect() {

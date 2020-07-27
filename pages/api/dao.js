@@ -22,7 +22,7 @@ handler.get(async (req, res) => {
   await req.db
     .collection('daos')
     .find({})
-    .toArray(function (err, items) {
+    .toArray(function(err, items) {
       if (err) {
         res.status(401).json(items)
         throw err
@@ -43,33 +43,32 @@ handler.post(async (req, res) => {
     imageHash,
     torusAccount,
   } = req.body
-  await createDao(tokenName, tokenSymbol, torusAccount)
-    .then(async orgAddress => {
-      if (orgAddress) {
-        await req.db.collection('daos').insertOne({
-          daoName: daoName,
-          daoAddress: orgAddress,
-          description: description,
-          tokenName: tokenName,
-          tokenSymbol: tokenSymbol,
-          fbGroulURL: fbGroulURL,
-          fbGroupId: fbGroupId,
-          imageHash: imageHash,
-        })
-        return res.status(200).json({
-          orgAddress: orgAddress,
-          message: 'DAO has been created successfully',
-        })
-      }
-      return res.status(401).json({
-        orgAddress: 'Not found',
-        message: 'Could get your Org Address.',
+  try {
+    const orgAddress = await createDao(tokenName, tokenSymbol, torusAccount)
+    if (orgAddress) {
+      await req.db.collection('daos').insertOne({
+        daoName: daoName,
+        daoAddress: orgAddress,
+        description: description,
+        tokenName: tokenName,
+        tokenSymbol: tokenSymbol,
+        fbGroulURL: fbGroulURL,
+        fbGroupId: fbGroupId,
+        imageHash: imageHash,
       })
+      return res.status(200).json({
+        orgAddress: orgAddress,
+        message: 'DAO has been created successfully',
+      })
+    }
+    return res.status(401).json({
+      orgAddress: 'Not found',
+      message: 'Could get your Org Address.',
     })
-    .catch(error => {
-      console.log(error)
-      return res.status(500).json('There was an error creating your DAO.')
-    })
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json('There was an error creating your DAO.')
+  }
 })
 
 export default handler

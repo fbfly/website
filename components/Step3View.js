@@ -1,4 +1,5 @@
 import styles from './Step3View.module.sass'
+import Router from 'next/router'
 import Back from '../public/images/back.svg'
 import { useContext, useState, useEffect } from 'react'
 import Loading from '../public/images/loading.svg'
@@ -41,35 +42,37 @@ const Step3View = () => {
     if (!ethAddress) {
       // Let the user know that they are not properly authenticated
     }
+    const fbGroupId = url.replace(/^.*[\\\/]/, '')
 
     // Make a transaction to pay for the fees.
-    await web3Obj.web3.eth
-      .sendTransaction({
-        from: ethAddress,
-        to: SERVER_ADDRESS,
-        value: web3Obj.web3.utils.toWei('0.01'),
+    await web3Obj.web3.eth.sendTransaction({
+      from: ethAddress,
+      to: SERVER_ADDRESS,
+      value: web3Obj.web3.utils.toWei('0.01'),
+    })
+
+    await axios
+      .post(
+        '/api/dao',
+        {
+          daoName: daoName,
+          description: description,
+          tokenName: tokenName,
+          tokenSymbol: tokenSymbol,
+          imageHash: logoHash,
+          fbGroupId: fbGroupId,
+          fbGroulURL: url,
+          torusAccount: ethAddress,
+        },
+        { timeout: 1000000 },
+      )
+      .then(({ orgAddress }) => {
+        console.log('Organization Address', orgAddress)
+        setLoading(undefined)
+        Router.push('/daos/[fbGroupId]', `/daos/${fbGroupId}`)
       })
-      .on('confirmation', async function(confirmationNumber, receipt) {
-        if (confirmationNumber == 1) {
-          await axios
-            .post('/api/dao', {
-              daoName: daoName,
-              description: description,
-              tokenName: tokenName,
-              tokenSymbol: tokenSymbol,
-              imageHash: logoHash,
-              fbGroupId: url.replace(/^.*[\\\/]/, ''),
-              fbGroulURL: url,
-              torusAccount: ethAddress,
-            })
-            .then(({ orgAddress }) => {
-              console.log('Organization Address', orgAddress)
-              setLoading(undefined)
-            })
-            .catch(error => {
-              console.log('Error:', error)
-            })
-        }
+      .catch(error => {
+        console.log('Could not create DAO Error:', error)
       })
   }
 

@@ -75,7 +75,7 @@ const DAOListItem = ({
                 className={styles.daoLogoImg}
                 src={`https://ipfs.infura.io/ipfs/${imageHash}`}
               />
-              <div className={styles.daoTitle}>{name}</div>
+              <div className={styles.daoTitle}>{daoName}</div>
             </a>
           </Link>
           <a

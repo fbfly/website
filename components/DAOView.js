@@ -1,4 +1,4 @@
-import '../styles/dao-view.sass'
+import styles from './DAOView.module.sass'
 import FbLogo from '../public/images/fb-logo.svg'
 import { useContext, useState, useEffect } from 'react'
 import CardContext from '../lib/CardContext'
@@ -27,45 +27,45 @@ const DAOView = () => {
   }, [logoHash])
 
   return (
-    <div className="card-inner">
-      <div className="dao-logo">
+    <div className={styles.cardInner}>
+      <div className={styles.daoLogo}>
         <img
-          className="dao-logo-img"
+          className={styles.daoLogoImg}
           src={`data:image/svg+xml;utf8,${logoFile}`}
         />
       </div>
-      <div className="dao-title">{name}</div>
-      <a className="dao-fb-link">
-        <img className="fb-logo-img" src={FbLogo} />
+      <div className={styles.daoTitle}>{name}</div>
+      <a className={styles.daoFbLink}>
+        <img className={styles.fbLogoImg} src={FbLogo} />
         Go to our Facebook Group
       </a>
-      <div className="dao-content">
-        <div className="dao-content-about">
-          <div className="dao-content-title">About {name}</div>
-          <div className="dao-content-description">
+      <div className={styles.daoContent}>
+        <div className={styles.daoContentAbout}>
+          <div className={styles.daoContentTitle}>About {name}</div>
+          <div className={styles.daoContentDescription}>
             {description}
-            <a className="more-link">Read more</a>
+            <a className={styles.moreLink}>Read more</a>
           </div>
         </div>
-        <div className="dao-content-counts-container">
-          <div className="dao-content-count">
-            <span className="count-title">Members</span>
-            <span className="count-value">{members}</span>
-            <a className="count-link">View more</a>
+        <div className={styles.daoContentCountsContainer}>
+          <div className={styles.daoContentCount}>
+            <span className={styles.countTitle}>Members</span>
+            <span className={styles.countValue}>{members}</span>
+            <a className={styles.countLink}>View more</a>
           </div>
-          <div className="dao-content-count">
-            <span className="count-title">Capital</span>
-            <span className="count-value">{capital}</span>
-            <a className="count-link">View more</a>
+          <div className={styles.daoContentCount}>
+            <span className={styles.countTitle}>Capital</span>
+            <span className={styles.countValue}>{capital}</span>
+            <a className={styles.countLink}>View more</a>
           </div>
-          <div className="dao-content-count">
-            <span className="count-title">Votes</span>
-            <span className="count-value">{votes}</span>
-            <a className="count-link">View more</a>
+          <div className={styles.daoContentCount}>
+            <span className={styles.countTitle}>Votes</span>
+            <span className={styles.countValue}>{votes}</span>
+            <a className={styles.countLink}>View more</a>
           </div>
         </div>
       </div>
-      <a className="dao-donate-button">Donate to {name}</a>
+      <a className={styles.daoDonateButton}>Donate to {name}</a>
     </div>
   )
 }

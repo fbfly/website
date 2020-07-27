@@ -1,5 +1,4 @@
 import Card from '../components/Card'
-import '../styles/connect.sass'
 import Head from 'next/head'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
@@ -13,7 +12,7 @@ const Onboarding = () => {
       </Head>
       <div className="container">
         <Navbar />
-        <div className="connect-container">
+        <div className="connectContainer">
           <Card className="onboarding" />
         </div>
         <Footer />

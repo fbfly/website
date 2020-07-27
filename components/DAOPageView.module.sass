@@ -9,7 +9,7 @@
   width: 100%
   overflow: hidden
   background: linear-gradient(260.48deg, #8B3CE6 -1.19%, #406EFB 96.86%)
-  .user-name
+  .userName
     width: 6.75rem
 
 .background
@@ -35,7 +35,7 @@
   border-radius: 8px
   padding: 1.25rem
   color: white
-  .user-profile
+  .userProfile
     width: 1.5rem
     height: 1.5rem
     background: white
@@ -46,57 +46,101 @@
       width: 100%
       height: 100%
 
-.dao-item
-  z-index: 2
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15)
-  border-radius: 8px
-  background: white
-  margin-top: 1.8rem
+.daoMain
+  z-index: 1
+  height: 100%
+  margin-top: 8rem
+  width: 100%
+  display: grid
+  grid-template-columns: 1fr 3fr
+  grid-gap: 1rem
+  padding: 0 5rem
+
+.tile
+  background: #FFFFFF;
+  border: 1px solid #EFEFEF;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 0 1rem
+
+.leftColumn
   display: flex
   flex-direction: column
-  align-items: center
+
+.daoViewTitle
+  padding-top: 2rem
+  padding-bottom: 2rem
+  display: flex
   justify-content: center
-  width: 88%
-  position: relative
+  align-items: center
+  flex-direction: column
+  margin: 0
+  .daoFbLink
+    margin-top: 0.5rem
+    font-weight: normal
+    font-size: 0.8rem
+  
+.daoCount
+  cursor: pointer
+  margin-top: 1rem
+  padding-top: 2rem
+  padding-bottom: 2rem
+  padding-left: 2rem
+  display: flex
+  justify-content: flex-start
+  align-items: center
+  &:hover 
+    color: #406EFB
 
-.top
-  margin-top: 7.8rem
+.daoCountRight
+  padding-left: 1rem
+  flex: 1
+  display: flex
+  flex-direction: column
+  .countValue
+    text-align: center
+    font-size: 2rem
+  .countTitle
+    text-align: center
+    font-size: 1rem
+    font-weight: 300
+    line-height: 1.5rem
 
-.dao-logo-img
+.daoLogoImg
   margin: 0.5rem
   width: 3rem
   height: 3rem
 
-.dao-count-img
+.daoCountImg
   width: 3.75rem
   height: 3.75rem
 
-.fbfly-text
+.fbflyText
   margin-top: 0.5rem
   display: flex
-  align-items: start
-  justify-self: start
+  align-items: flex-start
+  justify-self: flex-start
 
-.fbfly-logo
+.fbflyLogo
   justify-self: center
 
-.fbfly-logo-img
+.fbflyLogoImg
   width: 3.75rem
   height: 3.75rem
 
-.header-watermark
+.headerWatermark
   z-index: -1
   position: absolute
   height: 100%
   left: 50%
   transform: translateX(-50%)
 
-.dao-title
+.daoTitle
   text-align: center
   font-size: 1.5rem
   margin-bottom: 0.5rem
 
-.dao-fb-link
+.daoFbLink
   font-size: 1rem
   font-weight: normal
   cursor: pointer
@@ -105,59 +149,25 @@
   justify-content: center
   align-items: center
   color: #3A72FD
-  .fb-logo-img
+  .fbLogoImg
     width: 1rem
     height: 1rem
     margin-right: 0.5rem
 
-.dao-list-content
-  width: 100%
-  height: 100%
-  display: grid
-  justify-items: center
+.daoDonateButton
+  height: 2.5rem
+  display: flex
+  justify-content: center
   align-items: center
-  grid-template-columns: 1fr 1fr 1fr 1fr
-  grid-gap: 1rem
-  padding: 1rem
-  .dao-list-content-logo
-    border-right: 1px solid #EFEFEF
-    display: flex
-    width: 100%
-    flex-direction: column
-    justify-content: center
-    align-items: center
-    padding: 1rem
-    .dao-link
-      display: flex
-      flex-direction: column
-      justify-content: center
-      align-items: center
+  border-radius: 0.5rem
+  background: linear-gradient(144.73deg, #3177FF 7.02%, #9634E2 96.8%)
+  box-shadow: 0 0.25rem 0.5rem rgba(35, 24, 81, 0.2)
+  color: white
+  padding: 0 1rem
+  margin-top: 1rem
+  position: relative
 
-  .dao-list-content-count
-    display: flex
-    align-items: center
-    .dao-count-left
-      justify-self: end
-    .dao-count-right
-      justify-self: start
-      display: flex
-      justify-content: center
-      align-items: center
-      flex-direction: column
-    .count-title
-      color: #A99BD8
-      font-size: 1rem
-      text-align: center
-    .count-value
-      text-align: center
-      font-size: 2rem
-      margin: 0.5rem 0
-    .count-link
-      text-align: center
-      color: #3A72FD
-
-
-.login-button
+.loginButton
   justify-self: end
   height: 2.5rem
   display: flex
@@ -171,7 +181,7 @@
   &:hover
     color: white
     
-.fb-login-img
+.fbLoginImg
   margin-right: 1rem
   width: 1rem
   height: 1rem

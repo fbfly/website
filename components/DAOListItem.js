@@ -9,6 +9,7 @@ import membersLogo from '../public/images/profile.svg'
 import capitalLogo from '../public/images/coins.svg'
 import votesLogo from '../public/images/thumbs.svg'
 import axios from 'axios'
+import styles from './DAOListItem.module.sass'
 
 const DAOListItem = ({
   dao: {
@@ -20,7 +21,7 @@ const DAOListItem = ({
     tokenName,
     tokenSymbol,
   },
-  className,
+  top,
 }) => {
   const { web3Obj, connected } = useContext(TorusContext)
   const [members, setMembers] = useState()
@@ -60,45 +61,54 @@ const DAOListItem = ({
     aragonConnect()
   }, [])
   return (
-    <div className={className}>
-      <div className="dao-list-content">
-        <div className="dao-list-content-logo">
+    <div className={`${styles.daoItem} ${top ? styles.top : ''}`}>
+      <div className={styles.daoListContent}>
+        <div className={styles.daoListContentLogo}>
           <Link href="/daos/[fbGroupId]" as={`/daos/${fbGroupId}`}>
-            <a className="dao-link">
+            <a className={styles.daoLink}>
               <img
-                className="dao-logo-img"
+                className={styles.daoLogoImg}
                 src={`https://ipfs.infura.io/ipfs/${imageHash}`}
               />
-              <div className="dao-title">{name}</div>
+              <div className={styles.daoTitle}>{name}</div>
             </a>
           </Link>
           <a
-            className="dao-fb-link"
+            className={styles.daoFbLink}
             href={`https://www.facebook.com/groups/${fbGroupId}`}
           >
-            <img className="fb-logo-img" src={FbLogo} />
+            <img className={styles.fbLogoImg} src={FbLogo} />
             Go to Facebook Group
           </a>
         </div>
-        <div className="dao-list-content-count">
-          <img className="dao-count-img dao-count-left" src={membersLogo} />
-          <div className="dao-count-right">
-            <span className="count-value">{members}</span>
-            <span className="count-title">Members</span>
+        <div className={styles.daoListContentCount}>
+          <img
+            className={`${styles.daoCountImg} ${styles.daoCountLeft}`}
+            src={membersLogo}
+          />
+          <div className={styles.daoCountRight}>
+            <span className={styles.countValue}>{members}</span>
+            <span className={styles.countTitle}>Members</span>
           </div>
         </div>
-        <div className="dao-list-content-count">
-          <img className="dao-count-img dao-count-left" src={votesLogo} />
-          <div className="dao-count-right">
-            <span className="count-value">{votes}</span>
-            <span className="count-title">Votes</span>
+        <div className={styles.daoListContentCount}>
+          <img
+            className={`${styles.daoCountImg} ${styles.daoCountLeft}`}
+            src={votesLogo}
+          />
+          <div className={styles.daoCountRight}>
+            <span className={styles.countValue}>{votes}</span>
+            <span className={styles.countTitle}>Votes</span>
           </div>
         </div>
-        <div className="dao-list-content-count">
-          <img className="dao-count-img dao-count-left" src={capitalLogo} />
-          <div className="dao-count-right">
-            <span className="count-value">{capital}</span>
-            <span className="count-title">Capital</span>
+        <div className={styles.daoListContentCount}>
+          <img
+            className={`${styles.daoCountImg} ${styles.daoCountLeft}`}
+            src={capitalLogo}
+          />
+          <div className={styles.daoCountRight}>
+            <span className={styles.countValue}>{capital}</span>
+            <span className={styles.countTitle}>Capital</span>
           </div>
         </div>
       </div>

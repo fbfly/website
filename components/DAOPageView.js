@@ -1,4 +1,4 @@
-import '../styles/dao-page-view.sass'
+import styles from './DAOPageView.module.sass'
 import FbLogin from '../public/images/fb-login.svg'
 import caratDown from '../public/images/carat-down.svg'
 import headerWatermark from '../public/images/card-header-watermark.svg'
@@ -83,7 +83,7 @@ const DAOPageView = ({ fbGroupId }) => {
           to: vaultAppAddress,
           value: web3Obj.web3.utils.toWei('0.01'),
         })
-        .on('confirmation', async function (confirmationNumber, receipt) {
+        .on('confirmation', async function(confirmationNumber, receipt) {
           if (confirmationNumber == 1) {
             /**
              * Message notification, successfully donated.
@@ -135,85 +135,103 @@ const DAOPageView = ({ fbGroupId }) => {
   }, [dao])
   return (
     <>
-      <div className="background">
-        <div className="header">
-          <img className="header-watermark" src={headerWatermark} />
+      <div className={styles.background}>
+        <div className={styles.header}>
+          <img className={styles.headerWatermark} src={headerWatermark} />
           <Link href="/">
-            <a className="fbfly-text">
-              <img className="fbfly-text-img" src={FbText} />
-              <img className="fbfly-text-img" src={FlyText} />
+            <a className={styles.fbflyText}>
+              <img className={styles.fbflyTextImg} src={FbText} />
+              <img className={styles.fbflyTextImg} src={FlyText} />
             </a>
           </Link>
           <Link href="/">
-            <a className="fbfly-logo">
-              <img className="fbfly-logo-img" src={FbFlyLogo} />
+            <a className={styles.fbflyLogo}>
+              <img className={styles.fbflyLogoImg} src={FbFlyLogo} />
             </a>
           </Link>
           {connected ? (
-            <div className="user">
-              <div className="user-profile">
-                <img className="user-profile-img" src={profileImage} />
+            <div className={styles.user}>
+              <div className={styles.userProfile}>
+                <img className={styles.userProfileImg} src={profileImage} />
               </div>
-              <div className="user-name">{userName}</div>
+              <div className={styles.userName}>{userName}</div>
               {/* <img src={caratDown} /> */}
             </div>
           ) : (
             <a
-              className="login-button"
+              className={styles.loginButton}
               onClick={() => {
                 loginWithTorus()
               }}
             >
-              <img className="fb-login-img" src={FbLogin} />
+              <img className={styles.fbLoginImg} src={FbLogin} />
               Login with Facebook
             </a>
           )}
         </div>
-        <main className="dao-main">
-          <div className="left-column">
-            <div className="dao-view-title tile">
+        <main className={styles.daoMain}>
+          <div className={styles.leftColumn}>
+            <div className={`${styles.daoViewTitle} ${styles.tile}`}>
               {imageHash && (
                 <img
-                  className="dao-logo-img"
+                  className={styles.daoLogoImg}
                   src={`https://ipfs.infura.io/ipfs/${imageHash}`}
                 />
               )}
               <a
                 href={`https://rinkeby.aragon.org/#/${daoAddress}`}
-                className="dao-name"
+                className={styles.daoName}
               >
                 {daoName}
               </a>
               <a
-                className="dao-fb-link"
+                className={styles.daoFbLink}
                 href={`https://www.facebook.com/groups/${fbGroupId}`}
               >
-                <img className="fb-logo-img" src={FbLogo} />
+                <img className={styles.fbLogoImg} src={FbLogo} />
                 Go to Facebook Group
               </a>
-              <a className="dao-donate-button">Donate now</a>
+              <a className={styles.daoDonateButton}>Donate now</a>
             </div>
-            <div className="dao-count tile" onClick={() => setSelected(0)}>
-              <img className="dao-count-img dao-count-left" src={membersLogo} />
-              <div className="dao-count-right">
-                <span className="count-value">{members}</span>
-                <span className="count-title">Members</span>
+            <div
+              className={`${styles.daoCount} ${styles.tile}`}
+              onClick={() => setSelected(0)}
+            >
+              <img
+                className={`${styles.daoCountImg} ${styles.daoCountLeft}`}
+                src={membersLogo}
+              />
+              <div className={styles.daoCountRight}>
+                <span className={styles.countValue}>{members}</span>
+                <span className={styles.countTitle}>Members</span>
               </div>
             </div>
-            <div className="dao-count tile" onClick={() => setSelected(1)}>
-              <img className="dao-count-img dao-count-left" src={votesLogo} />
-              <div className="dao-count-right">
-                <span className="count-value">{votes}</span>
-                <span className="count-title">Votes</span>
+            <div
+              className={`${styles.daoCount} ${styles.tile}`}
+              onClick={() => setSelected(1)}
+            >
+              <img
+                className={`${styles.daoCountImg} ${styles.daoCountLeft}`}
+                src={votesLogo}
+              />
+              <div className={styles.daoCountRight}>
+                <span className={styles.countValue}>{votes}</span>
+                <span className={styles.countTitle}>Votes</span>
               </div>
             </div>
-            <div className="dao-count tile" onClick={() => setSelected(2)}>
-              <img className="dao-count-img dao-count-left" src={capitalLogo} />
-              <div className="dao-count-right">
-                <span className="count-value">
+            <div
+              className={`${styles.daoCount} ${styles.tile}`}
+              onClick={() => setSelected(2)}
+            >
+              <img
+                className={`${styles.daoCountImg} ${styles.daoCountLeft}`}
+                src={capitalLogo}
+              />
+              <div className={styles.daoCountRight}>
+                <span className={styles.countValue}>
                   {exchange && `$${(balance * exchange).toFixed(0)}`}
                 </span>
-                <span className="count-title">Capital</span>
+                <span className={styles.countTitle}>Capital</span>
               </div>
             </div>
           </div>

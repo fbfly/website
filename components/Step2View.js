@@ -1,4 +1,4 @@
-import '../styles/step2-view.sass'
+import styles from './Step2View.module.sass'
 import Back from '../public/images/back.svg'
 import EthicalBrandLogo from '../public/images/ethical-brand.svg'
 import { useContext, useState, useEffect } from 'react'
@@ -46,21 +46,21 @@ const Step2View = () => {
   }
 
   return (
-    <div className="card-inner">
-      <div className="step2-inner">
-        <div className="text-section">
-          <span className="name-label">DAO Name</span>
+    <div className={styles.cardInner}>
+      <div className={styles.step2Inner}>
+        <div className={styles.textSection}>
+          <span className={styles.nameLabel}>DAO Name</span>
           <input
-            className="name-input"
+            className={styles.nameInput}
             placeholder="Ethical Brand"
             value={daoName}
             onChange={e => {
               setDaoName(e.target.value)
             }}
           />
-          <span className="description-label">DAO Description</span>
+          <span className={styles.descriptionLabel}>DAO Description</span>
           <textarea
-            className="description-input"
+            className={styles.descriptionInput}
             placeholder="About Ethical Brand"
             value={description}
             onChange={e => {
@@ -68,17 +68,17 @@ const Step2View = () => {
             }}
           />
         </div>
-        <div className="logo-section">
-          <span className="logo-label label">DAO Logo</span>
-          <div className="logo-input">
-            <div className="logo-container">
+        <div className={styles.logoSection}>
+          <span className={`${styles.logoLabel} ${styles.label}`}>DAO Logo</span>
+          <div className={styles.logoInput}>
+            <div className={styles.logoContainer}>
               <img
-                className="logo-img"
+                className={styles.logoImg}
                 // NEED TO SUPPORT MORE IMAGE TYPES ( THIS WON't WORK ON DAO PAGE )
                 src={`data:image/svg+xml;utf8,${logoFile}`}
               />
             </div>
-            <label className="logo-upload-button">
+            <label className={styles.logoUploadButton}>
               Upload new
               <input
                 style={{ display: 'none' }}
@@ -93,11 +93,11 @@ const Step2View = () => {
           </div>
         </div>
       </div>
-      <a className="step2-button" onClick={submit}>
+      <a className={styles.step2Button} onClick={submit}>
         Next Step
       </a>
-      <a className="step2-back-button" onClick={back}>
-        <img className="back-img" src={Back} />
+      <a className={styles.step2BackButton} onClick={back}>
+        <img className={styles.backImg} src={Back} />
         Back
       </a>
     </div>

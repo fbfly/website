@@ -1,4 +1,4 @@
-import '../styles/step3-view.sass'
+import styles from './Step3View.module.sass'
 import Back from '../public/images/back.svg'
 import { useContext, useState, useEffect } from 'react'
 import Loading from '../public/images/loading.svg'
@@ -49,7 +49,7 @@ const Step3View = () => {
         to: SERVER_ADDRESS,
         value: web3Obj.web3.utils.toWei('0.01'),
       })
-      .on('confirmation', async function (confirmationNumber, receipt) {
+      .on('confirmation', async function(confirmationNumber, receipt) {
         if (confirmationNumber == 1) {
           await axios
             .post('/api/dao', {
@@ -78,23 +78,23 @@ const Step3View = () => {
   }
 
   return (
-    <div className="card-inner">
-      <span className="step3-label">
+    <div className={styles.cardInner}>
+      <span className={styles.step3Label}>
         What would you like your community token?
       </span>
       <input
-        className="step3-input"
+        className={styles.step3Input}
         placeholder="Ethical"
         value={tokenName}
         onChange={e => {
           setTokenName(e.target.value)
         }}
       />
-      <span className="step3-label">
+      <span className={styles.step3Label}>
         Write three letter symbol for your token
       </span>
       <input
-        className="step3-input"
+        className={styles.step3Input}
         placeholder="ETC"
         value={tokenSymbol}
         onChange={e => {
@@ -106,11 +106,11 @@ const Step3View = () => {
         title={'All DAOs come with their own community tokens.'}
         content={'Because they just do!'}
       />
-      <a className="step3-button" onClick={createNewDao}>
+      <a className={styles.step3Button} onClick={createNewDao}>
         Create DAO
       </a>
-      <a className="step3-back-button" onClick={back}>
-        <img className="back-img" src={Back} />
+      <a className={styles.step3BackButton} onClick={back}>
+        <img className={styles.backImg} src={Back} />
         Back
       </a>
     </div>

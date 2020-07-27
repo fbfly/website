@@ -1,4 +1,4 @@
-import '../styles/ramp-view.sass'
+import styles from './RampView.module.sass'
 import { useContext, useState, useEffect } from 'react'
 import CardContext from '../lib/CardContext'
 import TorusContext from '../lib/TorusContext'
@@ -84,22 +84,25 @@ const RampView = () => {
   const [xDai, setxDai] = useState(calcxDaiFromUsd(10))
 
   return (
-    <div className="card-inner">
+    <div className={styles.cardInner}>
       {onRampDone ? (
         <>
-          <img className="ramp-img" src={onRampSuccess ? Success : Failure} />
-          <span className="ramp-title">
+          <img
+            className={styles.rampImg}
+            src={onRampSuccess ? Success : Failure}
+          />
+          <span className={styles.rampTitle}>
             {onRampSuccess ? 'Transaction Success' : 'Transaction Failed!'}
           </span>
-          <span className="ramp-description">
+          <span className={styles.rampDescription}>
             {onRampSuccess
               ? `Your balance is ${(xDaiBalance / 10 ** 18).toFixed(3)} xDAI`
               : 'Some problems have occurred during the process'}
           </span>
-          <div className="done-buttons">
+          <div className={styles.doneButtons}>
             {onRampSuccess ? (
               <a
-                className="create-button"
+                className={styles.createButton}
                 onClick={() => {
                   setOnRamp(false)
                   setStep(1)
@@ -109,7 +112,7 @@ const RampView = () => {
               </a>
             ) : (
               <a
-                className="ramp-back-button"
+                className={styles.rampBackButton}
                 onClick={() => {
                   setOnRampDone(false)
                 }}
@@ -121,19 +124,21 @@ const RampView = () => {
         </>
       ) : (
         <>
-          <span className="ramp-title">
+          <span className={styles.rampTitle}>
             You need funds to create and manage the DAO
           </span>
           <InfoButton
             title={'Why do I need funds to create and manage a DAO?'}
             content={'Because you do!'}
-            link={'https://docs.fbfly.xyz/about-daos/why-do-i-need-funds-to-create-and-manage-a-dao'}
+            link={
+              'https://docs.fbfly.xyz/about-daos/why-do-i-need-funds-to-create-and-manage-a-dao'
+            }
           />
-          <div className="ramp-input-container">
-            <div className="usd-input">
-              <span className="ramp-label">Send</span>
+          <div className={styles.rampInputContainer}>
+            <div className={styles.usdInput}>
+              <span className={styles.rampLabel}>Send</span>
               <input
-                className="ramp-input"
+                className={styles.rampInput}
                 type="number"
                 value={usd.toFixed(3)}
                 onChange={e => {
@@ -141,15 +146,15 @@ const RampView = () => {
                   setxDai(calcxDaiFromUsd(e.target.value))
                 }}
               />
-              <span className="ramp-unit">USD</span>
+              <span className={styles.rampUnit}>USD</span>
             </div>
-            <div className="ramp-arrow">
-              <img className="arrow-img" src={Arrow} />
+            <div className={styles.rampArrow}>
+              <img className={styles.arrowImg} src={Arrow} />
             </div>
-            <div className="xDai-input">
-              <span className="ramp-label">Receive</span>
+            <div className={styles.xDaiInput}>
+              <span className={styles.rampLabel}>Receive</span>
               <input
-                className="ramp-input"
+                className={styles.rampInput}
                 type="number"
                 value={xDai.toFixed(3)}
                 onChange={e => {
@@ -157,15 +162,15 @@ const RampView = () => {
                   setUsd(calcUsdFromxDai(e.target.value))
                 }}
               />
-              <span className="ramp-unit">xDAI</span>
+              <span className={styles.rampUnit}>xDAI</span>
             </div>
           </div>
-          <span className="ramp-details">
+          <span className={styles.rampDetails}>
             Each transaction costs ${(usd - xDai).toFixed(3)} USD to process
           </span>
 
           <a
-            className="ramp-button"
+            className={styles.rampButton}
             onClick={() => {
               onRamp()
             }}

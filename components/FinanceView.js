@@ -1,7 +1,7 @@
 import Question from '../public/images/question.svg'
 import More from '../public/images/more.svg'
 import xDaiLogo from '../public/images/xDai.svg'
-import '../styles/finance-view.sass'
+import styles from './FinanceView.module.sass'
 import { Finance } from '@aragon/connect-finance'
 import { useEffect, useState } from 'react'
 import { getUser } from '../lib/helpers'
@@ -41,40 +41,42 @@ const FinanceView = ({ org, balance, exchange }) => {
     getFinance()
   }, [])
   return (
-    <div className="finance-view">
-      <div className="dao-finance tile">
-        <div className="dao-finance-header">Finance</div>
-        <div className="dao-finance-content">
-          <div className="balance-value">{`${balance} ($${capital.toFixed(
+    <div className={styles.financeView}>
+      <div className={`${styles.daoFinance} ${styles.tile}`}>
+        <div className={styles.daoFinanceHeader}>Finance</div>
+        <div className={styles.daoFinanceContent}>
+          <div className={styles.balanceValue}>{`${balance} ($${capital.toFixed(
             2,
           )})`}</div>
-          <div className="balance-label">
-            {/* <img className="xdai-logo" src={xDaiLogo} /> */}
+          <div className={styles.balanceLabel}>
+            {/* <img className={styles.xdaiLogo} src={xDaiLogo} /> */}
             {balanceUnit}
           </div>
         </div>
       </div>
-      <div className="dao-transfers tile">
-        <div className="dao-finance-header">Transfers</div>
-        <div className="dao-transfers-title">
+      <div className={`${styles.daoTransfers} ${styles.tile}`}>
+        <div className={styles.daoFinanceHeader}>Transfers</div>
+        <div className={styles.daoTransfersTitle}>
           <span>Date</span>
           <span>User</span>
           <span>Reference</span>
           <span>Amount</span>
         </div>
-        <div className="dao-transfers-content">
+        <div className={styles.daoTransfersContent}>
           {transfers &&
             transfers.map(
               ({ dateValue, user, reference, amountValue }, index) => (
-                <div className="transfer-item" key={index}>
-                  <div className="transfer-date">
+                <div className={styles.transferItem} key={index}>
+                  <div className={styles.transferDate}>
                     {dateValue.toLocaleDateString()}
                   </div>
                   <UserDisplay user={user} />
-                  <div className="transfer-reference">{reference}</div>
-                  <div className="transfer-amount">
-                    <div className="transfer-value">{amountValue} ETH</div>
-                    <img className="transfer-more" src={More} />
+                  <div className={styles.transferReference}>{reference}</div>
+                  <div className={styles.transferAmount}>
+                    <div className={styles.transferValue}>
+                      {amountValue} ETH
+                    </div>
+                    <img className={styles.transferMore} src={More} />
                   </div>
                 </div>
               ),

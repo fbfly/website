@@ -1,5 +1,4 @@
 const withImages = require('next-images')
-const withStyles = require('@webdeb/next-styles')
 const compose = require('next-compose')
 
 const imagesConfig = {
@@ -9,19 +8,9 @@ const imagesConfig = {
   },
 }
 
-const sassConfig = {
-  sass: true,
-  sassLoaderOptions: {
-    sassOptions: {
-      includePaths: ['styles'],
-    },
-  },
-}
-
 const fontsConfig = {}
 
 module.exports = compose([
-  [withStyles, sassConfig],
   [withImages, imagesConfig],
   {
     webpack: config => {

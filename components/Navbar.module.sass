@@ -4,31 +4,31 @@
   width: 100%
   max-width: 80rem
 
-.navbar-brand
+.navbarbrand
   display: flex
   align-items: center
   height: 100%
 
-.navbar-brand
+.navbarbrand
   justify-content: space-between
-  .navbar-logo
+  .navbarlogo
     display: flex
     justify-content: center
     align-items: center
     margin-left: 2rem
-  .logo-img
+  .logoimg
     padding: 0.5rem
-  .logo-txt
+  .logotxt
     padding: 0.25rem
 
-.navbar-menu
+.navbarmenu
   display: flex
   align-items: center
   height: 100%
   justify-content: flex-end
   flex: 1
 
-.navbar-burger
+.navbarburger
   z-index: 10
   position: absolute
   top: 1.5rem
@@ -46,14 +46,14 @@
     margin: 5px 0
     transition: all 0.5s ease-in-out, background-color 0.25s
 
-.navbar-item 
+.navbaritem 
   display: flex
   justify-content: center
   align-items: center
   height: 2.5rem
   margin-right: 2rem
 
-.navbar-start-now
+.navbarstartnow
   background: linear-gradient(137.04deg, #3177FF 7.02%, #9634E2 96.8%)
   box-shadow: 0 0.5rem 1rem rgba(72, 72, 236, 0.33)
   border-radius: 0.5rem
@@ -61,7 +61,7 @@
   padding: 0 1rem
 
 .navbar.open
-  .navbar-burger
+  .navbarburger
     position: fixed
     transition: all 0.5s ease-in-out
     &::before
@@ -75,19 +75,19 @@
       transform: scale(0)
 
 @media (max-width: 40rem)
-  .navbar-item
+  .navbaritem
     color: white
     font-size: 1.75rem
     margin: 0
     margin-bottom: 1.25rem
-  .navbar-start-now
+  .navbarstartnow
     background: none
     box-shadow: none
     border-radius: 0
     padding: 0
   .navbar
     max-width: 100%
-  .navbar-menu 
+  .navbarmenu 
     transition: all 0.25s ease-in-out
     z-index: 5
     opacity: 0
@@ -104,9 +104,9 @@
     top: 0
     left: 0
     background: linear-gradient(269.42deg, #8B3CE6 -1.19%, #406EFB 96.86%)
-  .navbar-burger
+  .navbarburger
     display: block
   .navbar.open
-    .navbar-menu
+    .navbarmenu
       opacity: 1
       visibility: visible

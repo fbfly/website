@@ -1,4 +1,4 @@
-import '../styles/dao-list-view.sass'
+import styles from './DAOListView.module.sass'
 import FbLogin from '../public/images/fb-login.svg'
 import caratDown from '../public/images/carat-down.svg'
 import headerWatermark from '../public/images/card-header-watermark.svg'
@@ -56,47 +56,43 @@ const DAOListView = () => {
   }, [])
 
   return (
-    <div className="background">
-      <div className="header">
-        <img className="header-watermark" src={headerWatermark} />
+    <div className={styles.background}>
+      <div className={styles.header}>
+        <img className={styles.headerWatermark} src={headerWatermark} />
         <Link href="/">
-          <a className="fbfly-text">
-            <img className="fbfly-text-img" src={FbText} />
-            <img className="fbfly-text-img" src={FlyText} />
+          <a className={styles.fbflyText}>
+            <img className={styles.fbflyTextImg} src={FbText} />
+            <img className={styles.fbflyTextImg} src={FlyText} />
           </a>
         </Link>
         <Link href="/">
-          <a className="fbfly-logo">
-            <img className="fbfly-logo-img" src={FbFlyLogo} />
+          <a className={styles.fbflyLogo}>
+            <img className={styles.fbflyLogoImg} src={FbFlyLogo} />
           </a>
         </Link>
         {connected ? (
-          <div className="user">
-            <div className="user-profile">
-              <img className="user-profile-img" src={profileImage} />
+          <div className={styles.user}>
+            <div className={styles.userProfile}>
+              <img className={styles.userProfileImg} src={profileImage} />
             </div>
-            <div className="user-name">{userName}</div>
+            <div className={styles.userName}>{userName}</div>
             {/* <img src={caratDown} /> */}
           </div>
         ) : (
           <a
-            className="login-button"
+            className={styles.loginButton}
             onClick={() => {
               loginWithTorus()
             }}
           >
-            <img className="fb-login-img" src={FbLogin} />
+            <img className={styles.fbLoginImg} src={FbLogin} />
             Login with Facebook
           </a>
         )}
       </div>
       {daoList &&
         daoList.map((dao, index) => (
-          <DAOListItem
-            dao={dao}
-            className={`dao-item ${index === 0 ? 'top' : ''}`}
-            key={index}
-          />
+          <DAOListItem dao={dao} top={index === 0} key={index} />
         ))}
     </div>
   )

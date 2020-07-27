@@ -1,14 +1,12 @@
-import '../styles/startnow.sass'
+import styles from './StartNow.module.sass'
 import LogoWatermark from '../public/images/logo-watermark-startnow.svg'
 
 const StartNow = props => (
-  <section className="start-now">
-    <div className="start-now-inner">
-      <img className="logo-watermark" src={LogoWatermark} />
-      <span className="start-now-text">
-          Bring DeFi to your Facebook Group
-      </span>
-      <a href="/onboarding" className="start-now-button">
+  <section className={styles.startNow}>
+    <div className={styles.startNowInner}>
+      <img className={styles.logoWatermark} src={LogoWatermark} />
+      <span className={styles.startNowText}>Bring DeFi to your Facebook Group</span>
+      <a href="/onboarding" className={styles.startNowButton}>
         Start now
       </a>
     </div>

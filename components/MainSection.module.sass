@@ -5,7 +5,7 @@
   width: 100%
   position: relative
 
-.main-header
+.mainHeader
   display: flex
   flex-direction: column
   align-items: center
@@ -14,11 +14,11 @@
   height: clamp(14rem, 40vw, 30rem) 
   width: 100%
 
-.main-header-title
+.mainHeaderTitle
   text-align: center
   font-size: clamp(1.5rem, 4vw, 3.5rem) 
 
-.main-header-subtitle
+.mainHeaderSubtitle
   text-align: center
   font-size: clamp(1.5rem, 4vw, 3.5rem) 
   margin-bottom: 2rem
@@ -26,7 +26,7 @@
   -webkit-background-clip: text
   -webkit-text-fill-color: transparent
 
-.main-examples
+.mainExamples
   z-index: 1
   position: absolute
   top: clamp(14rem, 40vw, 30rem) 
@@ -38,19 +38,7 @@
   justify-content: center
   align-items: center
 
-  .background-card
-    width: 90%
-    max-width: 67.5rem
-    max-height: clamp(10rem, 40vw, 30rem) 
-
-  .foreground-card
-    z-index: 2
-    position: absolute
-    max-width: 55rem
-    width: 75%
-    height: clamp(calc(10rem + 4em), calc(40vw + 4em), calc(30rem + 4em)) 
-
-.main-sections
+.mainSections
   overflow: hidden
   padding-top: clamp(10rem, 35vw, 30rem)
   padding-bottom: clamp(2rem, 10vw, 10rem)
@@ -60,12 +48,12 @@
   width: 100%
   background: linear-gradient(180deg, #EDEBF6 0%, #FFFFFF 100%)
 
-.main-sections-text
+.mainSectionsText
   font-size: clamp(1.5rem, 4vw, 3.5rem) 
   color: black
   margin: 3rem 0
   
-.main-sections-grid
+.mainSectionsGrid
   flex: 1
   display: grid
   grid-template-columns: 1fr 1fr 1fr
@@ -73,7 +61,7 @@
   width: 75%
   max-width: 70rem
 
-.main-sections-item
+.mainSectionsItem
   display: flex
   flex-direction: column
   align-items: center
@@ -82,33 +70,33 @@
   border-radius: 0.75rem
   padding: 1.5rem
 
-  .section-img
+  .sectionImg
     margin: 1rem
     width: clamp(7rem, 10vw, 10rem) 
     height: clamp(7rem, 10vw, 10rem) 
-  .section-title
+  .sectionTitle
     width: 100%
     font-size: clamp(1rem, 1.5vw, 1.5rem) 
     margin-bottom: 0.5rem
-  .section-description
+  .sectionDescription
     width: 100%
     font-size: clamp(0.8rem, 1.25vw, 1rem) 
     font-weight: 400
     color: #8D7EC0
 
 @media (max-width: 70rem)
-  .main-sections-grid
+  .mainSectionsGrid
     grid-template-columns: 1fr 1fr
 
-  .main-sections-item:last-child
+  .mainSectionsItem:last-child
     grid-column: 1/ span 2
     margin: 0 25%
 
 @media (max-width: 40rem)
-  .main-sections-grid
+  .mainSectionsGrid
     grid-template-columns: 1fr
 
-  .main-sections-item:last-child
+  .mainSectionsItem:last-child
     grid-column: unset
     margin: 0
 

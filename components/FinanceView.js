@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { getUser } from '../lib/helpers'
 import { useContext } from 'react'
 import TorusContext from '../lib/TorusContext'
+import UserDisplay from './UserDisplay'
 
 const FinanceView = ({ org, balance, exchange }) => {
   const { connected, web3Obj } = useContext(TorusContext)
@@ -69,17 +70,7 @@ const FinanceView = ({ org, balance, exchange }) => {
                   <div className="transfer-date">
                     {dateValue.toLocaleDateString()}
                   </div>
-                  <div className="transfer-user">
-                    {user.profileImage && (
-                      <div className="transfer-user-img-container">
-                        <img
-                          className="transfer-user-img"
-                          src={user.profileImage}
-                        />
-                      </div>
-                    )}
-                    <div className="transfer-user-name">{user.name}</div>
-                  </div>
+                  <UserDisplay user={user} />
                   <div className="transfer-reference">{reference}</div>
                   <div className="transfer-amount">
                     <div className="transfer-value">{amountValue} ETH</div>

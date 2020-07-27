@@ -6,6 +6,7 @@ import TorusContext from '../lib/TorusContext'
 import { TokenManager } from '@aragon/connect-thegraph-tokens'
 import { useEffect, useState } from 'react'
 import { getUser } from '../lib/helpers'
+import UserDisplay from './UserDisplay'
 
 const TokensView = ({ org }) => {
   const { connected, web3Obj } = useContext(TorusContext)
@@ -77,17 +78,7 @@ const TokensView = ({ org }) => {
               {holders &&
                 holders.map((holder, index) => (
                   <div className="member-item" key={index}>
-                    <div className="item-user">
-                      {holder.user.profileImage && (
-                        <div className="item-user-img-container">
-                          <img
-                            className="item-user-img"
-                            src={holder.user.profileImage}
-                          />
-                        </div>
-                      )}
-                      <div className="item-user-name">{holder.user.name}</div>
-                    </div>
+                    <UserDisplay user={holder.user} />
                     <div className="member-item-right">
                       <div className="member-tokens">{holder.balance}</div>
                       <img className="member-more" src={More} />
@@ -154,17 +145,7 @@ const TokensView = ({ org }) => {
                   <div className="shares-item" key={index}>
                     <div className="shares-item-left">
                       <div className="item-color"></div>
-                      <div className="item-user">
-                        {holder.user.profileImage && (
-                          <div className="item-user-img-container">
-                            <img
-                              className="item-user-img"
-                              src={holder.user.profileImage}
-                            />
-                          </div>
-                        )}
-                        <div className="item-user-name">{holder.user.name}</div>
-                      </div>
+                      <UserDisplay user={holder.user} />
                     </div>
                     <div className="item-shares">
                       {(holder.balance * 100) / token.totalSupply}%

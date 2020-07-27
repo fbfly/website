@@ -39,7 +39,7 @@ const Card = () => {
   const [daoName, setDaoName] = useState('')
   const [description, setDescription] = useState('')
   const [logoHash, setLogoHash] = useState(
-    'bafybeidsm72bt7kspzyfh4bbtoxmqvsxgt3su25afb77h23t4uw4ys3dtm',
+    'bafybeibjvfp3agnjyxvs2lchivc7gw6ajldg4tjd7rthula3z273i75qmy',
   )
 
   // Step3 hooks

@@ -40,7 +40,10 @@ const DAOListItem = ({
         (await org.app('token-manager')).address,
         'https://api.thegraph.com/subgraphs/name/aragon/aragon-tokens-rinkeby',
       )
-      setMembers((await (await tokensApp.token()).holders()).length)
+      console.log({tokensApp})
+      const token = await tokensApp.token()
+      console.log({token})
+      setMembers((await token.holders()).length)
       console.log(await org.app('finance'))
       const vaultAppAddress = (await org.app('vault')).address
       const balance = Number(

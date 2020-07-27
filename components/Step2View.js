@@ -23,15 +23,15 @@ const Step2View = () => {
     setStep(1)
   }
 
-  const [logoFile, setLogoFile] = useState('')
+  // const [logoFile, setLogoFile] = useState('')
 
-  useEffect(() => {
-    fleekStorage
-      .getFileFromHash({
-        hash: logoHash,
-      })
-      .then(logoFile => setLogoFile(encodeURIComponent(logoFile)))
-  }, [logoHash])
+  // useEffect(() => {
+  //   fleekStorage
+  //     .getFileFromHash({
+  //       hash: logoHash,
+  //     })
+  //     .then(logoFile => setLogoFile(encodeURIComponent(logoFile)))
+  // }, [logoHash])
 
   const uploadFile = async file => {
     console.log('file uploading to ipfs')
@@ -75,7 +75,8 @@ const Step2View = () => {
               <img
                 className={styles.logoImg}
                 // NEED TO SUPPORT MORE IMAGE TYPES ( THIS WON't WORK ON DAO PAGE )
-                src={`data:image/svg+xml;utf8,${logoFile}`}
+                // src={`data:image/svg+xml;utf8,${logoFile}`}
+                  src={`https://ipfs.infura.io/ipfs/${logoHash}`}
               />
             </div>
             <label className={styles.logoUploadButton}>

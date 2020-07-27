@@ -27,7 +27,7 @@ handler.get(async (req, res) => {
         res.status(401).json(items)
         throw err
       }
-      res.status(200).json(items)
+      return res.status(200).json(items)
     })
 })
 
@@ -56,19 +56,19 @@ handler.post(async (req, res) => {
           fbGroupId: fbGroupId,
           imageHash: imageHash,
         })
-        await res.status(200).json({
+        return res.status(200).json({
           orgAddress: orgAddress,
           message: 'DAO has been created successfully',
         })
       }
-      await res.status(401).json({
+      return res.status(401).json({
         orgAddress: 'Not found',
         message: 'Could get your Org Address.',
       })
     })
     .catch(error => {
       console.log(error)
-      res.status(500).json('There was an error creating your DAO.')
+      return res.status(500).json('There was an error creating your DAO.')
     })
 })
 

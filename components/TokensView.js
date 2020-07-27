@@ -7,6 +7,7 @@ import { TokenManager } from '@aragon/connect-thegraph-tokens'
 import { useEffect, useState } from 'react'
 import { getUser } from '../lib/helpers'
 import UserDisplay from './UserDisplay'
+const axios = require('axios')
 
 const TokensView = ({ org }) => {
   const { connected, web3Obj } = useContext(TorusContext)
@@ -60,7 +61,7 @@ const TokensView = ({ org }) => {
   async function joinDao() {
     await axios
       .post('/api/dao/join', {
-        daoAddress: dao,
+        daoAddress: org.address,
         torusAccount: await web3Obj.account(),
       })
       .then()

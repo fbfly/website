@@ -8,6 +8,7 @@ import createDao from '../../lib/createDao'
 const cors = initMiddleware(
   // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
   Cors({
+    origin: '*',
     // Only allow requests with GET, POST and OPTIONS
     methods: ['GET', 'POST', 'OPTIONS'],
   }),
@@ -22,7 +23,7 @@ handler.get(async (req, res) => {
   await req.db
     .collection('daos')
     .find({})
-    .toArray(function(err, items) {
+    .toArray(function (err, items) {
       if (err) {
         res.status(401).json(items)
         throw err
@@ -32,6 +33,7 @@ handler.get(async (req, res) => {
 })
 
 handler.post(async (req, res) => {
+  req.setTimeout(0)
   await cors(req, res)
   const {
     daoName,
@@ -44,7 +46,7 @@ handler.post(async (req, res) => {
     torusAccount,
   } = req.body
   try {
-    const orgAddress = await createDao(tokenName, tokenSymbol, torusAccount)
+    const { orgAddress } = await createDao(tokenName, tokenSymbol, torusAccount)
     if (orgAddress) {
       await req.db.collection('daos').insertOne({
         daoName: daoName,
@@ -56,18 +58,16 @@ handler.post(async (req, res) => {
         fbGroupId: fbGroupId,
         imageHash: imageHash,
       })
-      return res.status(200).json({
+      res.status(200).json({
         orgAddress: orgAddress,
         message: 'DAO has been created successfully',
       })
+      res.end('OK')
     }
-    return res.status(401).json({
-      orgAddress: 'Not found',
-      message: 'Could get your Org Address.',
-    })
+    res.status(401).send('401 ERROR')
   } catch (error) {
     console.log(error)
-    return res.status(500).json('There was an error creating your DAO.')
+    res.status(500).send('500 ERROR')
   }
 })
 

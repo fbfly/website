@@ -1,4 +1,4 @@
-.example-card
+.exampleCard
   height: 100%
   width: 100%
   background: #FFFFFF
@@ -10,7 +10,19 @@
   flex-direction: column
   position: relative
 
-.example-card-logo
+.backgroundCard
+  width: 90%
+  max-width: 67.5rem
+  max-height: clamp(10rem, 40vw, 30rem) 
+
+.foregroundCard
+  z-index: 2
+  position: absolute
+  max-width: 55rem
+  width: 75%
+  height: clamp(calc(10rem + 4em), calc(40vw + 4em), calc(30rem + 4em)) 
+
+.exampleCardLogo
   background: #FFFFFF
   box-shadow: 0px 4px 4px rgba(58, 38, 119, 0.12)
   position: absolute
@@ -23,18 +35,18 @@
   display: flex
   justify-content: center
   align-items: center
-  .example-card-logo-img
+  .exampleCardLogoImg
     width: 75%
     height: 75%
     
 
-.example-card-header-watermark
+.exampleCardHeaderWatermark
   position: absolute
   height: 8em
   left: 50%
   transform: translateX(-50%)
 
-.example-card-header
+.exampleCardHeader
   display: flex
   justify-content: space-between
   align-items: flex-start
@@ -43,13 +55,13 @@
   width: 100%
   background: linear-gradient(266.52deg, #8B3CE6 -1.19%, #406EFB 96.86%)
   position: relative
-  .example-card-user
+  .exampleCardUser
     z-index: 1
     display: flex
     justify-content: space-around
     align-items: center
     padding: 1.25em
-    .user-profile
+    .userProfile
       width: 1.5em
       height: 1.5em
       background: white
@@ -60,82 +72,82 @@
         width: 100%
         height: 100%
   
-  .example-card-status
+  .exampleCardStatus
     z-index: 1
     display: flex
     justify-content: space-around
     align-items: center
     padding: 1.25em
-    .status-icon
+    .statusIcon
       width: 0.75em
       height: 0.75em
       border-radius: 50%
       margin-right: 0.5em
 
-    .status-icon.true
+    .statusIcon.true
         background: #70F1DA
 
-    .status-icon.false
+    .statusIcon.false
         background: #F18F70
 
 
-.example-card-inner
+.exampleCardInner
   display: flex
   flex-direction: column
   align-items: center
   justify-content: center
   height: calc(100% - 8em)
 
-.example-card-title
+.exampleCardTitle
   text-align: center
   font-size: 1.5em
   margin-bottom: 0.5em
 
-.example-card-fb-link
+.exampleCardFbLink
   cursor: pointer
   text-align: center
   display: flex
   justify-content: center
   align-items: center
   color: #3A72FD
-  .fb-logo-img
+  .fbLogoImg
     width: 1.5em
     height: 1.5em
     margin-right: 0.5em
 
-.example-card-content
+.exampleCardContent
   display: grid
   max-height: 60%
   grid-template-columns: 3fr 1fr 1fr 1fr
   grid-gap: 1em
   padding: 1em
-  .example-card-content-about
+  .exampleCardContentAbout
     display: flex
     flex-direction: column
     justify-content: center
     padding: 1em
-  .more-link
+  .moreLink
     color: #3A72FD
-  .example-card-content-title
+  .exampleCardContentTitle
     color: #A99BD8
     margin-bottom: 1em
-  .example-card-content-count
+  .exampleCardContentCount
     display: flex
     justify-content: center
     align-items: center
     flex-direction: column
-    .count-title
+    .countTitle
       color: #A99BD8
       text-align: center
-    .count-value
+    .countValue
       text-align: center
       font-size: 1.5em
       margin: 0.5em 0
-    .count-link
+    .countLink
       text-align: center
       color: #3A72FD
 
-.example-card-donate-button
+.exampleCardDonateButton
   height: 2.5em
   display: flex
   justify-content: center

@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import '../styles/connect.sass'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import { useState } from 'react'
@@ -18,7 +17,7 @@ const Test = () => {
       </Head>
       <div className="container">
         <Navbar />
-        <div className="connect-container">
+        <div className="connectContainer">
           <button
             onClick={async () => {
               await axios

@@ -1,70 +1,81 @@
-import '../styles/example-card.sass'
+import styles from './ExampleCard.module.sass'
 import HeaderWatermark from '../public/images/card-header-watermark.svg'
 import EthicalBrand from '../public/images/ethical-brand.svg'
 import FbLogo from '../public/images/fb-logo.svg'
 import UserProfile from '../public/images/user-profile.svg'
 
-const ExampleCard = ({ className }) => {
+const ExampleCard = ({ background }) => {
   const userName = 'Adrian G.'
   const connectionStatus = true
 
   return (
-    <div className={className ? `example-card ${className}` : 'example-card'}>
-      <div className="example-card-header">
-        <img className="example-card-header-watermark" src={HeaderWatermark} />
-        <div className="example-card-user">
-          <div className="user-profile">
-            <img className="user-profile-img" src={UserProfile} />
+    <div
+      className={`${styles.exampleCard} ${
+        background ? styles.backgroundCard : styles.foregroundCard
+      }`}
+    >
+      <div className={styles.exampleCardHeader}>
+        <img
+          className={styles.exampleCardHeaderWatermark}
+          src={HeaderWatermark}
+        />
+        <div className={styles.exampleCardUser}>
+          <div className={styles.userProfile}>
+            <img className={styles.userProfileImg} src={UserProfile} />
           </div>
-          <div className="user-name">{userName}</div>
+          <div className={styles.userName}>{userName}</div>
         </div>
-        <div className="example-card-status">
+        <div className={styles.exampleCardStatus}>
           <div
-            className={
-              connectionStatus ? 'status-icon true' : 'status-icon false'
-            }
+            className={`${styles.statusIcon} ${
+              connectionStatus ? styles.true : styles.false
+            }`}
           />
-          <div className="status-text">
+          <div className={styles.statusText}>
             {connectionStatus ? 'Connected' : 'Not Connected'}
           </div>
         </div>
       </div>
-      <div className="example-card-logo">
-          <img className="example-card-logo-img" src={EthicalBrand} />
+      <div className={styles.exampleCardLogo}>
+        <img className={styles.exampleCardLogoImg} src={EthicalBrand} />
       </div>
-      <div className="example-card-inner">
-        <div className="example-card-title">Ethical Brand</div>
-        <a className="example-card-fb-link">
-          <img className="fb-logo-img" src={FbLogo} />
+      <div className={styles.exampleCardInner}>
+        <div className={styles.exampleCardTitle}>Ethical Brand</div>
+        <a className={styles.exampleCardFbLink}>
+          <img className={styles.fbLogoImg} src={FbLogo} />
           Go to our Facebook Group
         </a>
-        <div className="example-card-content">
-          <div className="example-card-content-about">
-            <div className="example-card-content-title">About Ethical Brand</div>
-            <div className="example-card-content-description">
+        <div className={styles.exampleCardContent}>
+          <div className={styles.exampleCardContentAbout}>
+            <div className={styles.exampleCardContentTitle}>
+              About Ethical Brand
+            </div>
+            <div className={styles.exampleCardContentDescription}>
               Fast fashion is easy for consumers because it’s just that: fast
               and inexpensive. Lasting for only a season or so, it’s easy for us
               to end up with clothes that tatter and rip after just a few wears.{' '}
-              <a className="more-link">Read more</a>
+              <a className={styles.moreLink}>Read more</a>
             </div>
           </div>
-          <div className="example-card-content-count">
-              <span className="count-title">Members</span>
-              <span className="count-value">28</span>
-              <a className="count-link">View more</a>
+          <div className={styles.exampleCardContentCount}>
+            <span className={styles.countTitle}>Members</span>
+            <span className={styles.countValue}>28</span>
+            <a className={styles.countLink}>View more</a>
           </div>
-          <div className="example-card-content-count">
-              <span className="count-title">Capital</span>
-              <span className="count-value">552$</span>
-              <a className="count-link">View more</a>
+          <div className={styles.exampleCardContentCount}>
+            <span className={styles.countTitle}>Capital</span>
+            <span className={styles.countValue}>552$</span>
+            <a className={styles.countLink}>View more</a>
           </div>
-          <div className="example-card-content-count">
-              <span className="count-title">Votes</span>
-              <span className="count-value">82</span>
-              <a className="count-link">View more</a>
+          <div className={styles.exampleCardContentCount}>
+            <span className={styles.countTitle}>Votes</span>
+            <span className={styles.countValue}>82</span>
+            <a className={styles.countLink}>View more</a>
           </div>
         </div>
-        <a className="example-card-donate-button">Donate to Ethical Brand</a>
+        <a className={styles.exampleCardDonateButton}>
+          Donate to Ethical Brand
+        </a>
       </div>
     </div>
   )

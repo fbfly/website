@@ -1,4 +1,4 @@
-import '../styles/login-view.sass'
+import styles from './LoginView.module.sass'
 import { useContext } from 'react'
 import CardContext from '../lib/CardContext'
 import TorusContext from '../lib/TorusContext'
@@ -36,17 +36,17 @@ const LoginView = () => {
     }
   }
   return (
-    <div className="card-inner">
-      <img className="login-img" src={Login} />
-      <span className="login-title">Connect your Facebook account</span>
+    <div className={styles.cardInner}>
+      <img className={styles.loginImg} src={Login} />
+      <span className={styles.loginTitle}>Connect your Facebook account</span>
 
       <a
-        className="login-button"
+        className={styles.loginButton}
         onClick={() => {
           loginWithTorus()
         }}
       >
-        <img className="fb-login-img" src={FbLogin} />
+        <img className={styles.fbLoginImg} src={FbLogin} />
         Login with Facebook
       </a>
     </div>

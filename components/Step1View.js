@@ -1,4 +1,4 @@
-import '../styles/step1-view.sass'
+import styles from './Step1View.module.sass'
 import { useContext, useEffect } from 'react'
 import InfoButton from './InfoButton'
 import CardContext from '../lib/CardContext'
@@ -11,10 +11,12 @@ const Step1View = () => {
   }
 
   return (
-    <div className="card-inner">
-      <span className="step1-label">What is your Facebook Group URL?</span>
+    <div className={styles.cardInner}>
+      <span className={styles.step1Label}>
+        What is your Facebook Group URL?
+      </span>
       <input
-        className="step1-input"
+        className={styles.step1Input}
         placeholder="http://www.facebook.com/groups/123456"
         value={url}
         onChange={e => {
@@ -26,7 +28,7 @@ const Step1View = () => {
         title={'Why do we need your FB Group?'}
         content={'All DAOs have a FB Group linked!'}
       />
-      <a className="step1-button" onClick={submit}>
+      <a className={styles.step1Button} onClick={submit}>
         Next Step
       </a>
     </div>

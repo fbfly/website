@@ -1,11 +1,12 @@
 import Question from '../public/images/question.svg'
 import More from '../public/images/more.svg'
-import '../styles/tokens-view.sass'
+import styles from './TokensView.module.sass'
 import { useContext } from 'react'
 import TorusContext from '../lib/TorusContext'
 import { TokenManager } from '@aragon/connect-thegraph-tokens'
 import { useEffect, useState } from 'react'
 import { getUser } from '../lib/helpers'
+import UserDisplay from './UserDisplay'
 
 const TokensView = ({ org }) => {
   const { connected, web3Obj } = useContext(TorusContext)
@@ -73,36 +74,28 @@ const TokensView = ({ org }) => {
   }
 
   return (
-    <div className="tokens-view">
-      <div className="tokens-main-column">
-        <div className="dao-tokens tile">
-          <div className="dao-tokens-header">
+    <div className={styles.tokensView}>
+      <div className={styles.tokensMainColumn}>
+        <div className={`${styles.daoTokens} ${styles.tile}`}>
+          <div className={styles.daoTokensHeader}>
             Members
-            <span className="dao-tokens-symbol">{token.symbol}</span>
+            <span className={styles.daoTokensSymbol}>{token.symbol}</span>
           </div>
-          <div className="dao-tokens-content">
-            <div className="dao-tokens-title">
+          <div className={styles.daoTokensContent}>
+            <div className={styles.daoTokensTitle}>
               <span>Holder</span>
               <span>Balance</span>
             </div>
-            <div className="dao-tokens-members">
+            <div className={styles.daoTokensMembers}>
               {holders &&
                 holders.map((holder, index) => (
-                  <div className="member-item" key={index}>
-                    <div className="item-user">
-                      {holder.user.profileImage && (
-                        <div className="item-user-img-container">
-                          <img
-                            className="item-user-img"
-                            src={holder.user.profileImage}
-                          />
-                        </div>
-                      )}
-                      <div className="item-user-name">{holder.user.name}</div>
-                    </div>
-                    <div className="member-item-right">
-                      <div className="member-tokens">{holder.balance}</div>
-                      <img className="member-more" src={More} />
+                  <div className={styles.memberItem} key={index}>
+                    <UserDisplay user={holder.user} />
+                    <div className={styles.memberItemRight}>
+                      <div className={styles.memberTokens}>
+                        {holder.balance}
+                      </div>
+                      <img className={styles.memberMore} src={More} />
                     </div>
                   </div>
                 ))}
@@ -110,77 +103,69 @@ const TokensView = ({ org }) => {
           </div>
         </div>
       </div>
-      <div className="tokens-right-column">
-        <div className="dao-tokens-info tile">
-          <div className="dao-tokens-info-title">Token Info</div>
-          <div className="dao-tokens-info-content">
-            <div className="token-item">
-              <span className="item-label">Name</span>
-              <span className="item-value">{token.name}</span>
+      <div className={styles.tokensRightColumn}>
+        <div className={`${styles.daoTokensInfo} ${styles.tile}`}>
+          <div className={styles.daoTokensInfoTitle}>Token Info</div>
+          <div className={styles.daoTokensInfoContent}>
+            <div className={styles.tokenItem}>
+              <span className={styles.itemLabel}>Name</span>
+              <span className={styles.itemValue}>{token.name}</span>
             </div>
-            <div className="token-item">
-              <span className="item-label">Symbol</span>
-              <span className="item-value item-symbol">{token.symbol}</span>
+            <div className={styles.tokenItem}>
+              <span className={styles.itemLabel}>Symbol</span>
+              <span className={`${styles.itemValue} ${styles.itemSymbol}`}>
+                {token.symbol}
+              </span>
             </div>
-            <div className="token-item">
-              <span className="item-label">Total Supply</span>
-              <span className="item-value">{token.totalSupply}</span>
+            <div className={styles.tokenItem}>
+              <span className={styles.itemLabel}>Total Supply</span>
+              <span className={styles.itemValue}>{token.totalSupply}</span>
             </div>
-            <div className="token-item">
-              <span className="item-label">Transferable</span>
-              <span className="item-value">
+            <div className={styles.tokenItem}>
+              <span className={styles.itemLabel}>Transferable</span>
+              <span className={styles.itemValue}>
                 {token.transferable ? 'Yes' : 'No'}
               </span>
             </div>
           </div>
         </div>
         {connected && !member && (
-          <div className="dao-tokens-info tile">
-            <div className="dao-tokens-info-title">Become a member</div>
-            <div className="dao-tokens-info-content">
-              <span className="dao-member-info">
+          <div className={`${styles.daoTokensInfo} ${styles.tile}`}>
+            <div className={styles.daoTokensInfoTitle}>Become a member</div>
+            <div className={styles.daoTokensInfoContent}>
+              <span className={styles.daoMemberInfo}>
                 Are you a member of our Facebook Group?
               </span>
-              <a className="dao-join-button" onClick={joinDao}>
+              <a className={styles.daoJoinButton} onClick={joinDao}>
                 Join now
               </a>
             </div>
           </div>
         )}
-        <div className="dao-tokens-info tile">
-          <div className="dao-tokens-info-title">
+        <div className={`${styles.daoTokensInfo} ${styles.tile}`}>
+          <div className={styles.daoTokensInfoTitle}>
             Ownership Distribution
-            <img className="question-img" src={Question} />
+            <img className={styles.questionImg} src={Question} />
           </div>
-          <div className="dao-tokens-info-content">
-            <div className="shares-header">
-              <span className="shares-title">Token Holder Stakes</span>
-              <div className="shares-display">
+          <div className={styles.daoTokensInfoContent}>
+            <div className={styles.sharesHeader}>
+              <span className={styles.sharesTitle}>Token Holder Stakes</span>
+              <div className={styles.sharesDisplay}>
                 {holders &&
                   holders.map((holder, index) => (
-                    <div className="shares-display-item"></div>
+                    <div className={styles.sharesDisplayItem} key={index}></div>
                   ))}
               </div>
             </div>
-            <div className="shares-content">
+            <div className={styles.sharesContent}>
               {holders &&
                 holders.map((holder, index) => (
-                  <div className="shares-item" key={index}>
-                    <div className="shares-item-left">
-                      <div className="item-color"></div>
-                      <div className="item-user">
-                        {holder.user.profileImage && (
-                          <div className="item-user-img-container">
-                            <img
-                              className="item-user-img"
-                              src={holder.user.profileImage}
-                            />
-                          </div>
-                        )}
-                        <div className="item-user-name">{holder.user.name}</div>
-                      </div>
+                  <div className={styles.sharesItem} key={index}>
+                    <div className={styles.sharesItemLeft}>
+                      <div className={styles.itemColor}></div>
+                      <UserDisplay user={holder.user} />
                     </div>
-                    <div className="item-shares">
+                    <div className={styles.itemShares}>
                       {(holder.balance * 100) / token.totalSupply}%
                     </div>
                   </div>

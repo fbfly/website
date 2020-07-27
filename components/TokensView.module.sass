@@ -1,20 +1,20 @@
-.tokens-view
+.tokensView
   width: 100%
   display: grid
   grid-template-columns: 2fr 1fr
   grid-gap: 1rem
 
-.tokens-right-column
+.tokensRightColumn
   display: flex
   flex-direction: column
 
-.dao-tokens-header
+.daoTokensHeader
   padding: 1rem
   display: flex
   align-items: center
   font-weight: normal
   font-size: 1.25rem
-  .dao-tokens-symbol
+  .daoTokensSymbol
     color: white
     margin-left: 0.5rem
     display: flex
@@ -25,9 +25,9 @@
     padding: 0 0.5rem
     font-size: 0.7rem
 
-.dao-tokens-content
+.daoTokensContent
   display: grid
-  .dao-tokens-title
+  .daoTokensTitle
     display: flex
     justify-content: space-between
     align-items: center
@@ -39,8 +39,8 @@
       text-transform: uppercase
       font-size: 12px;
       color: #818181;
-  .dao-tokens-members
-    .member-item
+  .daoTokensMembers
+    .memberItem
       padding: 1rem
       border-style: solid none none none
       border-width: 1px
@@ -48,43 +48,20 @@
       display: flex
       justify-content: space-between
       align-items: center
-    .member-item-right
+    .memberItemRight
       display: flex
       align-items: center
-      .member-more
+      .memberMore
         margin-left: 2rem
       
-    .item-user
-      background: #E5F5FA;
-      margin-right: 0.5rem
-      width: 8rem
-      height: 2rem
-      border-radius: 0.5rem;
-      overflow: hidden
-      display: flex
-      align-items: center
-      .item-user-name
-        padding: 0 0.5rem
-      .item-user-img-container
-        overflow: hidden
-        position: relative
-        width: 2rem
-        height: 2rem
-      .item-user-img
-        position: absolute
-        top: 50%
-        left: 50%
-        transform: translate(-50%,-50%)
-        width: 3rem
-        height: 3rem
 
-.dao-tokens-info
+.daoTokensInfo
   padding: 0
   display: flex
   flex-direction: column
   justify-content: flex-start
   margin-bottom: 1rem
-  .dao-tokens-info-title
+  .daoTokensInfoTitle
     padding: 1rem 1rem
     font-size: 0.8rem;
     color: #637381;
@@ -95,28 +72,28 @@
     border-width: 1px
     border-style: none none solid none
     border-color: #DDE4E9
-    .question-img
+    .questionImg
       margin-left: 0.5rem
       height: 1rem
       width: 1rem
 
-.dao-tokens-info-content
+.daoTokensInfoContent
   padding: 0.25rem 1rem
   display: flex
   flex-direction: column
   justify-content: flex-start
   padding-bottom: 1rem
-  .token-item
+  .tokenItem
     display: flex
     justify-content: space-between
     align-items: center;
     margin-top: 1rem
-    .item-label
+    .itemLabel
       color: #637381
       font-weight: 300
-    .item-value
+    .itemValue
       text-transform: uppercase
-    .item-symbol
+    .itemSymbol
       background: #E5F5FA;
       border-radius: 0.5rem;
       justify-content: center
@@ -124,12 +101,12 @@
       display: flex
       padding: 0.25rem 1rem
 
-.shares-header
+.sharesHeader
   padding: 0.5rem 0
-.shares-title
+.sharesTitle
   font-weight: normal
   margin-top: 0.5rem
-.shares-display
+.sharesDisplay
   margin: 1rem 0
   border-radius: 0.25rem
   overflow: hidden
@@ -137,7 +114,7 @@
   display: grid;
   grid-auto-columns: 1fr
   grid-auto-flow: column
-  .shares-display-item
+  .sharesDisplayItem
     &:nth-child(1)
       background: #3E7BF6
     &:nth-child(2)
@@ -151,65 +128,42 @@
     &:nth-child(6)
       background: #F05858;
   
-.shares-item
+.sharesItem
   margin-top: 0.5rem
   display: flex
   justify-content: space-between
   align-items: center
-  &:nth-child(1) .item-color
+  &:nth-child(1) .itemColor
     background: #3E7BF6
-  &:nth-child(2) .item-color
+  &:nth-child(2) .itemColor
     background: #F08658
-  &:nth-child(3) .item-color
+  &:nth-child(3) .itemColor
     background: #58F095;
-  &:nth-child(4) .item-color
+  &:nth-child(4) .itemColor
     background: #9258F0;
-  &:nth-child(5) .item-color
+  &:nth-child(5) .itemColor
     background: #FC68FF
-  &:nth-child(6) .item-color
+  &:nth-child(6) .itemColor
     background: #F05858;
-  .shares-item-left
+  .sharesItemLeft
     display: flex
     justify-content: center
     align-items: center
 
-  .item-color
+  .itemColor
     border-radius: 50%
     width: 0.75rem
     height: 0.75rem
     margin-right: 0.5rem
-  .item-user
-    margin-right: 0.5rem
-    width: 8rem
-    height: 2rem
-    background: #E5F5FA;
-    border-radius: 0.5rem;
-    overflow: hidden
-    display: flex
-    align-items: center
-    .item-user-name
-      padding: 0 0.5rem
-    .item-user-img-container
-      overflow: hidden
-      position: relative
-      width: 2rem
-      height: 2rem
-    .item-user-img
-      position: absolute
-      top: 50%
-      left: 50%
-      transform: translate(-50%,-50%)
-      width: 3rem
-      height: 3rem
 
-.dao-member-info
+.daoMemberInfo
   margin-top: 1rem
   text-align: center
   color: #637381
   font-weight: 300
   
 
-.dao-join-button
+.daoJoinButton
   height: 2.5rem
   display: flex
   justify-content: center
@@ -220,3 +174,10 @@
   color: white
   padding: 0 1rem
   margin-top: 1rem
+
+.tile
+  background: #FFFFFF;
+  border: 1px solid #EFEFEF;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 0 1rem

@@ -43,6 +43,7 @@
     "ora": "^4.0.5",
     "react": "latest",
     "react-dom": "latest",
+    "sass": "^1.26.10",
     "styled-components": "^5.1.1",
     "swr": "^0.1.18",
     "use-wallet": "^0.7.1",

@@ -1,4 +1,4 @@
-.step1-button
+.step1Button
   position: absolute
   bottom: 2rem
   right: 3rem
@@ -12,13 +12,13 @@
   color: white
   padding: 0 3rem
 
-.step1-label
+.step1Label
   color: #8F82B9
   margin-bottom: 1rem
   width: 60%
   font-size: 1rem
 
-.step1-input
+.step1Input
   padding: 1rem
   font-size: 1rem
   width: 60%
@@ -28,10 +28,22 @@
   &:focus
     border: 2px solid #8F82B9;
     outline: none
+    
+.cardInner
+  background: white
+  margin-top: 8rem
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  height: calc(100% - 8rem)
+  width: 100%
+  padding: 2rem 0
+  position: relative
 
 @media (max-width: 40rem)
-  .step1-label, .step1-input
+  .step1Label, .step1Input
     width: calc(100% - 4rem)
-  .step1-button
+  .step1Button
     right: 2rem
     padding: 0 2rem

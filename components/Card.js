@@ -1,4 +1,4 @@
-import '../styles/card.sass'
+import styles from './Card.module.sass'
 import HeaderWatermark from '../public/images/card-header-watermark.svg'
 import EthicalBrandLogo from '../public/images/ethical-brand.svg'
 import Alert from '../public/images/alert.svg'
@@ -14,7 +14,7 @@ import Step3View from './Step3View'
 import LoadingView from './LoadingView'
 import axios from 'axios'
 
-const Card = ({ className }) => {
+const Card = () => {
   const [loading, setLoading] = useState(undefined)
   const [flying, setFlying] = useState(false)
   const [step, setStep] = useState(undefined)
@@ -39,7 +39,7 @@ const Card = ({ className }) => {
   const [daoName, setDaoName] = useState('')
   const [description, setDescription] = useState('')
   const [logoHash, setLogoHash] = useState(
-    'bafybeidsm72bt7kspzyfh4bbtoxmqvsxgt3su25afb77h23t4uw4ys3dtm',
+    'bafybeibjvfp3agnjyxvs2lchivc7gw6ajldg4tjd7rthula3z273i75qmy',
   )
 
   // Step3 hooks
@@ -70,7 +70,7 @@ const Card = ({ className }) => {
   }, [connected])
 
   return (
-    <div className={className ? `card ${className}` : 'card'}>
+    <div className={styles.card}>
       <CardProvider
         value={{
           setStep,
@@ -104,61 +104,61 @@ const Card = ({ className }) => {
         }}
       >
         {connected && !loading && (
-          <div className="card-user">
-            <div className="user-profile">
-              <img className="user-profile-img" src={profileImage} />
+          <div className={styles.cardUser}>
+            <div className={styles.userProfile}>
+              <img className={styles.userProfileImg} src={profileImage} />
             </div>
-            <div className="user-name">{userName}</div>
+            <div className={styles.userName}>{userName}</div>
           </div>
         )}
         {!loading &&
           (connected ? (
-            <div className="card-status connected">
-              <div className="balance">
+            <div className={`${styles.cardStatus} ${styles.connected}`}>
+              <div className={styles.balance}>
                 {`${(balance / 10 ** 18).toFixed(2)} ${balanceUnit}`}
               </div>
               {onRamp && (
-                <div className="alert">
-                  <img className="alert-img" src={Alert} />
+                <div className={styles.alert}>
+                  <img className={styles.alertImg} src={Alert} />
                   {'Insufficient funds'}
                 </div>
               )}
             </div>
           ) : (
-            <div className="card-status">
-              <div className="status-icon false" />
-              <div className="status-text">Not connected</div>
+            <div className={styles.cardStatus}>
+              <div className={`${styles.statusIcon} ${styles.false}`} />
+              <div className={styles.statusText}>Not connected</div>
             </div>
           ))}
         {!flying && !loading && (
-          <div className="card-tabs">
+          <div className={styles.cardTabs}>
             <div
-              className={step === 1 ? 'tab selected' : 'tab'}
+              className={`${styles.tab} ${step === 1 ? styles.selected : ''}`}
               onClick={() => connected && setStep(1)}
             >
-              <span className="tab-title">Step 01</span>
-              <span className="tab-description">FB group URL</span>
+              <span className={styles.tabTitle}>Step 01</span>
+              <span className={styles.tabDescription}>FB group URL</span>
             </div>
             <div
-              className={step === 2 ? 'tab selected' : 'tab'}
+              className={`${styles.tab} ${step === 2 ? styles.selected : ''}`}
               onClick={() => connected && setStep(2)}
             >
-              <span className="tab-title">Step 02</span>
-              <span className="tab-description">Set DAO profile</span>
+              <span className={styles.tabTitle}>Step 02</span>
+              <span className={styles.tabDescription}>Set DAO profile</span>
             </div>
             <div
-              className={step === 3 ? 'tab selected' : 'tab'}
+              className={`${styles.tab} ${step === 3 ? styles.selected : ''}`}
               onClick={() => connected && setStep(3)}
             >
-              <span className="tab-title">Step 03</span>
-              <span className="tab-description">DAO settings</span>
+              <span className={styles.tabTitle}>Step 03</span>
+              <span className={styles.tabDescription}>DAO settings</span>
             </div>
             <div
-              className={step === 4 ? 'tab selected' : 'tab'}
+              className={`${styles.tab} ${step === 4 ? styles.selected : ''}`}
               onClick={() => connected && setStep(4)}
             >
-              <span className="tab-title">Step 04</span>
-              <span className="tab-description">Confirm DAO</span>
+              <span className={styles.tabTitle}>Step 04</span>
+              <span className={styles.tabDescription}>Confirm DAO</span>
             </div>
           </div>
         )}

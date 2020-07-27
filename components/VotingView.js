@@ -1,7 +1,7 @@
 import Question from '../public/images/question.svg'
 import More from '../public/images/more.svg'
 import xDaiLogo from '../public/images/xDai.svg'
-import '../styles/voting-view.sass'
+import styles from './VotingView.module.sass'
 
 import { Voting } from '@aragon/connect-thegraph-voting'
 import { useEffect, useState } from 'react'
@@ -39,16 +39,16 @@ const VotingView = ({ org }) => {
   }
 
   return (
-    <div className="voting-view">
-      <div className="dao-voting tile">
-        <div className="dao-voting-header">Voting</div>
-        <div className="dao-voting-title">
+    <div className={styles.votingView}>
+      <div className={`${styles.daoVoting} ${styles.tile}`}>
+        <div className={styles.daoVotingHeader}>Voting</div>
+        <div className={styles.daoVotingTitle}>
           <span>Description</span>
           <span>Yes</span>
           <span>No</span>
           <span>Status</span>
         </div>
-        <div className="dao-voting-content">
+        <div className={styles.daoVotingContent}>
           {votes &&
             votes.map(
               (
@@ -64,14 +64,18 @@ const VotingView = ({ org }) => {
                 },
                 index,
               ) => (
-                <div className="vote-item" key={index}>
-                  <div className="vote-metadata"> {metadata} </div>
-                  <div className="vote-count">{yea}</div>
-                  <div className="vote-count">{nay}</div>
+                <div className={styles.voteItem} key={index}>
+                  <div className={styles.voteMetadata}> {metadata} </div>
+                  <div className={styles.voteCount}>{yea}</div>
+                  <div className={styles.voteCount}>{nay}</div>
                   {executed ? (
-                    <div className="vote-status pass">Passed</div>
+                    <div className={`${styles.voteStatus} ${styles.pass}`}>
+                      Passed
+                    </div>
                   ) : (
-                    <div className="vote-status fail">Rejected</div>
+                    <div className={`${styles.voteStatus} ${fail}`}>
+                      Rejected
+                    </div>
                   )}
                 </div>
               ),

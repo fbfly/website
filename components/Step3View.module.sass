@@ -1,4 +1,4 @@
-.step3-button
+.step3Button
   position: absolute
   bottom: 2rem
   right: 3rem
@@ -12,7 +12,7 @@
   color: white
   padding: 0 3rem
 
-.step3-back-button
+.step3BackButton
   position: absolute
   bottom: 2rem
   left: 3rem
@@ -25,16 +25,16 @@
   box-shadow: 0 0.25rem 0.5rem rgba(35, 24, 82, 0.2)
   border-radius: 0.5rem;
   padding: 0 3rem
-  .back-img
+  .backImg
     margin-right: 1rem
 
-.step3-label
+.step3Label
   color: #8F82B9
   margin-bottom: 1rem
   font-size: 1rem
   width: 60%
 
-.step3-input
+.step3Input
   font-size: 1rem
   padding: 1rem
   width: 60%
@@ -46,12 +46,24 @@
     border: 2px solid #8F82B9;
     outline: none
 
+.cardInner
+  background: white
+  margin-top: 8rem
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  height: calc(100% - 8rem)
+  width: 100%
+  padding: 2rem 0
+  position: relative
+
 @media (max-width: 40rem)
-  .step3-label, .step3-input
+  .step3Label, .step3Input
     width: calc(100% - 4rem)
-  .step3-button
+  .step3Button
     right: 2rem
     padding: 0 2rem
-  .step3-back-button
+  .step3BackButton
     left: 2rem
     padding: 0 2rem

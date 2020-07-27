@@ -38,18 +38,18 @@ const Step3View = () => {
   } = useContext(CardContext)
 
   const createNewDao = async () => {
-    setLoading({ img: Loading, title: 'Your dao is being created' })
+    setLoading({ img: Loading, title: 'Your DAO is being created' })
     if (!ethAddress) {
       // Let the user know that they are not properly authenticated
     }
     const fbGroupId = url.replace(/^.*[\\\/]/, '')
 
     // Make a transaction to pay for the fees.
-    await web3Obj.web3.eth.sendTransaction({
-      from: ethAddress,
-      to: SERVER_ADDRESS,
-      value: web3Obj.web3.utils.toWei('0.01'),
-    })
+    // await web3Obj.web3.eth.sendTransaction({
+    //   from: ethAddress,
+    //   to: SERVER_ADDRESS,
+    //   value: web3Obj.web3.utils.toWei('0.01'),
+    // })
 
     try {
       const response = await axios.post(
@@ -84,7 +84,7 @@ const Step3View = () => {
   return (
     <div className={styles.cardInner}>
       <span className={styles.step3Label}>
-        What would you like your community token?
+        What would you like to name your community token?
       </span>
       <input
         className={styles.step3Input}

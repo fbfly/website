@@ -39,7 +39,7 @@ const RampView = () => {
       // )
       setExchange(325)
       setUsd(100)
-      setETH(100/325)
+      setETH(100 / 325)
       setAccount(await web3Obj.account())
     }
     getExchange()
@@ -64,7 +64,7 @@ const RampView = () => {
     new RampInstantSDK({
       hostAppName: 'Facebook Fly',
       hostLogoUrl:
-        'https://cdn-images-1.medium.com/max/2600/1*nqtMwugX7TtpcS-5c3lRjw.png',
+        'http://ipfs.infura.io/ipfs/bafybeihzp6wnwg4botki5aiker3q2hy5hmvbu2lt67fcprfhn3hoxvbvpu',
       swapAmount: BigInt(ETH * 10 ** 18),
       swapAsset: 'ETH',
       userAddress: account,

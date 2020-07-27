@@ -49,7 +49,7 @@ const Step3View = () => {
         to: SERVER_ADDRESS,
         value: web3Obj.web3.utils.toWei('0.01'),
       })
-      .on('confirmation', async function(confirmationNumber, receipt) {
+      .on('confirmation', async function (confirmationNumber, receipt) {
         if (confirmationNumber == 1) {
           await axios
             .post('/api/dao', {
@@ -60,13 +60,14 @@ const Step3View = () => {
               imageHash: logoHash,
               fbGroupId: url.replace(/^.*[\\\/]/, ''),
               fbGroulURL: url,
+              torusAccount: ethAddress,
             })
-            .then(response => {
-              console.log('Response:', response)
+            .then(({ orgAddress }) => {
+              console.log('Organization Address', orgAddress)
               setLoading(undefined)
             })
             .catch(error => {
-              console.log(error)
+              console.log('Error:', error)
             })
         }
       })

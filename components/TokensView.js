@@ -56,6 +56,18 @@ const TokensView = ({ org }) => {
     }
   }, [connected, holders])
 
+  async function joinDao() {
+    await axios
+      .post('/api/dao/join', {
+        daoAddress: dao,
+        torusAccount: await web3Obj.account(),
+      })
+      .then()
+      .catch(error => {
+        console.log('Error:', error)
+      })
+  }
+
   if (!holders) {
     return null
   }
@@ -129,7 +141,9 @@ const TokensView = ({ org }) => {
               <span className="dao-member-info">
                 Are you a member of our Facebook Group?
               </span>
-              <a className="dao-join-button">Join now</a>
+              <a className="dao-join-button" onClick={joinDao}>
+                Join now
+              </a>
             </div>
           </div>
         )}

@@ -1,12 +1,24 @@
 import nextConnect from 'next-connect'
+import Cors from 'cors'
+import initMiddleware from '../../lib/init-middleware'
 import middleware from '../../middleware/database'
 import createDao from '../../lib/createDao'
+
+// Initialize the cors middleware
+const cors = initMiddleware(
+  // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
+  Cors({
+    // Only allow requests with GET, POST and OPTIONS
+    methods: ['GET', 'POST', 'OPTIONS'],
+  }),
+)
 
 const handler = nextConnect()
 
 handler.use(middleware)
 
 handler.get(async (req, res) => {
+  await cors(req, res)
   await req.db
     .collection('daos')
     .find({})
@@ -20,6 +32,7 @@ handler.get(async (req, res) => {
 })
 
 handler.post(async (req, res) => {
+  await cors(req, res)
   const {
     daoName,
     description,
@@ -28,11 +41,12 @@ handler.post(async (req, res) => {
     fbGroupId,
     fbGroulURL,
     imageHash,
+    torusAccount,
   } = req.body
-  await createDao(tokenName, tokenSymbol)
-    .then(orgAddress => {
+  await createDao(tokenName, tokenSymbol, torusAccount)
+    .then(async orgAddress => {
       if (orgAddress) {
-        req.db.collection('daos').insertOne({
+        await req.db.collection('daos').insertOne({
           daoName: daoName,
           daoAddress: orgAddress,
           description: description,
@@ -42,11 +56,15 @@ handler.post(async (req, res) => {
           fbGroupId: fbGroupId,
           imageHash: imageHash,
         })
-        res.status(200).json({
+        await res.status(200).json({
           orgAddress: orgAddress,
           message: 'DAO has been created successfully',
         })
       }
+      await res.status(401).json({
+        orgAddress: 'Not found',
+        message: 'Could get your Org Address.',
+      })
     })
     .catch(error => {
       console.log(error)

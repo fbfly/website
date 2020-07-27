@@ -6,7 +6,9 @@ import { useState } from 'react'
 const axios = require('axios')
 
 const Test = () => {
-  const [orgAddress, setOrgAddress] = useState('')
+  const [orgAddress, setOrgAddress] = useState(
+    '0x1F98b94eE21470A2A19aCFCeBeD8840436c35a54',
+  )
 
   return (
     <>
@@ -20,16 +22,14 @@ const Test = () => {
           <button
             onClick={async () => {
               await axios
-                .post('/api/dao', {
-                  daoName: 'Pica Pollo',
-                  description: 'Best DAO',
-                  tokenName: 'Flintstone',
-                  tokenSymbol: 'FST',
-                  fbGroupId: 'MyGroupId',
-                  fbGroulURL: 'MyGroupURL',
-                  imageHash: 'IPFSHash',
+                .post('/api/dao/join', {
+                  daoAddress: orgAddress,
+                  torusAccount: '0xB298bF415FFE9B2BAF0e3f86AFb1777E9f57e6D7',
                 })
-                .then(orgAddress => setOrgAddress(orgAddress))
+                .then()
+                .catch(error => {
+                  console.log('Error:', error)
+                })
             }}
           >
             Create DAO

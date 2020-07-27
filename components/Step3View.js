@@ -70,7 +70,7 @@ const Step3View = () => {
       const { orgAddress } = response.data
       console.log('Organization Address', orgAddress)
       setLoading(undefined)
-      Router.push('/daos/[fbGroupId]', `/daos/${fbGroupId}`)
+      Router.push('/daos/[fbGroupId]', `/daos/12345`)
     } catch (error) {
       console.log('Could not create DAO Error:', error)
       setStep(2)

@@ -88,7 +88,7 @@ const Step2View = () => {
                   const file = e.target.files[0]
                   uploadFile(file)
                 }}
-                accept="image/svg+xml"
+                accept="image/*"
               />
             </label>
           </div>

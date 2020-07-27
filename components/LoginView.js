@@ -23,11 +23,11 @@ const LoginView = () => {
       const userInfo = await web3Obj.torus.getUserInfo()
       const xDaiBalance = await web3Obj.balance()
       setBalance(xDaiBalance)
-      if (xDaiBalance < 1) {
+      // if (xDaiBalance < 1) {
         setOnRamp(true)
-      } else {
-        setStep(1)
-      }
+      // } else {
+      //   setStep(1)
+      // }
       await updateUserInfo()
       setLoading(undefined)
       setConnected(true)

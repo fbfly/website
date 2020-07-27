@@ -7,6 +7,8 @@ import Arrow from '../public/images/arrow.svg'
 import Success from '../public/images/success.svg'
 import Failure from '../public/images/failure.svg'
 import InfoButton from './InfoButton'
+import { RampInstantSDK } from '@ramp-network/ramp-instant-sdk'
+import axios from 'axios'
 
 const RampView = () => {
   const { web3Obj } = useContext(TorusContext)
@@ -22,66 +24,73 @@ const RampView = () => {
     setOnRampSuccess,
   } = useContext(CardContext)
 
+  const [exchange, setExchange] = useState()
+  const [account, setAccount] = useState()
+  useEffect(() => {
+    async function getExchange() {
+      // setExchange(
+      //   Number(
+      //     (
+      //       await axios.get(
+      //         'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD',
+      //       )
+      //     ).data['USD'],
+      //   ),
+      // )
+      setExchange(325)
+      setUsd(100)
+      setETH(100/325)
+      setAccount(await web3Obj.account())
+    }
+    getExchange()
+  }, [])
+
   useEffect(() => {
     async function checkBalance() {
       const balance = await web3Obj.balance()
 
-      if (balance > 0.1) {
-        setBalance(balance)
-        setOnRampDone(true)
-        setOnRampSuccess(true)
-        setLoading(undefined)
-      }
+      // if (balance > 0.1) {
+      //   setBalance(balance)
+      //   setOnRampDone(true)
+      //   setOnRampSuccess(true)
+      //   setLoading(undefined)
+      // }
     }
     checkBalance()
   }, [balance])
 
   async function onRamp() {
     setLoading({ img: Wallet, title: 'Your wallet is being funded' })
-    try {
-      await web3Obj.changeNetwork('mainnet')
-      const mainBalance = await web3Obj.balance()
-      const daiBalance = await web3Obj.daiBalance()
-
-      // If you don't have DAI, then...
-      if (daiBalance < 1) {
-        // Check if you have some ether to buy DAI.
-        if (mainBalance < 1) {
-          // If you don't have any ether, then buy some ether.
-          await web3Obj
-            .buyEth()
-            .then(() => console.log('You bought some ether'))
-        }
-        // If you had ether, then just buy DAI.
-        await web3Obj.exchangeEthToDAI().then(() => {
-          console.log('You got some DAI :)')
-        })
-      }
-
-      await web3Obj.exchangeDaixDai(1)
-      await web3Obj.changeNetwork('xdai')
-      const xDaiBalance = await web3Obj.balance()
-      setBalance(xDaiBalance)
-    } catch (error) {
-      console.log({ onRampError: error })
-      setOnRampDone(true)
-      setOnRampSuccess(false)
-    }
-    setLoading(undefined)
+    new RampInstantSDK({
+      hostAppName: 'Facebook Fly',
+      hostLogoUrl:
+        'https://cdn-images-1.medium.com/max/2600/1*nqtMwugX7TtpcS-5c3lRjw.png',
+      swapAmount: BigInt(ETH * 10 ** 18),
+      swapAsset: 'ETH',
+      userAddress: account,
+      url: 'https://ri-widget-staging.firebaseapp.com/',
+      variant: 'auto',
+    })
+      .on('WIDGET_CLOSE', event => {
+        setOnRampDone(true)
+        setOnRampSuccess(true)
+        setLoading(undefined)
+      })
+      .show()
   }
 
-  function calcxDaiFromUsd(_usd) {
-    const _xDai = (982 / 1000) * Number(_usd)
-    return _xDai
+  function calcETHFromUsd(_usd) {
+    const _ETH = Number(_usd) / exchange
+    return _ETH
   }
 
-  function calcUsdFromxDai(_xDai) {
-    const _usd = (1000 / 982) * Number(_xDai)
+  function calcUsdFromETH(_ETH) {
+    const _usd = exchange * Number(_ETH)
     return _usd
   }
 
-  const [usd, setUsd] = useState(10)
-  const [xDai, setxDai] = useState(calcxDaiFromUsd(10))
+  const [usd, setUsd] = useState(1)
+  const [ETH, setETH] = useState(1)
 
   return (
     <div className={styles.cardInner}>
@@ -96,7 +105,7 @@ const RampView = () => {
           </span>
           <span className={styles.rampDescription}>
             {onRampSuccess
-              ? `Your balance is ${(xDaiBalance / 10 ** 18).toFixed(3)} xDAI`
+              ? `Your balance is ${(balance / 10 ** 18).toFixed(3)} ETH`
               : 'Some problems have occurred during the process'}
           </span>
           <div className={styles.doneButtons}>
@@ -143,7 +152,7 @@ const RampView = () => {
                 value={usd.toFixed(3)}
                 onChange={e => {
                   setUsd(Number(e.target.value))
-                  setxDai(calcxDaiFromUsd(e.target.value))
+                  setETH(calcETHFromUsd(e.target.value))
                 }}
               />
               <span className={styles.rampUnit}>USD</span>
@@ -151,23 +160,20 @@ const RampView = () => {
             <div className={styles.rampArrow}>
               <img className={styles.arrowImg} src={Arrow} />
             </div>
-            <div className={styles.xDaiInput}>
+            <div className={styles.ETHInput}>
               <span className={styles.rampLabel}>Receive</span>
               <input
                 className={styles.rampInput}
                 type="number"
-                value={xDai.toFixed(3)}
+                value={ETH.toFixed(3)}
                 onChange={e => {
-                  setxDai(Number(e.target.value))
-                  setUsd(calcUsdFromxDai(e.target.value))
+                  setETH(Number(e.target.value))
+                  setUsd(calcUsdFromETH(e.target.value))
                 }}
               />
-              <span className={styles.rampUnit}>xDAI</span>
+              <span className={styles.rampUnit}>ETH</span>
             </div>
           </div>
-          <span className={styles.rampDetails}>
-            Each transaction costs ${(usd - xDai).toFixed(3)} USD to process
-          </span>
 
           <a
             className={styles.rampButton}

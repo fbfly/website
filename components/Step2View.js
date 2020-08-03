@@ -4,6 +4,7 @@ import EthicalBrandLogo from '../public/images/ethical-brand.svg'
 import { useContext, useState, useEffect } from 'react'
 import CardContext from '../lib/CardContext'
 import fleekStorage from '@fleekhq/fleek-storage-js'
+import ipfsService from '../lib/ipfs'
 
 const Step2View = () => {
   const {
@@ -35,14 +36,9 @@ const Step2View = () => {
 
   const uploadFile = async file => {
     console.log('file uploading to ipfs')
-    const uploadedFile = await fleekStorage.upload({
-      apiKey: '9cILwykg8eJ7JifGfuS4zA==',
-      apiSecret: 'u1gcUczk4+o3B0XBP2A0DcWABEvDqUdxz06MgXc3FRA=',
-      key: file.name,
-      data: file,
-    })
+    const imageHash = await ipfsService.uploadFile(file)
     console.log('file upload done')
-    setLogoHash(uploadedFile.hash)
+    setLogoHash(imageHash)
   }
 
   return (
@@ -69,14 +65,14 @@ const Step2View = () => {
           />
         </div>
         <div className={styles.logoSection}>
-          <span className={`${styles.logoLabel} ${styles.label}`}>DAO Logo</span>
+          <span className={`${styles.logoLabel} ${styles.label}`}>
+            DAO Logo
+          </span>
           <div className={styles.logoInput}>
             <div className={styles.logoContainer}>
               <img
                 className={styles.logoImg}
-                // NEED TO SUPPORT MORE IMAGE TYPES ( THIS WON't WORK ON DAO PAGE )
-                // src={`data:image/svg+xml;utf8,${logoFile}`}
-                  src={`https://ipfs.infura.io/ipfs/${logoHash}`}
+                src={`https://ipfs.infura.io/ipfs/${logoHash}`}
               />
             </div>
             <label className={styles.logoUploadButton}>
